@@ -5,7 +5,7 @@ namespace Domain
 {
     [Table("BijakBin", Schema = "TTN")]
 
-    public class BijakBin : BaseClass<int> 
+    public class ReceiptBin : BaseClass<int> 
     { 
         public long BijakId { get; set; }
         public int BinId { get; set; }

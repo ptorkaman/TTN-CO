@@ -1,7 +1,7 @@
 ﻿
 namespace DTO
 {
-    public  class BijakStatusDTO : BaseClassDTO<int> 
+    public  class ReceiptStatusDTO : BaseClassDTO<int> 
     { 
         public string Title { get; set; }
        

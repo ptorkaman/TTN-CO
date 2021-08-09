@@ -8,10 +8,10 @@ namespace Services
 {
     public interface IBijakStatusService
     {
-        Task<BijakStatusDTO> Create(BijakStatusDTO modelDto, CancellationToken cancellationToken);
+        Task<ReceiptStatusDTO> Create(ReceiptStatusDTO modelDto, CancellationToken cancellationToken);
         Task<bool> DeleteBijakStatusAsync(int cityId, CancellationToken cancellationToken);
-        Task<BijakStatusDTO> UpdateBijakStatusAsync(int cityId, BijakStatusDTO modelDto, CancellationToken cancellationToken);
-        Task<PagedResult<BijakStatusDTO>> GetAllCitiesAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken);
-        Task<List<BijakStatusDTO>> GetAllAsync(CancellationToken cancellationToken);
+        Task<ReceiptStatusDTO> UpdateBijakStatusAsync(int cityId, ReceiptStatusDTO modelDto, CancellationToken cancellationToken);
+        Task<PagedResult<ReceiptStatusDTO>> GetAllCitiesAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken);
+        Task<List<ReceiptStatusDTO>> GetAllAsync(CancellationToken cancellationToken);
     }
 }

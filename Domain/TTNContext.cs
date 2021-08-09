@@ -22,10 +22,10 @@ namespace Domain
         public  DbSet<Permission> Permissions { get; set; }
         public  DbSet<Person> Persons { get; set; }
         public  DbSet<Bin> Bins { get; set; }
-        public  DbSet<Receipt> Bijaks { get; set; }
-        public DbSet<BijakBin> BijakBins { get; set; }
-        public DbSet<ReceiptDetail> BijakDtls { get; set; }
-        public DbSet<BijakStatus> BijakStatuses { get; set; }
+        public  DbSet<Receipt> Receipts { get; set; }
+        public DbSet<ReceiptBin> ReceiptBins { get; set; }
+        public DbSet<ReceiptDetail> ReceiptDetails { get; set; }
+        public DbSet<ReceiptStatus> ReceiptStatuses { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<Parish> Parishes { get; set; }
@@ -57,10 +57,10 @@ namespace Domain
             modelBuilder.Entity<Parish>(entity => {entity.ToTable("Parishes", "TTN");});
             modelBuilder.Entity<Country>(entity =>{ entity.ToTable("Countries", "TTN");});
             modelBuilder.Entity<City>(entity => {entity.ToTable("Cities", "TTN");});
-            modelBuilder.Entity<BijakStatus>(entity => { entity.ToTable("BijakStatuses", "TTN");});
-            modelBuilder.Entity<Receipt>(entity => { entity.ToTable("Bijaks", "TTN");});
-            modelBuilder.Entity<ReceiptDetail>(entity =>{ entity.ToTable("BijakDtls", "TTN"); });
-            modelBuilder.Entity<BijakBin>(entity => { entity.ToTable("BijakBins", "TTN");});
+            modelBuilder.Entity<ReceiptStatus>(entity => { entity.ToTable("ReceiptStatuses", "TTN");});
+            modelBuilder.Entity<Receipt>(entity => { entity.ToTable("Receipts", "TTN");});
+            modelBuilder.Entity<ReceiptDetail>(entity =>{ entity.ToTable("ReceiptDetails", "TTN"); });
+            modelBuilder.Entity<ReceiptBin>(entity => { entity.ToTable("ReceiptBins", "TTN");});
             modelBuilder.Entity<Bin>(entity =>  { entity.ToTable("Bins", "TTN");  });
             modelBuilder.Entity<MenuPermission>(entity =>{ entity.ToTable("MenuPermissions", "TTN");});
             modelBuilder.Entity<RolePermission>(entity =>  {entity.ToTable("RolePermissions", "TTN");  });

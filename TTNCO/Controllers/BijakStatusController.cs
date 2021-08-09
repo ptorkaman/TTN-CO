@@ -31,7 +31,7 @@ namespace TTNCO.Controllers.v1
 
         #region BijakStatus Actions
         [HttpPost()]
-        public async Task<ApiResult<BijakStatusDTO>> CreateBijakStatus(BijakStatusDTO modelDto, CancellationToken cancellationToken)
+        public async Task<ApiResult<ReceiptStatusDTO>> CreateBijakStatus(ReceiptStatusDTO modelDto, CancellationToken cancellationToken)
         {
             modelDto.CreatedBy = HttpContext.User.Identity.GetUserId<int>();
 
@@ -47,21 +47,21 @@ namespace TTNCO.Controllers.v1
         }
 
         [HttpPut("{Id}")]
-        public async Task<ApiResult<BijakStatusDTO>> UpdateBijakStatus(int Id, BijakStatusDTO modelDto, CancellationToken cancellationToken)
+        public async Task<ApiResult<ReceiptStatusDTO>> UpdateBijakStatus(int Id, ReceiptStatusDTO modelDto, CancellationToken cancellationToken)
         {
             var result = await _cityService.UpdateBijakStatusAsync(Id, modelDto, cancellationToken);
             return result;
         }
 
         [HttpGet()]
-        public async Task<ApiResult<List<BijakStatusDTO>>> GetAllCities(CancellationToken cancellationToken)
+        public async Task<ApiResult<List<ReceiptStatusDTO>>> GetAllCities(CancellationToken cancellationToken)
         {
             var result = await _cityService.GetAllAsync(cancellationToken);
             return result;
         }
 
         [HttpGet("{page}/{pageSize}")]
-        public async Task<ApiResult<PagedResult<BijakStatusDTO>>> GetCities(int? page, [FromQuery] int? pageSize, [FromQuery] string orderBy, CancellationToken cancellationToken)
+        public async Task<ApiResult<PagedResult<ReceiptStatusDTO>>> GetCities(int? page, [FromQuery] int? pageSize, [FromQuery] string orderBy, CancellationToken cancellationToken)
         {
             var result = await _cityService.GetAllCitiesAsync(page, pageSize, orderBy, cancellationToken);
             return result;

@@ -2,9 +2,9 @@
 
 namespace DTO
 {
-    public  class BijakDtlDTO : BaseClassDTO<int> 
+    public  class ReceiptDetailDTO : BaseClassDTO<int> 
     { 
-        public long BijakId { get; set; }
+        public long ReceiptId { get; set; }
         public string GoodsName { get; set; }
         public int GoodsId { get; set; }
         public int Qty { get; set; }

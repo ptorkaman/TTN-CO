@@ -17,12 +17,12 @@ namespace Services.Mapper
             CreateMap<Province, ProvinceDTO>();
             CreateMap<Parish, ParishDTO>();
 
-            CreateMap<BijakStatus, BijakStatusDTO>();
+            CreateMap<ReceiptStatus, ReceiptStatusDTO>();
             CreateMap<Region, RegionDTO>();
             CreateMap<Person, PersonDTO>();
-            CreateMap<Receipt, BijakDTO>();
-            CreateMap<BijakBin, BijakBinDTO>();
-            CreateMap<ReceiptDetail, BijakDtlDTO>();
+            CreateMap<Receipt, ReceiptDTO>();
+            CreateMap<ReceiptBin, ReceiptBinDTO>();
+            CreateMap<ReceiptDetail, ReceiptDetailDTO>();
             CreateMap<Bin, BinDTO>();
             CreateMap<Menu, MenuDTO>();
             CreateMap<Permission, PermissionDTO>();
