@@ -1,0 +1,12 @@
+D:\Project\TTNCO\Common\bin\Release\net5.0\Common.deps.json
+D:\Project\TTNCO\Common\bin\Release\net5.0\Common.dll
+D:\Project\TTNCO\Common\bin\Release\net5.0\ref\Common.dll
+D:\Project\TTNCO\Common\bin\Release\net5.0\Common.pdb
+D:\Project\TTNCO\Common\obj\Release\net5.0\Common.csproj.AssemblyReference.cache
+D:\Project\TTNCO\Common\obj\Release\net5.0\Common.GeneratedMSBuildEditorConfig.editorconfig
+D:\Project\TTNCO\Common\obj\Release\net5.0\Common.AssemblyInfoInputs.cache
+D:\Project\TTNCO\Common\obj\Release\net5.0\Common.AssemblyInfo.cs
+D:\Project\TTNCO\Common\obj\Release\net5.0\Common.csproj.CoreCompileInputs.cache
+D:\Project\TTNCO\Common\obj\Release\net5.0\Common.dll
+D:\Project\TTNCO\Common\obj\Release\net5.0\ref\Common.dll
+D:\Project\TTNCO\Common\obj\Release\net5.0\Common.pdb
