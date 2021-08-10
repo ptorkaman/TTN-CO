@@ -43,7 +43,7 @@ namespace TTNCO.Controllers
         public async Task<ApiResult<LoginDataDTO>> Login(LoginDTO modelDto, CancellationToken cancellationToken)
         {
             var model = await _userService.Login(modelDto, cancellationToken);
-            model.Menu = _userService.GetMenu(model.Id);
+            //model.Menu = _userService.GetMenu(model.Id);
             return model;
         }
    

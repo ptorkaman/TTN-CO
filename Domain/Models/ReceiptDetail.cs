@@ -7,7 +7,7 @@ namespace Domain
 
     public class ReceiptDetail : BaseClass<int> 
     { 
-        public long BijakId { get; set; }
+        public long ReceiptId { get; set; }
         public string GoodsName { get; set; }
         public int GoodsId { get; set; }
         public int Qty { get; set; }

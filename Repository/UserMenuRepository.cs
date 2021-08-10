@@ -22,7 +22,7 @@ namespace Repository
 
         public async Task<List<UserMenu>> GetByUserId(long Id)
         {  
-            return await Table.Where(p =>p.IsActive && p.UserId == Id ).Include(x=>x.Menu).ToListAsync();
+            return await Table.Where(p =>p.IsActive && p.UserId == Id ).ToListAsync();
         }
 
         public async Task<List<UserMenu>> GetMenu(long modelId)

@@ -47,7 +47,7 @@ namespace Services.User
             var Menu =  _userMenuRepository.GetByUserId(user.Id);
             foreach (var item in Menu.Result)
             {
-                model.Menu.Add(_mapper.Map<MenuDTO>(item .Menu) ) ;
+                //model.Menu.Add(_mapper.Map<MenuDTO>(item .Menu) ) ;
             }
 
             model.Id = user.Id;

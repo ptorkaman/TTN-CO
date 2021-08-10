@@ -26,34 +26,34 @@ namespace Domain
         public int StatusId { get; set; }
         [Column(TypeName = "decimal(18,4)")]
 
-        public decimal FreightAmt { get; set; }
+        public decimal FreightAmount { get; set; }
         [Column(TypeName = "decimal(18,4)")]
 
-        public decimal InsuranceAmt { get; set; }
+        public decimal InsuranceAmount { get; set; }
         [Column(TypeName = "decimal(18,4)")]
 
-        public decimal CityAmt { get; set; }
+        public decimal CityAmount { get; set; }
         [Column(TypeName = "decimal(18,4)")]
 
-        public decimal PassingAmt { get; set; }
+        public decimal PassingAmount { get; set; }
         [Column(TypeName = "decimal(18,4)")]
 
-        public decimal DerricAmt { get; set; }
+        public decimal DerricAmount { get; set; }
         [Column(TypeName = "decimal(18,4)")]
 
-        public decimal DownloadAmt { get; set; }
+        public decimal DownloadAmount { get; set; }
         [Column(TypeName = "decimal(18,4)")]
 
-        public decimal InstitutionAmt { get; set; }
+        public decimal InstitutionAmount { get; set; }
         [Column(TypeName = "decimal(18,4)")]
 
-        public decimal PerfixAmt { get; set; }
+        public decimal PerfixAmount { get; set; }
         [Column(TypeName = "decimal(18,4)")]
 
-        public decimal TotalAmt { get; set; }
+        public decimal TotalAmount { get; set; }
         [Column(TypeName = "decimal(18,4)")]
 
-        public decimal TipAmt { get; set; }
+        public decimal TipAmount { get; set; }
         [Column(TypeName = "decimal(18,4)")]
 
         public decimal Startlatitude { get; set; }
@@ -67,6 +67,7 @@ namespace Domain
 
         public decimal Destinationlongtude { get; set; }
         public int ForceType { get; set; }
+        public IList<ReceiptDetail> ReceiptDetail { get; set; }
 
     }
 }

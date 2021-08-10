@@ -32,7 +32,7 @@ namespace Services
         public async Task<GroupUserDTO> Create(GroupUserDTO modelDto, CancellationToken cancellationToken)
         {
 
-            //var model = _groupUserRepository.GetById(modelDto.Id) != null;
+            //var model = _groupUserRepository.GetByCityId(modelDto.Id) != null;
             //if (!model)
             //    throw new CustomException("خطا در دریافت اطلاعات ");
 

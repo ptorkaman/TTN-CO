@@ -220,6 +220,8 @@ namespace TTNCO
             services.AddScoped<IUserWarehouseRepository, UserWarehouseRepository>();
             services.AddScoped<IBinRepository, BinRepository>();
             services.AddScoped<IReceiptRepository, ReceiptRepository>();
+            services.AddScoped<IReciverRepository, ReciverRepository>();
+            services.AddScoped<ISenderRepository, SenderRepository>();
 
             
             #endregion
@@ -236,6 +238,8 @@ namespace TTNCO
             services.AddScoped<IBinService, BinService>();
             services.AddScoped<IWarehouseService, WarehouseService>();
             services.AddScoped<IReceiptService, ReceiptService>();
+            services.AddScoped<ISenderService, SenderService>();
+            services.AddScoped<IReciverService, ReciverService>();
             
             #endregion
 
