@@ -10,7 +10,7 @@ namespace Domain
 {
     [Table("Person", Schema = "TTN")]
 
-    public partial class Person
+    public  class Person
     {
         public Person()
         {

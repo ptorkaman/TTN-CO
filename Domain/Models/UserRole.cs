@@ -9,7 +9,7 @@ namespace Domain
 {
     [Table("UserRole", Schema = "TTN")]
 
-    public partial class UserRole
+    public  class UserRole
     {
         public long Id { get; set; }
         public long RoleId { get; set; }

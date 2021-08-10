@@ -5,7 +5,7 @@ namespace Domain
 {
     [Table("MenuPermission", Schema = "TTN")]
 
-    public partial class MenuPermission : BaseClass<long>
+    public  class MenuPermission : BaseClass<long>
     {
         public long MenuId { get; set; }
         public long PermissionId { get; set; }

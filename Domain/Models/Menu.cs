@@ -10,8 +10,12 @@ namespace Domain
 {
     [Table("Menu", Schema = "TTN")]
 
-    public partial class Menu:BaseClass<long>
+    public  class Menu:BaseClass<long>
     {
+        public Menu()
+        {
+            UserMenus = new List<UserMenu>();
+        }
         public string Name { get; set; }
         public long? ParentId { get; set; }
 

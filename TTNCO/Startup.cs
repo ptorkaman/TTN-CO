@@ -218,21 +218,25 @@ namespace TTNCO
             services.AddScoped<IParishRepository, ParishRepository>();
             services.AddScoped<IWarehouseRepository, WarehouseRepository>();
             services.AddScoped<IUserWarehouseRepository, UserWarehouseRepository>();
+            services.AddScoped<IBinRepository, BinRepository>();
+            services.AddScoped<IReceiptRepository, ReceiptRepository>();
 
             
             #endregion
 
             #region Services
             services.AddScoped<IUserWarhouseService, UserWarhouseService>();
-            services.AddScoped<IBijakStatusService, BijakStatusService>();
+            services.AddScoped<IReceiptStatusService, ReceiptStatusService>();
             services.AddScoped<IMenuPermissionService, MenuPermissionService>();
             services.AddScoped<IRegionService, RegionService>();
             services.AddScoped<IParishService, ParishService>();
             services.AddScoped<IPersonService, PersonService>();
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<IProvinceService, ProvinceService>();
-            services.AddScoped<ICityService, CityService>();
+            services.AddScoped<IBinService, BinService>();
             services.AddScoped<IWarehouseService, WarehouseService>();
+            services.AddScoped<IReceiptService, ReceiptService>();
+            
             #endregion
 
         }

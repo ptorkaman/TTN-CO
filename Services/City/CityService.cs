@@ -48,7 +48,7 @@ namespace Services
             return _mapper.Map<CityDTO>(city);
         }
 
-        public async Task<bool> DeleteCityAsync(int cityId, CancellationToken cancellationToken)
+        public async Task<bool> DeleteAsync(int cityId, CancellationToken cancellationToken)
         {
             var model = _repository.GetById(cityId);
             if (model == null)
@@ -57,13 +57,13 @@ namespace Services
             return true;
         }
 
-        public async Task<List<CityDTO>> GetAllAsync(int id,CancellationToken cancellationToken)
+        public async Task<List<CityDTO>> GetAsync(int id,CancellationToken cancellationToken)
         {
             var model =await _cityRepository.GetByCityId(id, cancellationToken);
             return _mapper.Map<List<CityDTO>>(model);
         }
 
-        public async Task<PagedResult<CityDTO>> GetAllCitiesAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
+        public async Task<PagedResult<CityDTO>> GetAllAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
         {
             int pageNotNull = page ?? _pagingSettings.DefaultPage;
             int pageSizeNotNull = pageSize ?? _pagingSettings.PageSize;
@@ -71,9 +71,9 @@ namespace Services
             return _mapper.Map<PagedResult<CityDTO>>(model);
         }
 
-        public async Task<CityDTO> UpdateCityAsync(int cityId, CityDTO modelDto, CancellationToken cancellationToken)
+        public async Task<CityDTO> UpdateAsync(int cityId, CityDTO modelDto, CancellationToken cancellationToken)
         {
-            Domain.City city = new()
+            City city = new()
             {
                 Id = cityId,
                 CreatedBy = modelDto.CreatedBy.Value,

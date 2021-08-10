@@ -14,8 +14,13 @@ namespace DTO
     }
     public class LoginDataDTO
     {
+        public LoginDataDTO()
+        {
+            Menu = new List<MenuDTO>();
+        }
         public string Token { get; set; }
-        public List<UserMenuDTO> Menu { get; set; }
+        public IList<MenuDTO> Menu { get; set; }
+        public long Id { get; set; }
     }
     public class LoginDTO
     {

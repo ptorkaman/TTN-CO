@@ -9,7 +9,7 @@ namespace Domain
 {
     [Table("Permission", Schema = "TTN")]
 
-    public partial class Permission
+    public  class Permission
     {
         public Permission()
         {

@@ -45,6 +45,12 @@ namespace Services.User
             var jwt = await GenerateAsync(user);
             model.Token = jwt;
             var Menu =  _userMenuRepository.GetByUserId(user.Id);
+            foreach (var item in Menu.Result)
+            {
+                model.Menu.Add(_mapper.Map<MenuDTO>(item .Menu) ) ;
+            }
+
+            model.Id = user.Id;
             //model.Menu = _mapper.Map<List<UserMenuDTO>>(Menu);
             user.LastLogOnDate = DateTime.Now;
             await _userRepository.UpdateAsync(user, cancellationToken);
@@ -185,6 +191,17 @@ namespace Services.User
 
             }
             else return false;
+        }
+
+        public IList<MenuDTO> GetMenu(long modelId)
+        {
+            var model = _userMenuRepository.GetMenu(modelId);
+            IList<MenuDTO> list = new List<MenuDTO>();
+            foreach(var itm in model.Result)
+            {
+                list.Add(_mapper.Map<MenuDTO>(itm));
+            }
+            return list;
         }
     }
 }

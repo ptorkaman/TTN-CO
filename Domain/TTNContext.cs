@@ -34,7 +34,7 @@ namespace Domain
         public DbSet<Region> Regions { get; set; }
         public DbSet<Sender> Senders { get; set; }
         public DbSet<SenderWarehouse> SenderWarehouses { get; set; }
-        public DbSet<TransportationDtl> TransportationDtls { get; set; }
+        public DbSet<TransportationDetail> TransportationDtls { get; set; }
         public DbSet<Unit> Units { get; set; }
         public DbSet<UserType> UserTypes { get; set; }
         public DbSet<UserWarhouse> UserWarhouses { get; set; }
@@ -48,7 +48,7 @@ namespace Domain
             modelBuilder.Entity<WehicleType>(entity =>{entity.ToTable("WehicleTypes", "TTN"); });
             modelBuilder.Entity<Warehouse>(entity =>{entity.ToTable("Warehouses", "TTN");});
             modelBuilder.Entity<Unit>(entity => {entity.ToTable("Units", "TTN");});
-            modelBuilder.Entity<TransportationDtl>(entity => { entity.ToTable("TransportationDtls", "TTN"); });
+            modelBuilder.Entity<TransportationDetail>(entity => { entity.ToTable("TransportationDetails", "TTN"); });
             modelBuilder.Entity<SenderWarehouse>(entity => { entity.ToTable("SenderWarehouses", "TTN"); });
             modelBuilder.Entity<Sender>(entity =>{entity.ToTable("Senders", "TTN");});
             modelBuilder.Entity<Region>(entity =>  {  entity.ToTable("Regions", "TTN"); });
@@ -68,7 +68,18 @@ namespace Domain
             modelBuilder.Entity<Permission>(entity =>{  entity.ToTable("Permissions", "TTN"); });
             modelBuilder.Entity<Person>(entity => {  entity.ToTable("Persons", "TTN"); });
             modelBuilder.Entity<UserRole>(entity =>{entity.ToTable("UserRoles", "TTN"); });
-            modelBuilder.Entity<UserMenu>(entity =>  { entity.ToTable("UserMenus", "TTN"); });
+            modelBuilder.Entity<UserMenu>(entity =>
+            {
+                entity.ToTable("UserMenus", "TTN");
+                entity.HasOne<User>(x => x.User)
+                    .WithMany(x => x.UserMenus)
+                    .HasForeignKey(x => x.UserId);
+                entity.HasOne<Menu>(x => x.Menu)
+                    .WithMany(x => x.UserMenus)
+                    .HasForeignKey(x => x.MenuId);
+
+                
+            });
             modelBuilder.Entity<UserType>(entity => { entity.ToTable("UserTypes", "TTN");});
             modelBuilder.Entity<Role>(entity =>{ entity.ToTable("Roles", "TTN");});
             modelBuilder.Entity<UserWarhouse>(entity =>{ entity.ToTable("UserWarhouses", "TTN"); });
@@ -76,11 +87,9 @@ namespace Domain
             modelBuilder.Entity<User>(entity =>
             {
                 entity.ToTable("Users", "TTN");
-
                 entity.Property(e => e.ChangePasswordCode)
                     .HasMaxLength(10)
                     .IsUnicode(false);
-
                 entity.Property(e => e.Code).HasDefaultValueSql("(newid())");
                 entity.Property(e => e.Password).HasMaxLength(200);
                 entity.Property(e => e.TwoStepCode).HasMaxLength(10);

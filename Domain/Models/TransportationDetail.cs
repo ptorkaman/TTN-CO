@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain
 {
-    [Table("TransportationDtl", Schema = "TTN")]
+    [Table("TransportationDetail", Schema = "TTN")]
 
-    public class TransportationDtl : BaseClass<int> 
+    public class TransportationDetail : BaseClass<int> 
     {
         public int TransportationId { get; set; }
         public string Remark { get; set; }

@@ -11,9 +11,9 @@ namespace Domain
     [Table("Receipt", Schema = "TTN")]
     public class Receipt : BaseClass<long> 
     { 
-        public int BijakNo { get; set; }
+        public int ReceiptNo { get; set; }
         public string ReferenceNo { get; set; }
-        public int senderId { get; set; }
+        public int SenderId { get; set; }
         public int RecieverId { get; set; }
         public int? StartwarhouseId { get; set; }
         public int? DestinationWarhouseId { get; set; }

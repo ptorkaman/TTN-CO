@@ -6,7 +6,7 @@ namespace DTO
     { 
         public int ReceiptNo { get; set; }
         public string ReferenceNo { get; set; }
-        public int senderId { get; set; }
+        public int SenderId { get; set; }
         public int RecieverId { get; set; }
         public int? StartwarhouseId { get; set; }
         public int? DestinationWarhouseId { get; set; }

@@ -5,7 +5,7 @@ namespace Domain
 {
     [Table("UserMenu", Schema = "TTN")]
 
-    public partial class UserMenu : BaseClass<long>
+    public  class UserMenu : BaseClass<long>
     {
         public long MenuId { get; set; }
         public long UserId { get; set; }

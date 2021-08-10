@@ -13,7 +13,7 @@ namespace Domain
     public class Bin: BaseClass<int>
     {
         public int WarehoseId { get; set; }
-        public string BinName { get; set; }
+        public string Name { get; set; }
 
     }
 }

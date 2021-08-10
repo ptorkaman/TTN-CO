@@ -14,5 +14,6 @@ namespace Services.User
         Task<LoginDataDTO> Login(LoginDTO modelDto, CancellationToken cancellationToken);
         Task<string> CheckVerification(CheckVerificationDTO model, CancellationToken cancellationToken);
         bool ForgetPassword(SendSmsDTO modelDto, CancellationToken cancellationToken);
+        IList<MenuDTO> GetMenu(long modelId);
     }
 }

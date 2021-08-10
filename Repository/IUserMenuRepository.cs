@@ -10,6 +10,6 @@ namespace Repository
     public interface IUserMenuRepository : IRepository<UserMenu>
     {
         Task<List<UserMenu>> GetByUserId(long Id);
- 
+        Task<List<UserMenu>> GetMenu(long modelId);
     }
 }

@@ -11,6 +11,8 @@ namespace Services.Mapper
         {
             AllowNullDestinationValues = true;
             //Source -> Destination           
+            CreateMap<ReceiptStatus, ReceiptStatusDTO>();
+            CreateMap<UserMenu, UserMenuDTO>();
 
             CreateMap<City, CityDTO>();
             CreateMap<Country, CountryDTO>();
@@ -32,7 +34,7 @@ namespace Services.Mapper
             CreateMap<RolePermission, RolePermissionDTO>();
             CreateMap<Sender, SenderDTO>();
             CreateMap<SenderWarehouse, SenderWarehouseDTO>();
-            CreateMap<TransportationDtl, TransportationDtlDTO>();
+            CreateMap<TransportationDetail, TransportationDtlDTO>();
             CreateMap<Unit, UnitDTO>();
             CreateMap<UserRole, UserRoleDTO>();
             CreateMap<UserType, UserTypeDTO>();
@@ -41,7 +43,7 @@ namespace Services.Mapper
             CreateMap<WehicleType, WehicleTypeDTO>();
             CreateMap<MenuPermission, MenuPermissionDTO>();
             CreateMap<GroupUser, GroupUserDTO>();
-            CreateMap<List<UserMenu>, List<UserMenuDTO>>();
+            //CreateMap<List<UserMenu>, List<UserMenuDTO>>();
             
         }
     }

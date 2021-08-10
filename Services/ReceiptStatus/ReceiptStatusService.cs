@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Common.Exceptions;
 using Common.Utilities;
+using Domain;
 using DTO;
 using DTO.Settings;
 using Microsoft.Extensions.Options;
@@ -12,17 +13,17 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public class BijakStatusService : IBijakStatusService
+    public class ReceiptStatusService : IReceiptStatusService
     {
         #region Fields
-        private readonly IRepository<Domain.ReceiptStatus> _cityRepository;
+        private readonly IRepository<ReceiptStatus> _cityRepository;
         private readonly IMapper _mapper;
         private readonly PagingSettings _pagingSettings;
 
         #endregion
 
         #region CTOR
-        public BijakStatusService(IRepository<Domain.ReceiptStatus> cityRepository, IMapper mapper, IOptionsSnapshot<PagingSettings> pagingSettings)
+        public ReceiptStatusService(IRepository<ReceiptStatus> cityRepository, IMapper mapper, IOptionsSnapshot<PagingSettings> pagingSettings)
         {
             _cityRepository = cityRepository;
             _mapper = mapper;
@@ -31,12 +32,7 @@ namespace Services
 
         public async Task<ReceiptStatusDTO> Create(ReceiptStatusDTO modelDto, CancellationToken cancellationToken)
         {
-
-            //var model = _cityRepository.GetById(modelDto.Id) != null;
-            //if (!model)
-            //    throw new CustomException("خطا در دریافت اطلاعات ");
-
-            Domain.ReceiptStatus city = new()
+            ReceiptStatus city = new()
             {
                 CreatedBy = modelDto.CreatedBy.Value,
                 CreatedDate = DateTime.Now,
@@ -49,7 +45,7 @@ namespace Services
 
         }
 
-        public async Task<bool> DeleteBijakStatusAsync(int cityId, CancellationToken cancellationToken)
+        public async Task<bool> DeleteAsync(int cityId, CancellationToken cancellationToken)
         {
             var model = _cityRepository.GetById(cityId);
             if (model == null)
@@ -61,10 +57,10 @@ namespace Services
         public async Task<List<ReceiptStatusDTO>> GetAllAsync(CancellationToken cancellationToken)
         {
             var model = _cityRepository.GetAllAsync( cancellationToken);
-            return _mapper.Map<List<ReceiptStatusDTO>>(model);
+            return _mapper.Map<List<ReceiptStatusDTO>>(model.Result);
         }
 
-        public async Task<PagedResult<ReceiptStatusDTO>> GetAllCitiesAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
+        public async Task<PagedResult<ReceiptStatusDTO>> GetAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
         {
             int pageNotNull = page ?? _pagingSettings.DefaultPage;
             int pageSizeNotNull = pageSize ?? _pagingSettings.PageSize;
@@ -72,7 +68,7 @@ namespace Services
             return _mapper.Map<PagedResult<ReceiptStatusDTO>>(model);
         }
 
-        public async Task<ReceiptStatusDTO> UpdateBijakStatusAsync(int cityId, ReceiptStatusDTO modelDto, CancellationToken cancellationToken)
+        public async Task<ReceiptStatusDTO> UpdateAsync(int cityId, ReceiptStatusDTO modelDto, CancellationToken cancellationToken)
         {
             Domain.ReceiptStatus city = new()
             {

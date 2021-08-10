@@ -1,8 +1,6 @@
 ﻿using Common.Extensions;
 using Common.Utilities;
-using Domain;
 using DTO;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 using System.Collections.Generic;
@@ -32,7 +30,7 @@ namespace TTNCO.Controllers.v1
 
         #region City Actions
         [HttpPost()]
-        public async Task<ApiResult<CityDTO>> CreateCity(CityDTO modelDto, CancellationToken cancellationToken)
+        public async Task<ApiResult<CityDTO>> Create(CityDTO modelDto, CancellationToken cancellationToken)
         {
             modelDto.CreatedBy = HttpContext.User.Identity.GetUserId<int>();
 
@@ -41,30 +39,30 @@ namespace TTNCO.Controllers.v1
         }
 
         [HttpDelete("{Id}")]
-        public async Task<ApiResult<string>> DeleteCity(int Id, CancellationToken cancellationToken)
+        public async Task<ApiResult<string>> Delete(int Id, CancellationToken cancellationToken)
         {
-            var result = await _cityService.DeleteCityAsync(Id, cancellationToken);
+            var result = await _cityService.DeleteAsync(Id, cancellationToken);
             return result.ToString();
         }
 
         [HttpPut("{Id}")]
-        public async Task<ApiResult<CityDTO>> UpdateCity(int Id, CityDTO modelDto, CancellationToken cancellationToken)
+        public async Task<ApiResult<CityDTO>> Update(int Id, CityDTO modelDto, CancellationToken cancellationToken)
         {
-            var result = await _cityService.UpdateCityAsync(Id, modelDto, cancellationToken);
+            var result = await _cityService.UpdateAsync(Id, modelDto, cancellationToken);
             return result;
         }
 
         [HttpGet("{id}")]
-        public async Task<ApiResult<List<CityDTO>>> GetAllCities(int id,CancellationToken cancellationToken)
+        public async Task<ApiResult<List<CityDTO>>> Get(int id,CancellationToken cancellationToken)
         {
-            var result = await _cityService.GetAllAsync(id,cancellationToken);
+            var result = await _cityService.GetAsync(id,cancellationToken);
             return result;
         }
 
         [HttpGet("{page}/{pageSize}")]
-        public async Task<ApiResult<PagedResult<CityDTO>>> GetCities(int? page, [FromQuery] int? pageSize, [FromQuery] string orderBy, CancellationToken cancellationToken)
+        public async Task<ApiResult<PagedResult<CityDTO>>> GetAll(int? page, [FromQuery] int? pageSize, [FromQuery] string orderBy, CancellationToken cancellationToken)
         {
-            var result = await _cityService.GetAllCitiesAsync(page, pageSize, orderBy, cancellationToken);
+            var result = await _cityService.GetAllAsync(page, pageSize, orderBy, cancellationToken);
             return result;
         }
 

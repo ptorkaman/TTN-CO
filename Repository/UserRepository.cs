@@ -86,6 +86,8 @@ namespace Repository
             await base.UpdateAsync(user, cancellationToken);
         }
 
+        
+
         //public async Task<User> GetByUserNameChangePassword(ChangePasswordViewModel model, string username)
         //{
         //    return Table.Where(p => p.Username == username && p.ChangePasswordCode == model.ChangePasswordCode).FirstOrDefault();

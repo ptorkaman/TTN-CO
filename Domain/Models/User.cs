@@ -6,12 +6,12 @@ namespace Domain
 {
     [Table("User", Schema = "TTN")]
 
-    public partial class User
+    public  class User
     {
         public User()
         {
-            UserRoles = new HashSet<UserRole>();
-            UserMenus = new List<UserMenu>();
+            //UserRoles = new HashSet<UserRole>();
+            //UserMenus = new HashSet<UserMenu>();
         }
 
         public long Id { get; set; }
