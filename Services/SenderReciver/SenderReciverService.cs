@@ -79,13 +79,13 @@ namespace Services
             return _mapper.Map<PagedResult<SenderReciverDTO>>(model);
         }
 
-        public async Task<SenderReciverDTO> UpdateAsync(int cityId, SenderReciverDTO modelDto, CancellationToken cancellationToken)
+        public async Task<SenderReciverDTO> UpdateAsync(int Id, SenderReciverDTO modelDto, CancellationToken cancellationToken)
         {
             SenderReciver model = new()
             {
-                Id = cityId,
+                Id = Id,
                 CreatedBy = modelDto.CreatedBy.Value,
-                CreatedDate = DateTime.Now,
+                CreatedDate = modelDto.CreatedDate.Value,
                 Name = modelDto.Name,
                 Address = modelDto.Address,
                 CityId = modelDto.CityId,

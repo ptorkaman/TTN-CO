@@ -45,6 +45,8 @@ namespace Domain
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasAnnotation("Relational:Collation", "Arabic_CI_AS");
+
             modelBuilder.Entity<WehicleType>(entity =>{entity.ToTable("WehicleTypes", "TTN"); });
             modelBuilder.Entity<Warehouse>(entity =>{entity.ToTable("Warehouses", "TTN");});
             modelBuilder.Entity<Unit>(entity => {entity.ToTable("Units", "TTN");});
@@ -67,6 +69,7 @@ namespace Domain
             modelBuilder.Entity<Permission>(entity =>{  entity.ToTable("Permissions", "TTN"); });
             modelBuilder.Entity<Person>(entity => {  entity.ToTable("Persons", "TTN"); });
             modelBuilder.Entity<UserRole>(entity =>{entity.ToTable("UserRoles", "TTN"); });
+
             modelBuilder.Entity<UserMenu>(entity =>
             {
                 entity.ToTable("UserMenus", "TTN");
@@ -76,13 +79,12 @@ namespace Domain
                 entity.HasOne<Menu>(x => x.Menu)
                     .WithMany(x => x.UserMenus)
                     .HasForeignKey(x => x.MenuId);
-
-                
             });
+
             modelBuilder.Entity<UserType>(entity => { entity.ToTable("UserTypes", "TTN");});
             modelBuilder.Entity<Role>(entity =>{ entity.ToTable("Roles", "TTN");});
             modelBuilder.Entity<UserWarhouse>(entity =>{ entity.ToTable("UserWarhouses", "TTN"); });
-            modelBuilder.HasAnnotation("Relational:Collation", "Arabic_CI_AS");
+
             modelBuilder.Entity<User>(entity =>
             {
                 entity.ToTable("Users", "TTN");

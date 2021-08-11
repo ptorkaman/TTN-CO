@@ -20,12 +20,10 @@ namespace DTO
 
     public enum ClassType
     {
-
         [Description("Sender")]
         Sender = 1
         ,
         [Description("Reciever")]
-
         Reciever = 2
     }
 }
