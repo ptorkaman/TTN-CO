@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    public interface IReciverRepository : IRepository<Reciver>
+    public interface IReciverRepository : IRepository<SenderReciver>
     {
-        Task<List<Reciver>> GetByCityId(int id, CancellationToken cancellationToken);
+        Task<List<SenderReciver>> GetByCityId(int id, CancellationToken cancellationToken);
     }
 }

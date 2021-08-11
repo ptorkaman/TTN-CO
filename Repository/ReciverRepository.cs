@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    public class ReciverRepository : Repository<Reciver>, IReciverRepository
+    public class ReciverRepository : Repository<SenderReciver>, IReciverRepository
     {
 
 
@@ -16,7 +16,7 @@ namespace Repository
 
         }
 
-        public Task<List<Reciver>> GetByCityId(int id, CancellationToken cancellationToken)
+        public Task<List<SenderReciver>> GetByCityId(int id, CancellationToken cancellationToken)
         {
             return Table.Where(x => x.IsActive && x.CityId == id).ToListAsync();
 

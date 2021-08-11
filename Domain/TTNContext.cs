@@ -30,7 +30,7 @@ namespace Domain
         public DbSet<Country> Countries { get; set; }
         public DbSet<Parish> Parishes { get; set; }
         public DbSet<Province> Provinces { get; set; }
-        public DbSet<Reciver> Recivers { get; set; }
+        public DbSet<SenderReciver> SenderRecivers { get; set; }
         public DbSet<Region> Regions { get; set; }
         public DbSet<Sender> Senders { get; set; }
         public DbSet<SenderWarehouse> SenderWarehouses { get; set; }
@@ -50,9 +50,8 @@ namespace Domain
             modelBuilder.Entity<Unit>(entity => {entity.ToTable("Units", "TTN");});
             modelBuilder.Entity<TransportationDetail>(entity => { entity.ToTable("TransportationDetails", "TTN"); });
             modelBuilder.Entity<SenderWarehouse>(entity => { entity.ToTable("SenderWarehouses", "TTN"); });
-            modelBuilder.Entity<Sender>(entity =>{entity.ToTable("Senders", "TTN");});
             modelBuilder.Entity<Region>(entity =>  {  entity.ToTable("Regions", "TTN"); });
-            modelBuilder.Entity<Reciver>(entity => { entity.ToTable("Recivers", "TTN"); });
+            modelBuilder.Entity<SenderReciver>(entity => { entity.ToTable("SenderRecivers", "TTN"); });
             modelBuilder.Entity<Province>(entity => {entity.ToTable("Provinces", "TTN"); });
             modelBuilder.Entity<Parish>(entity => {entity.ToTable("Parishes", "TTN");});
             modelBuilder.Entity<Country>(entity =>{ entity.ToTable("Countries", "TTN");});

@@ -24,6 +24,7 @@ using TTNCO.Versioning;
 using Services;
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace TTNCO
 {
@@ -107,7 +108,7 @@ namespace TTNCO
             #endregion
 
             #region Swagger
-
+           
             services.AddSwaggerGen(swagger =>
             {
                 swagger.SwaggerDoc("v1", new OpenApiInfo
@@ -127,7 +128,7 @@ namespace TTNCO
                 swagger.ResolveConflictingActions(a => a.First());
                 swagger.OperationFilter<RemoveVersionFromParameterv>();
                 swagger.DocumentFilter<ReplaceVersionWithExactValueInPath>();
-
+             
                 #region Enable Authorization using Swagger (JWT)
 
                 swagger.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
@@ -239,7 +240,7 @@ namespace TTNCO
             services.AddScoped<IWarehouseService, WarehouseService>();
             services.AddScoped<IReceiptService, ReceiptService>();
             services.AddScoped<ISenderService, SenderService>();
-            services.AddScoped<IReciverService, ReciverService>();
+            services.AddScoped<ISenderReciverService, SenderReciverService>();
             
             #endregion
 
@@ -264,6 +265,7 @@ namespace TTNCO
                 var prefix = _siteSetting.PrefixUrl;
                 c.SwaggerEndpoint(prefix + "/swagger/v1/swagger.json", "API v1");
                 c.SwaggerEndpoint(prefix + "/swagger/v2/swagger.json", "API v2");
+                c.DocExpansion(DocExpansion.None);
             });
 
             app.UseHttpsRedirection();

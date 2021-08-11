@@ -1,11 +1,12 @@
-﻿using Domain.Models;
+﻿using System.ComponentModel;
+using Domain.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain
 {
-    [Table("Reciver", Schema = "TTN")]
+    [Table("SenderReciver", Schema = "TTN")]
 
-    public class Reciver : BaseClass<int> 
+    public class SenderReciver : BaseClass<int> 
     {
         public int CityId { get; set; }
         public string CompanyName { get; set; }
@@ -17,6 +18,16 @@ namespace Domain
         public string Phone { get; set; }
 
         public string Address { get; set; }
+        public ClassType Type { get; set; }
+    }
 
+    public enum ClassType
+    {
+        [Description("Sender")]
+        Sender =1
+        ,
+        [Description("Reciever")]
+
+        Reciever = 2
     }
 }

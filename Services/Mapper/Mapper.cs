@@ -28,7 +28,7 @@ namespace Services.Mapper
             CreateMap<Bin, BinDTO>();
             CreateMap<Menu, MenuDTO>();
             CreateMap<Permission, PermissionDTO>();
-            CreateMap<Reciver, ReciverDTO>();
+            CreateMap<SenderReciver, SenderReciverDTO>();
             CreateMap<Region, RegionDTO>();
             CreateMap<Role, RoleDTO>();
             CreateMap<RolePermission, RolePermissionDTO>();
