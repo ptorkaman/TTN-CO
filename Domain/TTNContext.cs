@@ -12,6 +12,7 @@ namespace Domain
             : base(options)
         {
         }
+        public DbSet<PackageType> PackageTypes { get; set; }
         public DbSet<UserMenu> UserMenus { get; set; }
         public DbSet<MenuPermission> MenuPermissions { get; set; }
         public DbSet<User> Users { get; set; }

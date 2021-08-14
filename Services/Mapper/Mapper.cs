@@ -10,7 +10,10 @@ namespace Services.Mapper
         public Mapper()
         {
             AllowNullDestinationValues = true;
-            //Source -> Destination           
+            //Source -> Destination
+            //
+            CreateMap<PackageType, PackageTypeDTO>();
+
             CreateMap<ReceiptStatus, ReceiptStatusDTO>();
             CreateMap<UserMenu, UserMenuDTO>();
 
