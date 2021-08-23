@@ -9,22 +9,23 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Domain;
 
 namespace Services
 {
     public class MenuPermissionService : IMenuPermissionService
     {
         #region Fields
-        private readonly IRepository<Domain.MenuPermission> _menuRepository;
+        private readonly IRepository<MenuPermission> _repository;
         private readonly IMapper _mapper;
         private readonly PagingSettings _pagingSettings;
 
         #endregion
 
         #region CTOR
-        public MenuPermissionService(IRepository<Domain.MenuPermission> menuRepository, IMapper mapper, IOptionsSnapshot<PagingSettings> pagingSettings)
+        public MenuPermissionService(IRepository<Domain.MenuPermission> repository, IMapper mapper, IOptionsSnapshot<PagingSettings> pagingSettings)
         {
-            _menuRepository = menuRepository;
+            _repository = repository;
             _mapper = mapper;
             _pagingSettings = pagingSettings.Value;
         }
@@ -42,7 +43,7 @@ namespace Services
                     IsActive=true
                 };
 
-                await _menuRepository.AddAsync(menu, cancellationToken);
+                await _repository.AddAsync(menu, cancellationToken);
                 return _mapper.Map<MenuPermissionDTO>(menu);
             }
             catch (Exception ex)
@@ -54,30 +55,30 @@ namespace Services
 
         }
 
-        public async Task<bool> DeleteMenuPermissionAsync(int menuId, CancellationToken cancellationToken)
+        public async Task<bool> DeleteAsync(int menuId, CancellationToken cancellationToken)
         {
-            var model = _menuRepository.GetById(menuId);
+            var model = _repository.GetById(menuId);
             if (model == null)
                 throw new CustomException("خطا در دریافت اطلاعات ");
-            _menuRepository.DeleteAsync(model, cancellationToken);
+            _repository.DeleteAsync(model, cancellationToken);
             return true;
         }
 
-        public async Task<List<MenuPermissionDTO>> GetAll(CancellationToken cancellationToken)
+        public async Task<List<MenuPermissionDTO>> GetAsync(CancellationToken cancellationToken)
         {
-            var model = _menuRepository.GetAllAsync( cancellationToken);
+            var model = await _repository.GetAllAsync(cancellationToken);
             return _mapper.Map<List<MenuPermissionDTO>>(model);
         }
 
-        public async Task<PagedResult<MenuPermissionDTO>> GetAllAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
+        public Task<PagedResult<MenuPermission>> GetAllAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
         {
             int pageNotNull = page ?? _pagingSettings.DefaultPage;
             int pageSizeNotNull = pageSize ?? _pagingSettings.PageSize;
-            var model = _menuRepository.GetPagedAsync(pageNotNull, pageSizeNotNull, cancellationToken);
-            return _mapper.Map<PagedResult<MenuPermissionDTO>>(model);
+            var model = _repository.GetPagedAsync(pageNotNull, pageSizeNotNull, cancellationToken);
+            return model;
         }
 
-        public async Task<MenuPermissionDTO> UpdateMenuPermissionAsync(int menuId, MenuPermissionDTO modelDto, CancellationToken cancellationToken)
+        public async Task<MenuPermissionDTO> UpdateAsync(int menuId, MenuPermissionDTO modelDto, CancellationToken cancellationToken)
         {
             Domain.MenuPermission menu = new()
             {
@@ -90,7 +91,7 @@ namespace Services
                 ModifiedDate = DateTime.Now
             };
 
-            await _menuRepository.UpdateAsync(menu, cancellationToken);
+            await _repository.UpdateAsync(menu, cancellationToken);
             return _mapper.Map<MenuPermissionDTO>(menu);
         }
         #endregion

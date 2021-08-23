@@ -7,6 +7,7 @@ using Services;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Domain;
 using TTNCO.Result;
 
 namespace TTNCO.Controllers.v1
@@ -53,17 +54,17 @@ namespace TTNCO.Controllers.v1
             return result;
         }
 
-        [HttpGet("{id}")]
-        public async Task<ApiResult<List<RegionDTO>>> GetAll(int id,CancellationToken cancellationToken)
+        [HttpGet("Get")]
+        public async Task<ApiResult<List<RegionDTO>>> Get(CancellationToken cancellationToken)
         {
-            var result = await _regionService.GetByCityId(id,cancellationToken);
+            var result = await _regionService.GetAsync(cancellationToken);
             return result;
         }
 
-        [HttpGet("{page}/{pageSize}")]
-        public async Task<ApiResult<PagedResult<RegionDTO>>> Get(int? page, [FromQuery] int? pageSize, [FromQuery] string orderBy, CancellationToken cancellationToken)
+        [HttpGet("GetAll")]
+        public async Task<ApiResult<PagedResult<Region>>> GetAll(int? page, [FromQuery] int? pageSize, [FromQuery] string orderBy, CancellationToken cancellationToken)
         {
-            var result = await _regionService.GetAllCitiesAsync(page, pageSize, orderBy, cancellationToken);
+            var result = await _regionService.GetAllAsync(page, pageSize, orderBy, cancellationToken);
             return result;
         }
 

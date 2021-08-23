@@ -56,7 +56,7 @@ namespace Services
 
         }
 
-        public async Task<bool> DeleteCountryAsync(int countyId, CancellationToken cancellationToken)
+        public async Task<bool> DeleteAsync(int countyId, CancellationToken cancellationToken)
         {
             var model = _countyRepository.GetById(countyId);
             if (model == null)
@@ -65,21 +65,21 @@ namespace Services
             return true;
         }
 
-        public async Task<List<CountryDTO>> GetAllAsync(CancellationToken cancellationToken)
+        public async Task<List<CountryDTO>> GetAsync(CancellationToken cancellationToken)
         {
             var model = _countyRepository.GetAllAsync( cancellationToken);
             return _mapper.Map<List<CountryDTO>>(model.Result);
         }
 
-        public async Task<PagedResult<CountryDTO>> GetAllCitiesAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
+        public Task<PagedResult<Country>> GetAllCountryAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
         {
             int pageNotNull = page ?? _pagingSettings.DefaultPage;
             int pageSizeNotNull = pageSize ?? _pagingSettings.PageSize;
             var model = _countyRepository.GetPagedAsync(pageNotNull, pageSizeNotNull, cancellationToken);
-            return _mapper.Map<PagedResult<CountryDTO>>(model);
+            return  model;
         }
 
-        public async Task<CountryDTO> UpdateCountryAsync(int countyId, CountryDTO modelDto, CancellationToken cancellationToken)
+        public async Task<CountryDTO> UpdateAsync(int countyId, CountryDTO modelDto, CancellationToken cancellationToken)
         {
             Domain.Country county = new()
             {

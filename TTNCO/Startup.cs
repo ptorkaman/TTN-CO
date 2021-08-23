@@ -47,6 +47,10 @@ namespace TTNCO
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
+            var appSettings = appSettingsSection.Get<AppSettings>();
+            //var key = Encoding.ASCII.GetBytes(appSettings.Secret);
             services.AddControllers();
             services.AddControllers(options =>
             {
@@ -164,7 +168,7 @@ namespace TTNCO
 
             #region Swagger Json property Support
 
-            //services.AddSwaggerGenNewtonsoftSupport();
+            services.AddSwaggerGenNewtonsoftSupport();
 
             #endregion
 
@@ -229,6 +233,7 @@ namespace TTNCO
             #endregion
 
             #region Services
+            services.AddScoped<IStuffManagerService, StuffManagerService>();
             services.AddScoped<IUserWarhouseService, UserWarhouseService>();
             services.AddScoped<IReceiptStatusService, ReceiptStatusService>();
             services.AddScoped<IMenuPermissionService, MenuPermissionService>();
@@ -243,6 +248,9 @@ namespace TTNCO
             services.AddScoped<ISenderService, SenderService>();
             services.AddScoped<ISenderReciverService, SenderReciverService>();
             services.AddScoped<IPackageTypeService, PackageTypeService>();
+            services.AddScoped<ICityService, CityService>();
+            services.AddScoped<IVehicleTypeService, VehicleTypeService>();
+            services.AddScoped<IVehicleManagerService, VehicleManagerService>();
 
             #endregion
 

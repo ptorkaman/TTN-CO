@@ -20,10 +20,16 @@ namespace Repository
             _roleRepository = roleRepository;
         }
 
-        public Task<User> GetByUserAndPass(string username, string password, CancellationToken cancellationToken)
+        public User GetByUserAndPass(string username, string password, CancellationToken cancellationToken)
         {
+       
             var passwordHash = SecurityHelper.GetSha256Hash(password);
-            return Table.Where(p => p.Username == username && p.Password == passwordHash).SingleOrDefaultAsync(cancellationToken);
+            return Table.Include(x => x.UserRoles)
+                .ThenInclude(x => x.Role)
+               .ThenInclude(x => x.RolePermissions)
+                .Include(x => x.UserMenus)
+                //.ThenInclude(x => x.Menu)
+                .FirstOrDefault(x => x.Username == username); ;
         }
         public async Task AddAsync(User user, string password, CancellationToken cancellationToken)
         {

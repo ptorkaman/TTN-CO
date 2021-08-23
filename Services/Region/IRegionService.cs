@@ -3,6 +3,7 @@ using DTO;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Domain;
 
 namespace Services
 {
@@ -11,7 +12,7 @@ namespace Services
         Task<RegionDTO> Create(RegionDTO modelDto, CancellationToken cancellationToken);
         Task<bool> DeleteRegionAsync(int cityId, CancellationToken cancellationToken);
         Task<RegionDTO> UpdateRegionAsync(int cityId, RegionDTO modelDto, CancellationToken cancellationToken);
-        Task<PagedResult<RegionDTO>> GetAllCitiesAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken);
-        Task<List<RegionDTO>> GetByCityId(int id, CancellationToken cancellationToken);
+        Task<PagedResult<Region>> GetAllAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken);
+        Task<List<RegionDTO>> GetAsync(CancellationToken cancellationToken);
     }
 }

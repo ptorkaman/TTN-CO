@@ -9,7 +9,7 @@ namespace Repository
 {
     public interface IUserRepository : IRepository<User>
     {
-        Task<User> GetByUserAndPass(string username, string password, CancellationToken cancellationToken);
+        User GetByUserAndPass(string username, string password, CancellationToken cancellationToken);
         Task<List<Role>> GetUserRolesAsync(long userId);
         Task<List<Permission>> GetRolesPermissionsAsync(IEnumerable<string> roles);
         Task AddAsync(User user, string password, CancellationToken cancellationToken);

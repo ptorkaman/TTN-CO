@@ -54,15 +54,15 @@ namespace TTNCO.Controllers.v1
             return result;
         }
 
-        [HttpGet("{id}")]
-        public async Task<ApiResult<List<BinDTO>>> Get(int id,CancellationToken cancellationToken)
+        [HttpGet("Get")]
+        public async Task<ApiResult<List<BinDTO>>> Get(CancellationToken cancellationToken)
         {
-            var result = await _binService.GetAsync(id,cancellationToken);
+            var result = await _binService.GetAsync(cancellationToken);
             return result;
         }
 
-        [HttpGet("{page}/{pageSize}")]
-        public async Task<ApiResult<PagedResult<BinDTO>>> GetAll(int? page, [FromQuery] int? pageSize, [FromQuery] string orderBy, CancellationToken cancellationToken)
+        [HttpGet("GetAll")]
+        public async Task<ApiResult<PagedResult<Bin>>> GetAll(int? page, [FromQuery] int? pageSize, [FromQuery] string orderBy, CancellationToken cancellationToken)
         {
             var result = await _binService.GetAllAsync(page, pageSize, orderBy, cancellationToken);
             return result;

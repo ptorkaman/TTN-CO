@@ -12,7 +12,7 @@ namespace Services
         Task<BinDTO> Create(BinDTO modelDto, CancellationToken cancellationToken);
         Task<bool> DeleteAsync(int cityId, CancellationToken cancellationToken);
         Task<BinDTO> UpdateAsync(int cityId, BinDTO modelDto, CancellationToken cancellationToken);
-        Task<PagedResult<BinDTO>> GetAllAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken);
-        Task<List<BinDTO>> GetAsync(int id,CancellationToken cancellationToken);
+        Task<PagedResult<Bin>> GetAllAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken);
+        Task<List<BinDTO>> GetAsync(CancellationToken cancellationToken);
     }
 }

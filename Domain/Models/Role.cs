@@ -13,14 +13,14 @@ namespace Domain
     {
         public Role()
         {
-            RolePermissions = new HashSet<RolePermission>();
-            UserRoles = new HashSet<UserRole>();
+            //RolePermissions = new HashSet<RolePermission>();
+            //UserRoles = new HashSet<UserRole>();
         }
 
         public long Id { get; set; }
         public string Name { get; set; }
 
-        public virtual ICollection<RolePermission> RolePermissions { get; set; }
-        public virtual ICollection<UserRole> UserRoles { get; set; }
+        public virtual IList<RolePermission> RolePermissions { get; set; }
+        //public virtual ICollection<UserRole> UserRoles { get; set; }
     }
 }

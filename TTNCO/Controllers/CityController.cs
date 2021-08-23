@@ -6,6 +6,8 @@ using Services;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Domain;
+using Microsoft.AspNetCore.Authorization;
 using TTNCO.Result;
 
 namespace TTNCO.Controllers.v1
@@ -13,7 +15,7 @@ namespace TTNCO.Controllers.v1
     [ApiVersion("1.0")]
     [ApiExplorerSettings(GroupName = "v1")]
     [ApiController]
- 
+    [AllowAnonymous]
     public class CityController : BaseController
     {
         #region Fields
@@ -52,21 +54,21 @@ namespace TTNCO.Controllers.v1
             return result;
         }
 
-        [HttpGet("{id}")]
-        public async Task<ApiResult<List<CityDTO>>> Get(int id,CancellationToken cancellationToken)
+     
+
+        [HttpGet("Get")]
+        public async Task<ApiResult<List<CityDTO>>> Get(CancellationToken cancellationToken)
         {
-            var result = await _cityService.GetAsync(id,cancellationToken);
+            var result = await _cityService.GetAsync(cancellationToken);
             return result;
         }
 
-        [HttpGet("{page}/{pageSize}")]
-        public async Task<ApiResult<PagedResult<CityDTO>>> GetAll(int? page, [FromQuery] int? pageSize, [FromQuery] string orderBy, CancellationToken cancellationToken)
+        [HttpGet("GetAll")]
+        public async Task<ApiResult<PagedResult<City>>> GetAll(int? page, [FromQuery] int? pageSize, [FromQuery] string orderBy, CancellationToken cancellationToken)
         {
             var result = await _cityService.GetAllAsync(page, pageSize, orderBy, cancellationToken);
             return result;
         }
-
-
         #endregion
     }
 }

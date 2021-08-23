@@ -6,6 +6,7 @@ using Services.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using TTNCO.Result;
@@ -19,10 +20,12 @@ namespace TTNCO.Controllers
     {      
         private readonly ILogger<UserController> _logger;
         private readonly IUserService _userService;
-        public UserController(ILogger<UserController> logger, IUserService userService)
+        //private readonly AppSettings _appSettings;
+        public UserController(ILogger<UserController> logger, IUserService userService/*, AppSettings appSettings*/)
         {
             _logger = logger;
             _userService = userService;
+            //_appSettings = appSettings;
         }
 
         #region Create User
@@ -42,7 +45,10 @@ namespace TTNCO.Controllers
         [AllowAnonymous]
         public async Task<ApiResult<LoginDataDTO>> Login(LoginDTO modelDto, CancellationToken cancellationToken)
         {
-            var model = await _userService.Login(modelDto, cancellationToken);
+            var ip = Request.HttpContext.Connection.RemoteIpAddress.ToString();
+            var key =new  byte[64];// Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var model = await _userService.Login(modelDto, cancellationToken,ip, key);
+
             //model.Menu = _userService.GetMenu(model.Id);
             return model;
         }

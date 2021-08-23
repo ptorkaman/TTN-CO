@@ -9,6 +9,7 @@ D:\Project\TTNCO\TTNCO\bin\Debug\net5.0\ref\TTNCO.dll
 D:\Project\TTNCO\TTNCO\bin\Debug\net5.0\TTNCO.pdb
 D:\Project\TTNCO\TTNCO\bin\Debug\net5.0\AutoMapper.dll
 D:\Project\TTNCO\TTNCO\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\Project\TTNCO\TTNCO\bin\Debug\net5.0\Humanizer.dll
 D:\Project\TTNCO\TTNCO\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\Project\TTNCO\TTNCO\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
 D:\Project\TTNCO\TTNCO\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.Internal.dll
@@ -19,6 +20,7 @@ D:\Project\TTNCO\TTNCO\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.Versioning.dll
 D:\Project\TTNCO\TTNCO\bin\Debug\net5.0\Microsoft.Data.SqlClient.dll
 D:\Project\TTNCO\TTNCO\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.dll
 D:\Project\TTNCO\TTNCO\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\Project\TTNCO\TTNCO\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
 D:\Project\TTNCO\TTNCO\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Relational.dll
 D:\Project\TTNCO\TTNCO\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.SqlServer.dll
 D:\Project\TTNCO\TTNCO\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
@@ -32,6 +34,7 @@ D:\Project\TTNCO\TTNCO\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
 D:\Project\TTNCO\TTNCO\bin\Debug\net5.0\Microsoft.OpenApi.dll
 D:\Project\TTNCO\TTNCO\bin\Debug\net5.0\Newtonsoft.Json.dll
 D:\Project\TTNCO\TTNCO\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+D:\Project\TTNCO\TTNCO\bin\Debug\net5.0\SmsIrRestfulNetCore.dll
 D:\Project\TTNCO\TTNCO\bin\Debug\net5.0\Swashbuckle.AspNetCore.Newtonsoft.dll
 D:\Project\TTNCO\TTNCO\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
 D:\Project\TTNCO\TTNCO\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
@@ -68,6 +71,7 @@ D:\Project\TTNCO\TTNCO\obj\Debug\net5.0\TTNCO.GeneratedMSBuildEditorConfig.edito
 D:\Project\TTNCO\TTNCO\obj\Debug\net5.0\TTNCO.AssemblyInfoInputs.cache
 D:\Project\TTNCO\TTNCO\obj\Debug\net5.0\TTNCO.AssemblyInfo.cs
 D:\Project\TTNCO\TTNCO\obj\Debug\net5.0\TTNCO.csproj.CoreCompileInputs.cache
+D:\Project\TTNCO\TTNCO\obj\Debug\net5.0\TTNCO.MvcApplicationPartsAssemblyInfo.cs
 D:\Project\TTNCO\TTNCO\obj\Debug\net5.0\TTNCO.MvcApplicationPartsAssemblyInfo.cache
 D:\Project\TTNCO\TTNCO\obj\Debug\net5.0\staticwebassets\TTNCO.StaticWebAssets.Manifest.cache
 D:\Project\TTNCO\TTNCO\obj\Debug\net5.0\staticwebassets\TTNCO.StaticWebAssets.xml
@@ -78,7 +82,3 @@ D:\Project\TTNCO\TTNCO\obj\Debug\net5.0\TTNCO.dll
 D:\Project\TTNCO\TTNCO\obj\Debug\net5.0\ref\TTNCO.dll
 D:\Project\TTNCO\TTNCO\obj\Debug\net5.0\TTNCO.pdb
 D:\Project\TTNCO\TTNCO\obj\Debug\net5.0\TTNCO.genruntimeconfig.cache
-D:\Project\TTNCO\TTNCO\bin\Debug\net5.0\Humanizer.dll
-D:\Project\TTNCO\TTNCO\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
-D:\Project\TTNCO\TTNCO\bin\Debug\net5.0\SmsIrRestfulNetCore.dll
-D:\Project\TTNCO\TTNCO\obj\Debug\net5.0\TTNCO.MvcApplicationPartsAssemblyInfo.cs

@@ -12,6 +12,9 @@ namespace Domain
             : base(options)
         {
         }
+        public DbSet<VehicleManager> VehicleManagers { get; set; }
+        public DbSet<VehicleType> VehicleTypes { get; set; }
+        public DbSet<StuffManager> StuffManagers { get; set; }
         public DbSet<PackageType> PackageTypes { get; set; }
         public DbSet<UserMenu> UserMenus { get; set; }
         public DbSet<MenuPermission> MenuPermissions { get; set; }

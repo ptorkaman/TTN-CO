@@ -47,7 +47,7 @@ namespace Services
 
         }
 
-        public async Task<bool> DeleteParishAsync(int cityId, CancellationToken cancellationToken)
+        public async Task<bool> DeleteAsync(int cityId, CancellationToken cancellationToken)
         {
             var model = _repository.GetById(cityId);
             if (model == null)
@@ -56,21 +56,21 @@ namespace Services
             return true;
         }
 
-        public async Task<List<ParishDTO>> GetByRegionId(int id, CancellationToken cancellationToken)
+        public async Task<List<ParishDTO>> GetAsync(CancellationToken cancellationToken)
         {
-            var model = _parishRepository.GetByRegionId(id, cancellationToken);
-            return _mapper.Map<List<ParishDTO>>(model.Result);
+            var model = await _repository.GetAllAsync(cancellationToken);
+            return _mapper.Map<List<ParishDTO>>(model);
         }
 
-        public async Task<PagedResult<ParishDTO>> GetAllCitiesAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
+        public Task<PagedResult<Parish>> GetAllAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
         {
             int pageNotNull = page ?? _pagingSettings.DefaultPage;
             int pageSizeNotNull = pageSize ?? _pagingSettings.PageSize;
             var model = _repository.GetPagedAsync(pageNotNull, pageSizeNotNull, cancellationToken);
-            return _mapper.Map<PagedResult<ParishDTO>>(model);
+            return model;
         }
 
-        public async Task<ParishDTO> UpdateParishAsync(int cityId, ParishDTO modelDto, CancellationToken cancellationToken)
+        public async Task<ParishDTO> UpdateAsync(int cityId, ParishDTO modelDto, CancellationToken cancellationToken)
         {
             Domain.Parish city = new()
             {

@@ -14,7 +14,6 @@ namespace TTNCO.Controllers.v1
     [ApiVersion("1.0")]
     [ApiExplorerSettings(GroupName = "v1")]
     [ApiController]
-    [AllowAnonymous]
     public class PersonController : BaseController
     {
         #region Fields

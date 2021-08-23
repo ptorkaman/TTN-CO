@@ -12,6 +12,10 @@ namespace Services.Mapper
             AllowNullDestinationValues = true;
             //Source -> Destination
             //
+
+            CreateMap<VehicleManager, VehicleManagerDTO>();
+            CreateMap<VehicleType, VehicleTypeDTO>();
+            CreateMap<StuffManager, StuffManagerDTO>();
             CreateMap<PackageType, PackageTypeDTO>();
 
             CreateMap<ReceiptStatus, ReceiptStatusDTO>();

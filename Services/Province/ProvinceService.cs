@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Domain;
 
 namespace Services
 {
@@ -46,7 +47,7 @@ namespace Services
 
         }
 
-        public async Task<bool> DeleteProvinceAsync(int provinceId, CancellationToken cancellationToken)
+        public async Task<bool> DeleteAsync(int provinceId, CancellationToken cancellationToken)
         {
             var model = _repository.GetById(provinceId);
             if (model == null)
@@ -55,21 +56,21 @@ namespace Services
             return true;
         }
 
-        public async Task<List<ProvinceDTO>> GetAllAsync(int id,CancellationToken cancellationToken)
+        public async Task<List<ProvinceDTO>> GetAllAsync(CancellationToken cancellationToken)
         {
-            var model = _provinceRepository.GetByCountryId( id,cancellationToken);
+            var model = _provinceRepository.GetAllAsync( cancellationToken);
             return _mapper.Map<List<ProvinceDTO>>(model.Result);
         }
 
-        public async Task<PagedResult<ProvinceDTO>> GetAllCitiesAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
+        public  Task<PagedResult<Province>> GetAllProvinceAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
         {
             int pageNotNull = page ?? _pagingSettings.DefaultPage;
             int pageSizeNotNull = pageSize ?? _pagingSettings.PageSize;
             var model = _repository.GetPagedAsync(pageNotNull, pageSizeNotNull, cancellationToken);
-            return _mapper.Map<PagedResult<ProvinceDTO>>(model);
+            return model;
         }
 
-        public async Task<ProvinceDTO> UpdateProvinceAsync(int provinceId, ProvinceDTO modelDto, CancellationToken cancellationToken)
+        public async Task<ProvinceDTO> UpdateAsync(int provinceId, ProvinceDTO modelDto, CancellationToken cancellationToken)
         {
             Domain.Province province = new()
             {

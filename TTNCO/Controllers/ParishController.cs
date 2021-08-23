@@ -7,6 +7,7 @@ using Services;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Domain;
 using TTNCO.Result;
 
 namespace TTNCO.Controllers.v1
@@ -42,31 +43,30 @@ namespace TTNCO.Controllers.v1
         [HttpDelete("{Id}")]
         public async Task<ApiResult<string>> DeleteParish(int Id, CancellationToken cancellationToken)
         {
-            var result = await _parishService.DeleteParishAsync(Id, cancellationToken);
+            var result = await _parishService.DeleteAsync(Id, cancellationToken);
             return result.ToString();
         }
 
         [HttpPut("{Id}")]
         public async Task<ApiResult<ParishDTO>> UpdateParish(int Id, ParishDTO modelDto, CancellationToken cancellationToken)
         {
-            var result = await _parishService.UpdateParishAsync(Id, modelDto, cancellationToken);
+            var result = await _parishService.UpdateAsync(Id, modelDto, cancellationToken);
             return result;
         }
 
-        [HttpGet("{id}")]
-        public async Task<ApiResult<List<ParishDTO>>> GetAll(int id,CancellationToken cancellationToken)
+        [HttpGet("Get")]
+        public async Task<ApiResult<List<ParishDTO>>> Get(CancellationToken cancellationToken)
         {
-            var result = await _parishService.GetByRegionId(id,cancellationToken);
+            var result = await _parishService.GetAsync(cancellationToken);
             return result;
         }
 
-        [HttpGet("{page}/{pageSize}")]
-        public async Task<ApiResult<PagedResult<ParishDTO>>> Get(int? page, [FromQuery] int? pageSize, [FromQuery] string orderBy, CancellationToken cancellationToken)
+        [HttpGet("GetAll")]
+        public async Task<ApiResult<PagedResult<Parish>>> GetAll(int? page, [FromQuery] int? pageSize, [FromQuery] string orderBy, CancellationToken cancellationToken)
         {
-            var result = await _parishService.GetAllCitiesAsync(page, pageSize, orderBy, cancellationToken);
+            var result = await _parishService.GetAllAsync(page, pageSize, orderBy, cancellationToken);
             return result;
         }
-
 
         #endregion
     }

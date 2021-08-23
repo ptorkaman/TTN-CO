@@ -86,6 +86,22 @@ namespace Services
             await _repository.UpdateAsync(city, cancellationToken);
             return _mapper.Map<RegionDTO>(city);
         }
+
+
+        public async Task<List<RegionDTO>> GetAsync(CancellationToken cancellationToken)
+        {
+            var model = await _repository.GetAllAsync(cancellationToken);
+            return _mapper.Map<List<RegionDTO>>(model);
+        }
+
+        public Task<PagedResult<Region>> GetAllAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
+        {
+            int pageNotNull = page ?? _pagingSettings.DefaultPage;
+            int pageSizeNotNull = pageSize ?? _pagingSettings.PageSize;
+            var model = _repository.GetPagedAsync(pageNotNull, pageSizeNotNull, cancellationToken);
+            return model;
+        }
+
         #endregion
 
     }

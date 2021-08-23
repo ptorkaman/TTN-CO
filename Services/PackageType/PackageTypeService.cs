@@ -65,17 +65,18 @@ namespace Services
 
        
 
-        public async Task<PagedResult<PackageTypeDTO>> GetAllAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
+        public  Task<PagedResult<PackageType>> GetAllAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
         {
             int pageNotNull = page ?? _pagingSettings.DefaultPage;
             int pageSizeNotNull = pageSize ?? _pagingSettings.PageSize;
             var model = _repository.GetPagedAsync(pageNotNull, pageSizeNotNull, cancellationToken);
-            return _mapper.Map<PagedResult<PackageTypeDTO>>(model);
+            return model;
         }
 
         public async Task<PackageTypeDTO> UpdateAsync(int cityId, PackageTypeDTO modelDto, CancellationToken cancellationToken)
         {
-            PackageType city = new()
+
+            PackageType model = new()
             {
                 Id = cityId,
                 CreatedBy = modelDto.CreatedBy.Value,
@@ -85,9 +86,17 @@ namespace Services
                 ModifiedDate = DateTime.Now
             };
 
-            await _repository.UpdateAsync(city, cancellationToken);
-            return _mapper.Map<PackageTypeDTO>(city);
+            await _repository.UpdateAsync(model, cancellationToken);
+            return _mapper.Map<PackageTypeDTO>(model);
         }
+
+
+        public async Task<List<PackageType>> GetAllAsync(CancellationToken cancellationToken)
+        {
+            var model = _repository.GetAllAsync(cancellationToken);
+            return model.Result;
+        }
+
         #endregion
 
     }

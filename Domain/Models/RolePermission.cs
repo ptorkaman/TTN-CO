@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain
 {
-    [Table("RolePermission", Schema = "TTN")]
+    [Table("RolePermissions", Schema = "TTN")]
     public  class RolePermission
     {
         public long Id { get; set; }

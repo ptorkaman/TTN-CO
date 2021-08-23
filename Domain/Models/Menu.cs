@@ -14,7 +14,7 @@ namespace Domain
     {
         public Menu()
         {
-            UserMenus = new List<UserMenu>();
+            //UserMenus = new List<UserMenu>();
         }
         public string Name { get; set; }
         public long? ParentId { get; set; }

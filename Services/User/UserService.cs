@@ -26,6 +26,7 @@ namespace Services.User
         private readonly IUserMenuRepository _userMenuRepository;
         private readonly SiteSettings _siteSetting;
         private readonly IMapper _mapper;
+  
         public UserService(IRepository<Person> personRepository, IUserRepository userRepository, IOptionsSnapshot<SiteSettings> settings, IUserMenuRepository userMenuRepository, IMapper mapper)
         {
             _mapper = mapper;
@@ -35,14 +36,15 @@ namespace Services.User
             _userMenuRepository = userMenuRepository;
         }
 
-        public async Task<LoginDataDTO> Login(LoginDTO modelDto, CancellationToken cancellationToken)
+        public async Task<LoginDataDTO> Login(LoginDTO modelDto, CancellationToken cancellationToken,string ip, byte[] key)
         {
             LoginDataDTO model = new LoginDataDTO();
-            var user = await _userRepository.GetByUserAndPass(modelDto.UserName, modelDto.Password, cancellationToken);
+            var user =  _userRepository.GetByUserAndPass(modelDto.UserName, modelDto.Password, cancellationToken);
             if (user == null)
                 throw new BadRequestException("نام کاربری یا رمز عبور اشتباه است");
 
-            var jwt = await GenerateAsync(user);
+            var jwt = await GenerateAsync(user,ip, key);
+          
             model.Token = jwt;
             var Menu =  _userMenuRepository.GetByUserId(user.Id);
             foreach (var item in Menu.Result)
@@ -56,12 +58,36 @@ namespace Services.User
             await _userRepository.UpdateAsync(user, cancellationToken);
             return model;
         }
-        public async Task<string> GenerateAsync(Domain.User user)
+        public async Task<string> GenerateAsync(Domain.User user,string ip,byte[] key)
         {
             var secretKey =  Encoding.UTF8.GetBytes(_siteSetting.Jwt.Key);
             var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(secretKey), SecurityAlgorithms.HmacSha256Signature);
 
-            var claims = await _getClaimsAsync(user);
+            var claims = new ClaimsIdentity();
+            claims.AddClaim(new Claim(type: ClaimTypes.Name, user.Username));
+            claims.AddClaim(new Claim(type: "UserId", user.Id.ToString()));
+            claims.AddClaim(new Claim(type: "Ip", ip));
+            //claims.AddClaim(new Claim(ClaimTypes.Country, user.Base));
+            //claims.AddClaim(new Claim(type: "UserAgent", userAgent));
+            claims.AddClaim(new Claim(type: "UserMenues", user.UserMenus.ToString()));
+   
+            claims.AddClaims(new[]
+            {
+
+                new Claim(ClaimTypes.Name,user.Username),
+                //new Claim(ClaimTypes.Country,user.Base),
+                new Claim(ClaimTypes.UserData,user.Id.ToString())
+            });
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = claims,
+                Expires = DateTime.UtcNow.AddYears(100),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
+                    SecurityAlgorithms.HmacSha256Signature)
+            };
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var claim = await _getClaimsAsync(user);
             
             var descriptor = new SecurityTokenDescriptor
             {
@@ -75,11 +101,11 @@ namespace Services.User
             };
 
 
-            var tokenHandler = new JwtSecurityTokenHandler();
+            //var tokenHandler = new JwtSecurityTokenHandler();
 
-            var securityToken = tokenHandler.CreateToken(descriptor);
+            //var securityToken = tokenHandler.CreateToken(descriptor);
 
-            var jwt = tokenHandler.WriteToken(securityToken);
+            var jwt = tokenHandler.WriteToken(token);
 
             return jwt;
         }

@@ -57,18 +57,18 @@ namespace Services
             return true;
         }
 
-        public async Task<List<CityDTO>> GetAsync(int id,CancellationToken cancellationToken)
+        public async Task<List<CityDTO>> GetAsync(CancellationToken cancellationToken)
         {
-            var model =await _cityRepository.GetByCityId(id, cancellationToken);
+            var model =await _cityRepository.GetAllAsync( cancellationToken);
             return _mapper.Map<List<CityDTO>>(model);
         }
 
-        public async Task<PagedResult<CityDTO>> GetAllAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
+        public  Task<PagedResult<City>> GetAllAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
         {
             int pageNotNull = page ?? _pagingSettings.DefaultPage;
             int pageSizeNotNull = pageSize ?? _pagingSettings.PageSize;
             var model = _repository.GetPagedAsync(pageNotNull, pageSizeNotNull, cancellationToken);
-            return _mapper.Map<PagedResult<CityDTO>>(model);
+            return model;
         }
 
         public async Task<CityDTO> UpdateAsync(int cityId, CityDTO modelDto, CancellationToken cancellationToken)
