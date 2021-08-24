@@ -9,22 +9,23 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Domain;
 
 namespace Services
 {
     public class PermissionService : IPermissionService
     {
         #region Fields
-        private readonly IRepository<Domain.Permission> _permissionRepository;
+        private readonly IRepository<Permission> _repository;
         private readonly IMapper _mapper;
         private readonly PagingSettings _pagingSettings;
 
         #endregion
 
         #region CTOR
-        public PermissionService(IRepository<Domain.Permission> permissionRepository, IMapper mapper, IOptionsSnapshot<PagingSettings> pagingSettings)
+        public PermissionService(IRepository<Domain.Permission> repository, IMapper mapper, IOptionsSnapshot<PagingSettings> pagingSettings)
         {
-            _permissionRepository = permissionRepository;
+            _repository = repository;
             _mapper = mapper;
             _pagingSettings = pagingSettings.Value;
         }
@@ -36,38 +37,38 @@ namespace Services
            
                 Name = modelDto.Name,
                 EnglishName = modelDto.EnglishName,
-             
+             IsActive = true
             };
 
-            await _permissionRepository.AddAsync(permission, cancellationToken);
+            await _repository.AddAsync(permission, cancellationToken);
             return _mapper.Map<PermissionDTO>(permission);
 
         }
 
-        public async Task<bool> DeletePermissionAsync(int permissionId, CancellationToken cancellationToken)
+        public async Task<bool> DeleteAsync(int permissionId, CancellationToken cancellationToken)
         {
-            var model = _permissionRepository.GetById(permissionId);
+            var model = _repository.GetById(permissionId);
             if (model == null)
                 throw new CustomException("خطا در دریافت اطلاعات ");
-            _permissionRepository.DeleteAsync(model, cancellationToken);
+            _repository.DeleteAsync(model, cancellationToken);
             return true;
         }
 
-        public async Task<List<PermissionDTO>> GetAllAsync(CancellationToken cancellationToken)
+        public async Task<List<PermissionDTO>> GetAsync(CancellationToken cancellationToken)
         {
-            var model = _permissionRepository.GetAllAsync( cancellationToken);
+            var model = await _repository.GetAllAsync(cancellationToken);
             return _mapper.Map<List<PermissionDTO>>(model);
         }
 
-        public async Task<PagedResult<PermissionDTO>> GetAllCitiesAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
+        public Task<PagedResult<Permission>> GetAllAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
         {
             int pageNotNull = page ?? _pagingSettings.DefaultPage;
             int pageSizeNotNull = pageSize ?? _pagingSettings.PageSize;
-            var model = _permissionRepository.GetPagedAsync(pageNotNull, pageSizeNotNull, cancellationToken);
-            return _mapper.Map<PagedResult<PermissionDTO>>(model);
+            var model = _repository.GetPagedAsync(pageNotNull, pageSizeNotNull, cancellationToken);
+            return model;
         }
 
-        public async Task<PermissionDTO> UpdatePermissionAsync(int permissionId, PermissionDTO modelDto, CancellationToken cancellationToken)
+        public async Task<PermissionDTO> UpdateAsync(int permissionId, PermissionDTO modelDto, CancellationToken cancellationToken)
         {
             Domain.Permission permission = new()
             {
@@ -75,10 +76,10 @@ namespace Services
          
                 Name = modelDto.Name,
                 EnglishName = modelDto.EnglishName,
-                
+                IsActive = modelDto.IsActive
             };
 
-            await _permissionRepository.UpdateAsync(permission, cancellationToken);
+            await _repository.UpdateAsync(permission, cancellationToken);
             return _mapper.Map<PermissionDTO>(permission);
         }
         #endregion

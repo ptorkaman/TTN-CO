@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain
 {
-    [Table("User", Schema = "TTN")]
+    [Table("Users", Schema = "TTN")]
 
     public  class User
     {

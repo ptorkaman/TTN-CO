@@ -19,16 +19,14 @@ namespace Services
         private readonly IRepository<Sender> _repository;
         private readonly IMapper _mapper;
         private readonly PagingSettings _pagingSettings;
-        private readonly ISenderRepository _cityRepository;
         #endregion 
 
         #region CTOR
-        public SenderService(IRepository<Sender> repository, IMapper mapper, IOptionsSnapshot<PagingSettings> pagingSettings, ISenderRepository cityRepository)
+        public SenderService(IRepository<Sender> repository, IMapper mapper, IOptionsSnapshot<PagingSettings> pagingSettings)
         {
             _repository = repository;
             _mapper = mapper;
             _pagingSettings = pagingSettings.Value;
-            _cityRepository = cityRepository;
         }
 
         public async Task<SenderDTO> Create(SenderDTO modelDto, CancellationToken cancellationToken)
@@ -61,19 +59,20 @@ namespace Services
             return true;
         }
 
-        public async Task<List<SenderDTO>> GetAsync(int id,CancellationToken cancellationToken)
+        public async Task<List<SenderDTO>> GetAsync(CancellationToken cancellationToken)
         {
-            var model =await _cityRepository.GetByCityId(id, cancellationToken);
+            var model = await _repository.GetAllAsync(cancellationToken);
             return _mapper.Map<List<SenderDTO>>(model);
         }
 
-        public async Task<PagedResult<SenderDTO>> GetAllAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
+        public Task<PagedResult<Sender>> GetAllAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
         {
             int pageNotNull = page ?? _pagingSettings.DefaultPage;
             int pageSizeNotNull = pageSize ?? _pagingSettings.PageSize;
             var model = _repository.GetPagedAsync(pageNotNull, pageSizeNotNull, cancellationToken);
-            return _mapper.Map<PagedResult<SenderDTO>>(model);
+            return model;
         }
+
 
         public async Task<SenderDTO> UpdateAsync(int cityId, SenderDTO modelDto, CancellationToken cancellationToken)
         {

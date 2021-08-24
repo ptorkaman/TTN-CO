@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    [Table("Role", Schema = "TTN")]
+    [Table("Roles", Schema = "TTN")]
 
     public  class Role
     {

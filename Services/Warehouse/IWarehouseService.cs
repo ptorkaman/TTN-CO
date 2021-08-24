@@ -10,9 +10,9 @@ namespace Services
     public interface IWarehouseService
     {
         Task<WarehouseDTO> Create(WarehouseDTO modelDto, CancellationToken cancellationToken);
-        Task<bool> DeleteWarehouseAsync(int cityId, CancellationToken cancellationToken);
-        Task<WarehouseDTO> UpdateWarehouseAsync(int cityId, WarehouseDTO modelDto, CancellationToken cancellationToken);
-        Task<PagedResult<WarehouseDTO>> GetAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken);
-        Task<List<WarehouseDTO>> GetByCityId(int id,CancellationToken cancellationToken);
+        Task<bool> DeleteAsync(int cityId, CancellationToken cancellationToken);
+        Task<WarehouseDTO> UpdateAsync(int cityId, WarehouseDTO modelDto, CancellationToken cancellationToken);
+        Task<PagedResult<Warehouse>> GetAllAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken);
+        Task<List<WarehouseDTO>> GetAsync(CancellationToken cancellationToken);
     }
 }

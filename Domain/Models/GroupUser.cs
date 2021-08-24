@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    [Table("GroupUser", Schema = "TTN")]
+    [Table("GroupUsers", Schema = "TTN")]
 
     public class GroupUser : BaseClass<int>
     {

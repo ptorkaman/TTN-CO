@@ -94,6 +94,23 @@ namespace Services
             var model = await _warehouseRepository.GetByUserId(id, cancellationToken);
             return _mapper.Map<List<UserWarhouseDTO>>(model);
         }
+
+
+        public async Task<List<UserWarhouseDTO>> GetAsync(CancellationToken cancellationToken)
+        {
+            var model = await _repository.GetAllAsync(cancellationToken);
+            return _mapper.Map<List<UserWarhouseDTO>>(model);
+        }
+
+        public Task<PagedResult<UserWarhouse>> GetAllAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
+        {
+            int pageNotNull = page ?? _pagingSettings.DefaultPage;
+            int pageSizeNotNull = pageSize ?? _pagingSettings.PageSize;
+            var model = _repository.GetPagedAsync(pageNotNull, pageSizeNotNull, cancellationToken);
+            return model;
+        }
+
+
         #endregion
 
     }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    [Table("Receipt", Schema = "TTN")]
+    [Table("Receipts", Schema = "TTN")]
     public class Receipt : BaseClass<long> 
     { 
         public int ReceiptNo { get; set; }

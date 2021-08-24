@@ -12,4 +12,3 @@ D:\Project\TTNCO\Domain\obj\Debug\net5.0\Domain.dll
 D:\Project\TTNCO\Domain\obj\Debug\net5.0\ref\Domain.dll
 D:\Project\TTNCO\Domain\obj\Debug\net5.0\Domain.pdb
 D:\Project\TTNCO\Domain\obj\Debug\net5.0\Domain.genruntimeconfig.cache
-D:\Project\TTNCO\Domain\obj\Debug\net5.0\Domain.csproj.AssemblyReference.cache

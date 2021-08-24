@@ -80,9 +80,9 @@ namespace Domain
                 entity.HasOne<User>(x => x.User)
                     .WithMany(x => x.UserMenus)
                     .HasForeignKey(x => x.UserId);
-                entity.HasOne<Menu>(x => x.Menu)
-                    .WithMany(x => x.UserMenus)
-                    .HasForeignKey(x => x.MenuId);
+                //entity.HasOne<Menu>(x => x.Menu)
+                //    .WithMany(x => x.UserMenus)
+                //    .HasForeignKey(x => x.MenuId);
             });
 
             modelBuilder.Entity<UserType>(entity => { entity.ToTable("UserTypes", "TTN");});

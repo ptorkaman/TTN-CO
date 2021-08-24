@@ -55,7 +55,7 @@ namespace Services
             return _mapper.Map<WarehouseDTO>(city);
         }
 
-        public async Task<bool> DeleteWarehouseAsync(int cityId, CancellationToken cancellationToken)
+        public async Task<bool> DeleteAsync(int cityId, CancellationToken cancellationToken)
         {
             var model = _repository.GetById(cityId);
             if (model == null)
@@ -64,21 +64,21 @@ namespace Services
             return true;
         }
 
-        public async Task<List<WarehouseDTO>> GetByCityId(int id,CancellationToken cancellationToken)
+        public async Task<List<WarehouseDTO>> GetAsync(CancellationToken cancellationToken)
         {
-            var model =await _cityRepository.GetByCityId(id, cancellationToken);
+            var model = await _cityRepository.GetAllAsync(cancellationToken);
             return _mapper.Map<List<WarehouseDTO>>(model);
         }
 
-        public async Task<PagedResult<WarehouseDTO>> GetAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
+        public Task<PagedResult<Warehouse>> GetAllAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
         {
             int pageNotNull = page ?? _pagingSettings.DefaultPage;
             int pageSizeNotNull = pageSize ?? _pagingSettings.PageSize;
             var model = _repository.GetPagedAsync(pageNotNull, pageSizeNotNull, cancellationToken);
-            return _mapper.Map<PagedResult<WarehouseDTO>>(model);
+            return model;
         }
 
-        public async Task<WarehouseDTO> UpdateWarehouseAsync(int cityId, WarehouseDTO modelDto, CancellationToken cancellationToken)
+        public async Task<WarehouseDTO> UpdateAsync(int cityId, WarehouseDTO modelDto, CancellationToken cancellationToken)
         {
             Warehouse city = new()
             {

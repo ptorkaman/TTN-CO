@@ -10,8 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Common.Extensions;
-using ClassType = Domain.ClassType;
 
 namespace Services
 {
@@ -21,84 +19,82 @@ namespace Services
         private readonly IRepository<SenderReciver> _repository;
         private readonly IMapper _mapper;
         private readonly PagingSettings _pagingSettings;
-        private readonly IReciverRepository _senderReciverRepository;
         #endregion 
 
         #region CTOR
-        public SenderReciverService(IRepository<SenderReciver> repository, IMapper mapper, IOptionsSnapshot<PagingSettings> pagingSettings, IReciverRepository senderReciverRepository)
+        public SenderReciverService(IRepository<SenderReciver> repository, IMapper mapper, IOptionsSnapshot<PagingSettings> pagingSettings)
         {
             _repository = repository;
             _mapper = mapper;
             _pagingSettings = pagingSettings.Value;
-            _senderReciverRepository = senderReciverRepository;
+       
         }
 
         public async Task<SenderReciverDTO> Create(SenderReciverDTO modelDto, CancellationToken cancellationToken)
         {
-            SenderReciver model = new()
+            SenderReciver city = new()
             {
                 CreatedBy = modelDto.CreatedBy.Value,
                 CreatedDate = DateTime.Now,
                 Name = modelDto.Name,
+                Type =(Domain.ClassType) modelDto.Type,
                 Address = modelDto.Address,
                 CityId = modelDto.CityId,
                 CompanyCode = modelDto.CompanyCode,
                 CompanyName = modelDto.CompanyName,
                 Mobile = modelDto.Mobile,
                 Phone = modelDto.Phone,
-                ModifiedBy = modelDto.ModifiedBy,
-                ModifiedDate = modelDto.ModifiedDate,
-                Type = (ClassType) modelDto.Type,
+
                 IsActive = true
             };
-        
-            await _repository.AddAsync(model, cancellationToken);
-            return _mapper.Map<SenderReciverDTO>(model);
+            await _repository.AddAsync(city, cancellationToken);
+            return _mapper.Map<SenderReciverDTO>(city);
         }
 
-        public async Task<bool> DeleteAsync(int Id, CancellationToken cancellationToken)
+        public async Task<bool> DeleteAsync(int cityId, CancellationToken cancellationToken)
         {
-            var model = _repository.GetById(Id);
+            var model = _repository.GetById(cityId);
             if (model == null)
                 throw new CustomException("خطا در دریافت اطلاعات ");
             _repository.DeleteAsync(model, cancellationToken);
             return true;
         }
 
-        public async Task<List<SenderReciverDTO>> GetAsync(int id,CancellationToken cancellationToken)
+        public async Task<List<SenderReciverDTO>> GetAsync(CancellationToken cancellationToken)
         {
-            var model =await _senderReciverRepository.GetByCityId(id, cancellationToken);
+            var model =await _repository.GetAllAsync( cancellationToken);
             return _mapper.Map<List<SenderReciverDTO>>(model);
         }
 
-        public async Task<PagedResult<SenderReciverDTO>> GetAllAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
+        public  Task<PagedResult<SenderReciver>> GetAllAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
         {
             int pageNotNull = page ?? _pagingSettings.DefaultPage;
             int pageSizeNotNull = pageSize ?? _pagingSettings.PageSize;
             var model = _repository.GetPagedAsync(pageNotNull, pageSizeNotNull, cancellationToken);
-            return _mapper.Map<PagedResult<SenderReciverDTO>>(model);
+            return model;
         }
 
-        public async Task<SenderReciverDTO> UpdateAsync(int Id, SenderReciverDTO modelDto, CancellationToken cancellationToken)
+        public async Task<SenderReciverDTO> UpdateAsync(int cityId, SenderReciverDTO modelDto, CancellationToken cancellationToken)
         {
-            SenderReciver model = new()
+            SenderReciver city = new()
             {
-                Id = Id,
+                Id = cityId,
                 CreatedBy = modelDto.CreatedBy.Value,
                 CreatedDate = modelDto.CreatedDate.Value,
                 Name = modelDto.Name,
+                IsActive = modelDto.IsActive,
+                Type = (Domain.ClassType)modelDto.Type,
                 Address = modelDto.Address,
                 CityId = modelDto.CityId,
                 CompanyCode = modelDto.CompanyCode,
                 CompanyName = modelDto.CompanyName,
                 Mobile = modelDto.Mobile,
                 Phone = modelDto.Phone,
-                ModifiedBy = modelDto.ModifiedBy,
                 ModifiedDate = DateTime.Now
             };
 
-            await _repository.UpdateAsync(model, cancellationToken);
-            return _mapper.Map<SenderReciverDTO>(model);
+            await _repository.UpdateAsync(city, cancellationToken);
+            return _mapper.Map<SenderReciverDTO>(city);
         }
         #endregion
 

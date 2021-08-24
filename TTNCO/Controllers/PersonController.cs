@@ -7,6 +7,7 @@ using Services;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Domain;
 using TTNCO.Result;
 
 namespace TTNCO.Controllers.v1
@@ -14,6 +15,7 @@ namespace TTNCO.Controllers.v1
     [ApiVersion("1.0")]
     [ApiExplorerSettings(GroupName = "v1")]
     [ApiController]
+    [AllowAnonymous]
     public class PersonController : BaseController
     {
         #region Fields
@@ -39,34 +41,32 @@ namespace TTNCO.Controllers.v1
         }
 
         [HttpDelete("{Id}")]
-        public async Task<ApiResult<string>> Delete(int Id, CancellationToken cancellationToken)
+        public async Task<ApiResult<string>> Delete(long Id, CancellationToken cancellationToken)
         {
-            var result = await _personService.DeletePersonAsync(Id, cancellationToken);
+            var result = await _personService.DeleteAsync(Id, cancellationToken);
             return result.ToString();
         }
 
         [HttpPut("{Id}")]
-        public async Task<ApiResult<PersonDTO>> Update(int Id, PersonDTO modelDto, CancellationToken cancellationToken)
+        public async Task<ApiResult<PersonDTO>> Update(long Id, PersonDTO modelDto, CancellationToken cancellationToken)
         {
-            var result = await _personService.UpdatePersonAsync(Id, modelDto, cancellationToken);
+            var result = await _personService.UpdateAsync(Id, modelDto, cancellationToken);
             return result;
         }
 
-        [HttpGet()]
-        public async Task<ApiResult<List<PersonDTO>>> GetAllCities(CancellationToken cancellationToken)
+        [HttpGet("Get")]
+        public async Task<ApiResult<List<PersonDTO>>> Get(CancellationToken cancellationToken)
         {
-            var result = await _personService.GetAllAsync(cancellationToken);
+            var result = await _personService.GetAsync(cancellationToken);
             return result;
         }
 
-        [HttpGet("{page}/{pageSize}")]
-        public async Task<ApiResult<PagedResult<PersonDTO>>> GetCities(int? page, [FromQuery] int? pageSize, [FromQuery] string orderBy, CancellationToken cancellationToken)
+        [HttpGet("GetAll")]
+        public async Task<ApiResult<PagedResult<Person>>> GetAll(int? page, [FromQuery] int? pageSize, [FromQuery] string orderBy, CancellationToken cancellationToken)
         {
             var result = await _personService.GetAllAsync(page, pageSize, orderBy, cancellationToken);
             return result;
         }
-
-
         #endregion
     }
 }

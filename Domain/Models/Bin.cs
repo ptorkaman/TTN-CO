@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    [Table("Bin", Schema = "TTN")]
+    [Table("Bins", Schema = "TTN")]
 
     public class Bin: BaseClass<int>
     {

@@ -62,7 +62,7 @@ namespace Services
 
         }
 
-        public async Task<bool> DeletePersonAsync(int personId, CancellationToken cancellationToken)
+        public async Task<bool> DeleteAsync(long personId, CancellationToken cancellationToken)
         {
             var model = _personRepository.GetById(personId);
             if (model == null)
@@ -71,23 +71,20 @@ namespace Services
             return true;
         }
 
-        public async Task<List<PersonDTO>> GetAllAsync(CancellationToken cancellationToken)
+        public async Task<List<PersonDTO>> GetAsync(CancellationToken cancellationToken)
         {
-            var model = _personRepository.GetAllAsync(cancellationToken);
+            var model = await _personRepository.GetAllAsync(cancellationToken);
             return _mapper.Map<List<PersonDTO>>(model);
         }
 
-
-
-        public async Task<PagedResult<PersonDTO>> GetAllAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
+        public Task<PagedResult<Person>> GetAllAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
         {
             int pageNotNull = page ?? _pagingSettings.DefaultPage;
             int pageSizeNotNull = pageSize ?? _pagingSettings.PageSize;
             var model = _personRepository.GetPagedAsync(pageNotNull, pageSizeNotNull, cancellationToken);
-            return _mapper.Map<PagedResult<PersonDTO>>(model);
+            return model;
         }
-
-        public async Task<PersonDTO> UpdatePersonAsync(int personId, PersonDTO modelDto, CancellationToken cancellationToken)
+        public async Task<PersonDTO> UpdateAsync(long personId, PersonDTO modelDto, CancellationToken cancellationToken)
         {
             Domain.Person person = new()
             {

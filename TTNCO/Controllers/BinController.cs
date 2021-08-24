@@ -15,7 +15,7 @@ namespace TTNCO.Controllers.v1
     [ApiVersion("1.0")]
     [ApiExplorerSettings(GroupName = "v1")]
     [ApiController]
- 
+ [AllowAnonymous]
     public class BinnController : BaseController
     {
         #region Fields
@@ -35,7 +35,6 @@ namespace TTNCO.Controllers.v1
         public async Task<ApiResult<BinDTO>> Create(BinDTO modelDto, CancellationToken cancellationToken)
         {
             modelDto.CreatedBy = HttpContext.User.Identity.GetUserId<int>();
-
             var result = await _binService.Create(modelDto, cancellationToken);
             return result;
         }

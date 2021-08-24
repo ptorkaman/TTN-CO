@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain
 {
-    [Table("Sender", Schema = "TTN")]
+    [Table("Senders", Schema = "TTN")]
 
     public class Sender : BaseClass<int> 
     {

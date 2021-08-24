@@ -226,7 +226,7 @@ namespace TTNCO
             services.AddScoped<IBinRepository, BinRepository>();
             services.AddScoped<IReceiptRepository, ReceiptRepository>();
             services.AddScoped<IReciverRepository, ReciverRepository>();
-            services.AddScoped<ISenderRepository, SenderRepository>();
+         
             services.AddScoped<IPackageTypeRepository, PackageTypeRepository>();
 
 
@@ -251,7 +251,11 @@ namespace TTNCO
             services.AddScoped<ICityService, CityService>();
             services.AddScoped<IVehicleTypeService, VehicleTypeService>();
             services.AddScoped<IVehicleManagerService, VehicleManagerService>();
+            services.AddScoped<IMenuService, MenuService>();
+            services.AddScoped<IPermissionService, PermissionService>();
+            services.AddScoped<IUnitService, UnitService>();
 
+            
             #endregion
 
         }

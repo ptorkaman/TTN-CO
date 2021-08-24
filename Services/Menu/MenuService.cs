@@ -66,16 +66,16 @@ namespace Services
 
         public async Task<List<MenuDTO>> GetAsync(CancellationToken cancellationToken)
         {
-            var model = _repository.GetAllAsync( cancellationToken);
+            var model = await _repository.GetAllAsync(cancellationToken);
             return _mapper.Map<List<MenuDTO>>(model);
         }
 
-        public async Task<PagedResult<MenuDTO>> GetAllAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
+        public Task<PagedResult<Menu>> GetAllAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
         {
             int pageNotNull = page ?? _pagingSettings.DefaultPage;
             int pageSizeNotNull = pageSize ?? _pagingSettings.PageSize;
             var model = _repository.GetPagedAsync(pageNotNull, pageSizeNotNull, cancellationToken);
-            return _mapper.Map<PagedResult<MenuDTO>>(model);
+            return model;
         }
 
         public async Task<MenuDTO> UpdateAsync(int menuId, MenuDTO modelDto, CancellationToken cancellationToken)

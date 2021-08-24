@@ -13,36 +13,35 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public class ReceiptStatusService : IReceiptStatusService
+    public class UnitService : IUnitService
     {
         #region Fields
-        private readonly IRepository<ReceiptStatus> _repository;
+        private readonly IRepository<Unit> _repository;
         private readonly IMapper _mapper;
         private readonly PagingSettings _pagingSettings;
-
-        #endregion
+        #endregion 
 
         #region CTOR
-        public ReceiptStatusService(IRepository<ReceiptStatus> repository, IMapper mapper, IOptionsSnapshot<PagingSettings> pagingSettings)
+        public UnitService(IRepository<Unit> repository, IMapper mapper, IOptionsSnapshot<PagingSettings> pagingSettings)
         {
             _repository = repository;
             _mapper = mapper;
             _pagingSettings = pagingSettings.Value;
         }
 
-        public async Task<ReceiptStatusDTO> Create(ReceiptStatusDTO modelDto, CancellationToken cancellationToken)
+        public async Task<UnitDTO> Create(UnitDTO modelDto, CancellationToken cancellationToken)
         {
-            ReceiptStatus city = new()
+            Unit city = new()
             {
                 CreatedBy = modelDto.CreatedBy.Value,
                 CreatedDate = DateTime.Now,
-                Title = modelDto.Title,
-             IsActive=true
+                Name = modelDto.Name,
+                Dimension = modelDto.Dimension,
+         
+                IsActive = true
             };
-
             await _repository.AddAsync(city, cancellationToken);
-            return _mapper.Map<ReceiptStatusDTO>(city);
-
+            return _mapper.Map<UnitDTO>(city);
         }
 
         public async Task<bool> DeleteAsync(int cityId, CancellationToken cancellationToken)
@@ -54,13 +53,13 @@ namespace Services
             return true;
         }
 
-        public async Task<List<ReceiptStatusDTO>> GetAsync(CancellationToken cancellationToken)
+        public async Task<List<UnitDTO>> GetAsync(CancellationToken cancellationToken)
         {
-            var model = await _repository.GetAllAsync(cancellationToken);
-            return _mapper.Map<List<ReceiptStatusDTO>>(model);
+            var model =await _repository.GetAllAsync( cancellationToken);
+            return _mapper.Map<List<UnitDTO>>(model);
         }
 
-        public Task<PagedResult<ReceiptStatus>> GetAllAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
+        public  Task<PagedResult<Unit>> GetAllAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken)
         {
             int pageNotNull = page ?? _pagingSettings.DefaultPage;
             int pageSizeNotNull = pageSize ?? _pagingSettings.PageSize;
@@ -68,21 +67,20 @@ namespace Services
             return model;
         }
 
-
-        public async Task<ReceiptStatusDTO> UpdateAsync(int cityId, ReceiptStatusDTO modelDto, CancellationToken cancellationToken)
+        public async Task<UnitDTO> UpdateAsync(int cityId, UnitDTO modelDto, CancellationToken cancellationToken)
         {
-            Domain.ReceiptStatus city = new()
+            Unit city = new()
             {
                 Id = cityId,
                 CreatedBy = modelDto.CreatedBy.Value,
                 CreatedDate = modelDto.CreatedDate.Value,
-                Title = modelDto.Title,
-                
+                Name = modelDto.Name,
+                Dimension = modelDto.Dimension,
                 ModifiedDate = DateTime.Now
             };
 
             await _repository.UpdateAsync(city, cancellationToken);
-            return _mapper.Map<ReceiptStatusDTO>(city);
+            return _mapper.Map<UnitDTO>(city);
         }
         #endregion
 
