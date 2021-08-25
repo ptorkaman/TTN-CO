@@ -21,13 +21,13 @@ namespace Services
 {
     public class PersonService : IPersonService
     {
-        private readonly IRepository<Person> _personRepository;
+        private readonly IRepository<Person> _repository;
         private readonly SiteSettings _siteSetting;
         private readonly IMapper _mapper;
         private readonly PagingSettings _pagingSettings;
-        public PersonService(IRepository<Person> personRepository, IOptionsSnapshot<SiteSettings> settings,IMapper mapper)
+        public PersonService(IRepository<Person> repository, IOptionsSnapshot<SiteSettings> settings,IMapper mapper)
         {
-            _personRepository = personRepository;
+            _repository = repository;
             _siteSetting = settings.Value;
             _mapper = mapper;
         }
@@ -57,23 +57,24 @@ namespace Services
                
             };
 
-            await _personRepository.AddAsync(person, cancellationToken);
+            await _repository.AddAsync(person, cancellationToken);
             return _mapper.Map<PersonDTO>(person);
 
         }
 
         public async Task<bool> DeleteAsync(long personId, CancellationToken cancellationToken)
         {
-            var model = _personRepository.GetById(personId);
+            var model = _repository.GetById(personId);
             if (model == null)
                 throw new CustomException("خطا در دریافت اطلاعات ");
-            _personRepository.DeleteAsync(model, cancellationToken);
+            model.IsActive = false;
+            _repository.UpdateAsync(model, cancellationToken);
             return true;
         }
 
         public async Task<List<PersonDTO>> GetAsync(CancellationToken cancellationToken)
         {
-            var model = await _personRepository.GetAllAsync(cancellationToken);
+            var model = await _repository.GetAllAsync(cancellationToken);
             return _mapper.Map<List<PersonDTO>>(model);
         }
 
@@ -81,7 +82,7 @@ namespace Services
         {
             int pageNotNull = page ?? _pagingSettings.DefaultPage;
             int pageSizeNotNull = pageSize ?? _pagingSettings.PageSize;
-            var model = _personRepository.GetPagedAsync(pageNotNull, pageSizeNotNull, cancellationToken);
+            var model = _repository.GetPagedAsync(pageNotNull, pageSizeNotNull, cancellationToken);
             return model;
         }
         public async Task<PersonDTO> UpdateAsync(long personId, PersonDTO modelDto, CancellationToken cancellationToken)
@@ -110,7 +111,7 @@ namespace Services
                 IdNumber = modelDto.IdNumber,
             };
 
-            await _personRepository.UpdateAsync(person, cancellationToken);
+            await _repository.UpdateAsync(person, cancellationToken);
             return _mapper.Map<PersonDTO>(person);
         }
 

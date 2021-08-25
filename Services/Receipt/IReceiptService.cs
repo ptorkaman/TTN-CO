@@ -12,7 +12,7 @@ namespace Services
         Task<ReceiptDTO> Create(ReceiptDTO modelDto, CancellationToken cancellationToken);
         Task<bool> DeleteAsync(int cityId, CancellationToken cancellationToken);
         Task<ReceiptDTO> UpdateAsync(int cityId, ReceiptDTO modelDto, CancellationToken cancellationToken);
-        Task<PagedResult<ReceiptDTO>> GetAllAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken);
-        Task<List<ReceiptDTO>> GetAsync(int id,CancellationToken cancellationToken);
+        Task<PagedResult<Receipt>> GetAllAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken);
+        Task<List<ReceiptDTO>> GetAsync(CancellationToken cancellationToken);
     }
 }

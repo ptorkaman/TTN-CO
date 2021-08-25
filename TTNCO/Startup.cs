@@ -226,10 +226,11 @@ namespace TTNCO
             services.AddScoped<IBinRepository, BinRepository>();
             services.AddScoped<IReceiptRepository, ReceiptRepository>();
             services.AddScoped<IReciverRepository, ReciverRepository>();
-         
+
             services.AddScoped<IPackageTypeRepository, PackageTypeRepository>();
+            services.AddScoped<IReceiptDetailRepository, ReceiptDetailRepository>();
 
-
+            
             #endregion
 
             #region Services

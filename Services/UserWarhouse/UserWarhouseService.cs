@@ -48,12 +48,13 @@ namespace Services
             return _mapper.Map<UserWarhouseDTO>(warehouse);
         }
 
-        public async Task<bool> DeleteUserWarhouseAsync(int warehouseId, CancellationToken cancellationToken)
+        public async Task<bool> DeleteAsync(int warehouseId, CancellationToken cancellationToken)
         {
             var model = _repository.GetById(warehouseId);
             if (model == null)
                 throw new CustomException("خطا در دریافت اطلاعات ");
-            _repository.DeleteAsync(model, cancellationToken);
+            model.IsActive = false;
+            _repository.UpdateAsync(model, cancellationToken);
             return true;
         }
 

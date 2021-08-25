@@ -42,7 +42,7 @@ namespace TTNCO.Controllers.v1
         [HttpDelete("{Id}")]
         public async Task<ApiResult<string>> DeleteUserWarhouse(int Id, CancellationToken cancellationToken)
         {
-            var result = await _userWarhouseService.DeleteUserWarhouseAsync(Id, cancellationToken);
+            var result = await _userWarhouseService.DeleteAsync(Id, cancellationToken);
             return result.ToString();
         }
 

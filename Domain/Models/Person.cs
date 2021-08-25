@@ -38,5 +38,6 @@ namespace Domain
         public bool? IsMarried { get; set; }
         public bool? Gender { get; set; }
         public virtual ICollection<User> Users { get; set; }
+        public bool IsActive { get; set; }
     }
 }

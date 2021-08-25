@@ -10,7 +10,7 @@ namespace Services
     public interface IRegionService
     {
         Task<RegionDTO> Create(RegionDTO modelDto, CancellationToken cancellationToken);
-        Task<bool> DeleteRegionAsync(int cityId, CancellationToken cancellationToken);
+        Task<bool> DeleteAsync(int cityId, CancellationToken cancellationToken);
         Task<RegionDTO> UpdateRegionAsync(int cityId, RegionDTO modelDto, CancellationToken cancellationToken);
         Task<PagedResult<Region>> GetAllAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken);
         Task<List<RegionDTO>> GetAsync(CancellationToken cancellationToken);

@@ -47,12 +47,13 @@ namespace Services
 
         }
 
-        public async Task<bool> DeleteRegionAsync(int cityId, CancellationToken cancellationToken)
+        public async Task<bool> DeleteAsync(int cityId, CancellationToken cancellationToken)
         {
             var model = _repository.GetById(cityId);
             if (model == null)
                 throw new CustomException("خطا در دریافت اطلاعات ");
-            _repository.DeleteAsync(model, cancellationToken);
+            model.IsActive = false;
+            _repository.UpdateAsync(model, cancellationToken);
             return true;
         }
 

@@ -16,16 +16,16 @@ namespace Services
     public class StuffManagerService : IStuffManagerService
     {
         #region Fields
-        private readonly IRepository<StuffManager> _countyRepository;
+        private readonly IRepository<StuffManager> _repository;
         private readonly IMapper _mapper;
         private readonly PagingSettings _pagingSettings;
 
         #endregion
 
         #region CTOR
-        public StuffManagerService(IRepository<StuffManager> countyRepository, IMapper mapper, IOptionsSnapshot<PagingSettings> pagingSettings)
+        public StuffManagerService(IRepository<StuffManager> repository, IMapper mapper, IOptionsSnapshot<PagingSettings> pagingSettings)
         {
-            _countyRepository = countyRepository;
+            _repository = repository;
             _mapper = mapper;
             _pagingSettings = pagingSettings.Value;
         }
@@ -47,7 +47,7 @@ namespace Services
 
                 };
 
-                await _countyRepository.AddAsync(county, cancellationToken);
+                await _repository.AddAsync(county, cancellationToken);
                 return _mapper.Map<StuffManagerDTO>(county);
             }
             catch (Exception ex)
@@ -61,16 +61,17 @@ namespace Services
 
         public async Task<bool> DeleteAsync(int countyId, CancellationToken cancellationToken)
         {
-            var model = _countyRepository.GetById(countyId);
+            var model = _repository.GetById(countyId);
             if (model == null)
                 throw new CustomException("خطا در دریافت اطلاعات ");
-            _countyRepository.DeleteAsync(model, cancellationToken);
+            model.IsActive = false;
+            _repository.UpdateAsync(model, cancellationToken);
             return true;
         }
 
         public async Task<List<StuffManagerDTO>> GetAllAsync(CancellationToken cancellationToken)
         {
-            var model = _countyRepository.GetAllAsync( cancellationToken);
+            var model = _repository.GetAllAsync( cancellationToken);
             return _mapper.Map<List<StuffManagerDTO>>(model.Result);
         }
 
@@ -78,7 +79,7 @@ namespace Services
         {
             int pageNotNull = page ?? _pagingSettings.DefaultPage;
             int pageSizeNotNull = pageSize ?? _pagingSettings.PageSize;
-            var model = _countyRepository.GetPagedAsync(pageNotNull, pageSizeNotNull, cancellationToken);
+            var model = _repository.GetPagedAsync(pageNotNull, pageSizeNotNull, cancellationToken);
             return  model;
         }
 
@@ -98,7 +99,7 @@ namespace Services
                 ModifiedDate = DateTime.Now
             };
 
-            await _countyRepository.UpdateAsync(county, cancellationToken);
+            await _repository.UpdateAsync(county, cancellationToken);
             return _mapper.Map<StuffManagerDTO>(county);
         }
         #endregion

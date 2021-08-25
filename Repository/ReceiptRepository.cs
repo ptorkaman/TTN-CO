@@ -16,9 +16,9 @@ namespace Repository
 
         }
 
-        public Task<List<Receipt>> GetByReceiptId(int id, CancellationToken cancellationToken)
+        public Task<List<Receipt>> GetByReceiptId(long id, CancellationToken cancellationToken)
         {
-            return Table.Where(x => x.IsActive ).ToListAsync();
+            return Table.Where(x => x.IsActive  ).ToListAsync();
 
         }
     }

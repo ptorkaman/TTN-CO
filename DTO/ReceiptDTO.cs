@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Globalization;
 
 namespace DTO
 {
@@ -67,5 +68,8 @@ namespace DTO
         public decimal DestinationLongtude { get; set; }
         public int ForceType { get; set; }
         public IList<ReceiptDetailDTO> ReceiptDetail { get; set; }
+
+        //public string CreateDateStr => CreatedDate.Value.ToShortDateString().Split(' ')[0];
+
     }
 }

@@ -9,6 +9,6 @@ namespace Repository
 {
     public interface IReceiptRepository : IRepository<Receipt>
     {
-        Task<List<Receipt>> GetByReceiptId(int id, CancellationToken cancellationToken);
+        Task<List<Receipt>> GetByReceiptId(long id, CancellationToken cancellationToken);
     }
 }

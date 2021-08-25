@@ -10,7 +10,11 @@ namespace Domain
 {
     [Table("Receipts", Schema = "TTN")]
     public class Receipt : BaseClass<long> 
-    { 
+    {
+        public Receipt()
+        {
+            ReceiptDetail = new List<ReceiptDetail>();
+        }
         public int ReceiptNo { get; set; }
         public string ReferenceNo { get; set; }
         public int SenderId { get; set; }

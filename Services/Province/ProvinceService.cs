@@ -52,7 +52,8 @@ namespace Services
             var model = _repository.GetById(provinceId);
             if (model == null)
                 throw new CustomException("خطا در دریافت اطلاعات ");
-            _repository.DeleteAsync(model, cancellationToken);
+            model.IsActive = false;
+            _repository.UpdateAsync(model, cancellationToken);
             return true;
         }
 
@@ -68,6 +69,12 @@ namespace Services
             int pageSizeNotNull = pageSize ?? _pagingSettings.PageSize;
             var model = _repository.GetPagedAsync(pageNotNull, pageSizeNotNull, cancellationToken);
             return model;
+        }
+
+        public async Task<ProvinceDTO> GetById(int provinceId)
+        {
+            var model = _provinceRepository.GetById(provinceId);
+            return _mapper.Map<ProvinceDTO>(model);
         }
 
         public async Task<ProvinceDTO> UpdateAsync(int provinceId, ProvinceDTO modelDto, CancellationToken cancellationToken)

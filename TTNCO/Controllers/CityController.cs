@@ -20,13 +20,15 @@ namespace TTNCO.Controllers.v1
     {
         #region Fields
         private readonly ICityService _cityService;
+        private readonly IProvinceService _provinceService;
         #endregion
 
         #region CTOR
 
-        public CityController(ICityService cityService)
+        public CityController(ICityService cityService, IProvinceService provinceService)
         {
             _cityService = cityService;
+             _provinceService= provinceService;
         }
         #endregion
 
@@ -60,6 +62,10 @@ namespace TTNCO.Controllers.v1
         public async Task<ApiResult<List<CityDTO>>> Get(CancellationToken cancellationToken)
         {
             var result = await _cityService.GetAsync(cancellationToken);
+            foreach (var item in result)
+            {
+                item.ProvinceTitle = _provinceService.GetById(item.ProvinceId).Result.ProvinceName;
+            }
             return result;
         }
 

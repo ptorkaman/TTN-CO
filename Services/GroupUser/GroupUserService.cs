@@ -15,16 +15,16 @@ namespace Services
     public class GroupUserService : IGroupUserService
     {
         #region Fields
-        private readonly IRepository<Domain.GroupUser> _groupUserRepository;
+        private readonly IRepository<Domain.GroupUser> _repository;
         private readonly IMapper _mapper;
         private readonly PagingSettings _pagingSettings;
 
         #endregion
 
         #region CTOR
-        public GroupUserService(IRepository<Domain.GroupUser> groupUserRepository, IMapper mapper, IOptionsSnapshot<PagingSettings> pagingSettings)
+        public GroupUserService(IRepository<Domain.GroupUser> repository, IMapper mapper, IOptionsSnapshot<PagingSettings> pagingSettings)
         {
-            _groupUserRepository = groupUserRepository;
+            _repository = repository;
             _mapper = mapper;
             _pagingSettings = pagingSettings.Value;
         }
@@ -32,7 +32,7 @@ namespace Services
         public async Task<GroupUserDTO> Create(GroupUserDTO modelDto, CancellationToken cancellationToken)
         {
 
-            //var model = _groupUserRepository.GetByCityId(modelDto.Id) != null;
+            //var model = _repository.GetByCityId(modelDto.Id) != null;
             //if (!model)
             //    throw new CustomException("خطا در دریافت اطلاعات ");
 
@@ -45,23 +45,23 @@ namespace Services
 
             };
 
-            await _groupUserRepository.AddAsync(groupUser, cancellationToken);
+            await _repository.AddAsync(groupUser, cancellationToken);
             return _mapper.Map<GroupUserDTO>(groupUser);
 
         }
 
         public async Task<bool> DeleteGroupUserAsync(int groupUserId, CancellationToken cancellationToken)
         {
-            var model = _groupUserRepository.GetById(groupUserId);
+            var model = _repository.GetById(groupUserId);
             if (model == null)
                 throw new CustomException("خطا در دریافت اطلاعات ");
-            _groupUserRepository.DeleteAsync(model, cancellationToken);
-            return true;
+            model.IsActive = false;
+            _repository.UpdateAsync(model, cancellationToken); return true;
         }
 
         public async Task<List<GroupUserDTO>> GetAllAsync(CancellationToken cancellationToken)
         {
-            var model = _groupUserRepository.GetAllAsync( cancellationToken);
+            var model = _repository.GetAllAsync( cancellationToken);
             return _mapper.Map<List<GroupUserDTO>>(model);
         }
 
@@ -69,7 +69,7 @@ namespace Services
         {
             int pageNotNull = page ?? _pagingSettings.DefaultPage;
             int pageSizeNotNull = pageSize ?? _pagingSettings.PageSize;
-            var model = _groupUserRepository.GetPagedAsync(pageNotNull, pageSizeNotNull, cancellationToken);
+            var model = _repository.GetPagedAsync(pageNotNull, pageSizeNotNull, cancellationToken);
             return _mapper.Map<PagedResult<GroupUserDTO>>(model);
         }
 
@@ -85,7 +85,7 @@ namespace Services
                 ModifiedDate = DateTime.Now
             };
 
-            await _groupUserRepository.UpdateAsync(groupUser, cancellationToken);
+            await _repository.UpdateAsync(groupUser, cancellationToken);
             return _mapper.Map<GroupUserDTO>(groupUser);
         }
         #endregion

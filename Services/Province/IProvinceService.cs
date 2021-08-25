@@ -14,5 +14,6 @@ namespace Services
         Task<ProvinceDTO> UpdateAsync(int cityId, ProvinceDTO modelDto, CancellationToken cancellationToken);
         Task<List<ProvinceDTO>> GetAllAsync(CancellationToken cancellationToken);
         Task<PagedResult<Province>> GetAllProvinceAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken);
+        Task<ProvinceDTO> GetById(int itemProvinceId);
     }
 }

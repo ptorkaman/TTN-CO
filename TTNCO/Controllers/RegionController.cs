@@ -43,7 +43,7 @@ namespace TTNCO.Controllers.v1
         [HttpDelete("{Id}")]
         public async Task<ApiResult<string>> DeleteRegion(int Id, CancellationToken cancellationToken)
         {
-            var result = await _regionService.DeleteRegionAsync(Id, cancellationToken);
+            var result = await _regionService.DeleteAsync(Id, cancellationToken);
             return result.ToString();
         }
 

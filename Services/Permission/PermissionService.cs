@@ -50,7 +50,8 @@ namespace Services
             var model = _repository.GetById(permissionId);
             if (model == null)
                 throw new CustomException("خطا در دریافت اطلاعات ");
-            _repository.DeleteAsync(model, cancellationToken);
+            model.IsActive = false;
+            _repository.UpdateAsync(model, cancellationToken);
             return true;
         }
 
