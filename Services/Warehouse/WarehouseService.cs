@@ -19,16 +19,16 @@ namespace Services
         private readonly IRepository<Warehouse> _repository;
         private readonly IMapper _mapper;
         private readonly PagingSettings _pagingSettings;
-        private readonly IWarehouseRepository _cityRepository;
+        private readonly IWarehouseRepository _warehouseRepository;
         #endregion 
 
         #region CTOR
-        public WarehouseService(IRepository<Warehouse> repository, IMapper mapper, IOptionsSnapshot<PagingSettings> pagingSettings, IWarehouseRepository cityRepository)
+        public WarehouseService(IRepository<Warehouse> repository, IMapper mapper, IOptionsSnapshot<PagingSettings> pagingSettings, IWarehouseRepository warehouseRepository)
         {
             _repository = repository;
             _mapper = mapper;
             _pagingSettings = pagingSettings.Value;
-            _cityRepository = cityRepository;
+            _warehouseRepository = warehouseRepository;
         }
 
         public async Task<WarehouseDTO> Create(WarehouseDTO modelDto, CancellationToken cancellationToken)
@@ -67,7 +67,7 @@ namespace Services
 
         public async Task<List<WarehouseDTO>> GetAsync(CancellationToken cancellationToken)
         {
-            var model = await _cityRepository.GetAllAsync(cancellationToken);
+            var model = await _warehouseRepository.GetAllAsync(cancellationToken);
             return _mapper.Map<List<WarehouseDTO>>(model);
         }
 

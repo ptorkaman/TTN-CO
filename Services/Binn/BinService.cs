@@ -56,8 +56,9 @@ namespace Services
             return true;
         }
 
-        public async Task<List<BinDTO>> GetAsync(CancellationToken cancellationToken)
+        public async Task<List<BinDTO>> GetAsync( )
         {
+            CancellationToken cancellationToken = new CancellationToken();
             var model = await _repository.GetAllAsync(cancellationToken);
             return _mapper.Map<List<BinDTO>>(model);
         }
@@ -70,11 +71,11 @@ namespace Services
             return model;
         }
 
-        public async Task<BinDTO> UpdateAsync(int cityId, BinDTO modelDto, CancellationToken cancellationToken)
+        public async Task<BinDTO> UpdateAsync(int Id, BinDTO modelDto, CancellationToken cancellationToken)
         {
-            Domain.Bin city = new()
+            Domain.Bin model = new()
             {
-                Id = cityId,
+                Id = Id,
                 CreatedBy = modelDto.CreatedBy.Value,
                 CreatedDate = modelDto.CreatedDate.Value,
                 IsActive = modelDto.IsActive,
@@ -84,8 +85,8 @@ namespace Services
                 ModifiedDate = DateTime.Now
             };
 
-            await _repository.UpdateAsync(city, cancellationToken);
-            return _mapper.Map<BinDTO>(city);
+            await _repository.UpdateAsync(model, cancellationToken);
+            return _mapper.Map<BinDTO>(model);
         }
         #endregion
 

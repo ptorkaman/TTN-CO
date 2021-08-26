@@ -4,6 +4,7 @@ using Domain;
 using DTO;
 using DTO.Settings;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Repository;
@@ -26,7 +27,8 @@ namespace Services.User
         private readonly IUserMenuRepository _userMenuRepository;
         private readonly SiteSettings _siteSetting;
         private readonly IMapper _mapper;
-  
+        private TTNContext _context;
+
         public UserService(IRepository<Person> personRepository, IUserRepository userRepository, IOptionsSnapshot<SiteSettings> settings, IUserMenuRepository userMenuRepository, IMapper mapper)
         {
             _mapper = mapper;
@@ -34,8 +36,30 @@ namespace Services.User
             _userRepository = userRepository;
             _siteSetting = settings.Value;
             _userMenuRepository = userMenuRepository;
+            _context = new TTNContext();
         }
+        public object Login1(string username, string password)
+        {
+            //var user = _context.Users
+            //    //.Include(x => x.UserRoles)
+            //    //.ThenInclude(x => x.Role)
+            //    //.Include(x => x.UserMenus)
+            //    //.ThenInclude(x => x.Menu)
+            //    .FirstOrDefault(x => x.Username == username);
+            CancellationToken cancellationToken = new CancellationToken();
+            var user = _userRepository.GetByUserAndPass(username, password, cancellationToken);
 
+            if (user != null)
+            {
+                //foreach (var item in user.Roles)
+                //{
+                //    item.Role.Project = _context.Projects.FirstOrDefault(x => x.Id == item.Role.ProjectId);
+                //    item.Role.PermissionRoles = _context.PermissionRoles.Include(x => x.Permission).Where(x => x.RoleId == item.RoleId).ToList();
+                //}
+            }
+
+            return user;
+        }
         public async Task<LoginDataDTO> Login(LoginDTO modelDto, CancellationToken cancellationToken,string ip, byte[] key)
         {
             LoginDataDTO model = new LoginDataDTO();
@@ -69,44 +93,35 @@ namespace Services.User
             claims.AddClaim(new Claim(type: "Ip", ip));
             //claims.AddClaim(new Claim(ClaimTypes.Country, user.Base));
             //claims.AddClaim(new Claim(type: "UserAgent", userAgent));
-            claims.AddClaim(new Claim(type: "UserMenues", user.UserMenus.ToString()));
+            //claims.AddClaim(new Claim(type: "UserMenues", user.UserMenus.ToString()));
    
             claims.AddClaims(new[]
             {
-
                 new Claim(ClaimTypes.Name,user.Username),
                 //new Claim(ClaimTypes.Country,user.Base),
                 new Claim(ClaimTypes.UserData,user.Id.ToString())
             });
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = claims,
-                Expires = DateTime.UtcNow.AddYears(100),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
-                    SecurityAlgorithms.HmacSha256Signature)
-            };
+            //var tokenDescriptor = new SecurityTokenDescriptor
+            //{
+            //    Subject = claims,
+            //    Expires = DateTime.UtcNow.AddYears(100),
+            //    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            //};
             var tokenHandler = new JwtSecurityTokenHandler();
-            var token = tokenHandler.CreateToken(tokenDescriptor);
             var claim = await _getClaimsAsync(user);
             
             var descriptor = new SecurityTokenDescriptor
             {
-                Issuer = _siteSetting.Jwt.Issuer,
+               Issuer = _siteSetting.Jwt.Issuer,
                 Audience = _siteSetting.Jwt.Issuer,
                 IssuedAt = DateTime.Now,
                 NotBefore = DateTime.Now.AddMinutes(_siteSetting.Jwt.NotBeforeMinutes),
                 Expires = DateTime.Now.AddMinutes(_siteSetting.Jwt.ExpirationMinutes),
                 SigningCredentials = signingCredentials,
-                Subject = new ClaimsIdentity(claims)
+                Subject = claims
             };
-
-
-            //var tokenHandler = new JwtSecurityTokenHandler();
-
-            //var securityToken = tokenHandler.CreateToken(descriptor);
-
-            var jwt = tokenHandler.WriteToken(token);
-
+            var securityToken = tokenHandler.CreateToken(descriptor);
+            var jwt = tokenHandler.WriteToken(securityToken);
             return jwt;
         }
         private async Task<IEnumerable<Claim>> _getClaimsAsync(Domain.User user)
@@ -229,5 +244,7 @@ namespace Services.User
             }
             return list;
         }
+
+        
     }
 }

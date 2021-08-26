@@ -1,4 +1,5 @@
-﻿using Common;
+﻿using TTNCO.Result;
+using Common;
 using Common.Exceptions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,8 +12,10 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+
+using Albim.Resources;
+using Microsoft.Extensions.Localization;
 using Newtonsoft.Json.Serialization;
-using TTNCO.Result;
 
 namespace TTNCO
 {
@@ -40,6 +43,7 @@ namespace TTNCO
         private readonly RequestDelegate _next;
         private readonly IWebHostEnvironment _env;
         private readonly ILogger<CustomExceptionHandlerMiddleware> _logger;
+        private readonly IStringLocalizer<Resource> _localizer;
 
         /// <summary>
         /// 
@@ -49,11 +53,13 @@ namespace TTNCO
         /// <param name="logger"></param>
         public CustomExceptionHandlerMiddleware(RequestDelegate next,
             IWebHostEnvironment env,
-            ILogger<CustomExceptionHandlerMiddleware> logger)
+            ILogger<CustomExceptionHandlerMiddleware> logger,
+            IStringLocalizer<Resource> localizer)
         {
             _next = next;
             _env = env;
             _logger = logger;
+            _localizer = localizer;
         }
 
         /// <summary>
@@ -97,6 +103,7 @@ namespace TTNCO
                         dic.Add("InnerException.Exception", exception.InnerException.Message);
                         dic.Add("InnerException.StackTrace", exception.InnerException.StackTrace);
                     }
+
                     if (exception.AdditionalData != null)
                         dic.Add("AdditionalData", JsonConvert.SerializeObject(exception.AdditionalData));
 
@@ -106,6 +113,7 @@ namespace TTNCO
                 {
                     message = exception.Message;
                 }
+
                 await WriteToResponseAsync();
             }
             catch (SecurityTokenExpiredException exception)
@@ -133,25 +141,29 @@ namespace TTNCO
                     };
                     message = JsonConvert.SerializeObject(dic);
                 }
+
                 await WriteToResponseAsync();
             }
 
             async Task WriteToResponseAsync()
             {
                 if (context.Response.HasStarted)
-                    throw new InvalidOperationException("The response has already started, the http status code middleware will not be executed.");
+                    throw new InvalidOperationException(
+                        "The response has already started, the http status code middleware will not be executed.");
                 DefaultContractResolver contractResolver = new DefaultContractResolver
                 {
                     NamingStrategy = new SnakeCaseNamingStrategy()
                 };
-                var result = new ApiResult(false, apiStatusCode, message: message);
+                // localize message
+                var localizedMessage = message != null ? _localizer[message] : null;
+                var result = new ApiResult(false, apiStatusCode, message: localizedMessage);
                 var json = JsonConvert.SerializeObject(result, new JsonSerializerSettings
                 {
                     ContractResolver = contractResolver,
                     Formatting = Formatting.Indented
                 });
 
-                context.Response.StatusCode = (int)httpStatusCode;
+                context.Response.StatusCode = (int) httpStatusCode;
                 context.Response.ContentType = "application/json";
                 await context.Response.WriteAsync(json);
             }

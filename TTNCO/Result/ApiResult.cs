@@ -1,10 +1,11 @@
-﻿
-using Common;
+﻿using Common;
 using Common.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
+
+using Microsoft.Extensions.Localization;
 
 namespace TTNCO.Result
 {
@@ -17,7 +18,9 @@ namespace TTNCO.Result
         /// 
         /// </summary>
         public bool IsSuccess { get; set; }
+
         public bool IsCached { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -45,6 +48,7 @@ namespace TTNCO.Result
         }
 
         #region Implicit Operators
+
         /// <summary>
         /// 
         /// </summary>
@@ -75,9 +79,10 @@ namespace TTNCO.Result
             var message = result.Value.ToString();
             if (result.Value is SerializableError errors)
             {
-                var errorMessages = errors.SelectMany(p => (string[])p.Value).Distinct();
+                var errorMessages = errors.SelectMany(p => (string[]) p.Value).Distinct();
                 message = string.Join(" | ", errorMessages);
             }
+
             return new ApiResult(false, ApiResultStatusCode.BadRequest, message: message);
         }
 
@@ -100,6 +105,7 @@ namespace TTNCO.Result
         {
             return new ApiResult(false, ApiResultStatusCode.NotFound);
         }
+
         #endregion
     }
 
@@ -124,13 +130,15 @@ namespace TTNCO.Result
         /// <param name="data"></param>
         /// <param name="message"></param>
         /// <param name="isCached"></param>
-        public ApiResult(bool isSuccess, ApiResultStatusCode statusCode, TData data, bool isCached = false, string message = null)
+        public ApiResult(bool isSuccess, ApiResultStatusCode statusCode, TData data, bool isCached = false,
+            string message = null)
             : base(isSuccess, statusCode, isCached, message)
         {
             Data = data;
         }
 
         #region Implicit Operators
+
         /// <summary>
         /// 
         /// </summary>
@@ -158,7 +166,7 @@ namespace TTNCO.Result
         /// <returns></returns>
         public static implicit operator ApiResult<TData>(OkObjectResult result)
         {
-            return new ApiResult<TData>(true, ApiResultStatusCode.Success, (TData)result.Value);
+            return new ApiResult<TData>(true, ApiResultStatusCode.Success, (TData) result.Value);
         }
 
         /// <summary>
@@ -181,9 +189,10 @@ namespace TTNCO.Result
             var message = result.Value.ToString();
             if (result.Value is SerializableError errors)
             {
-                var errorMessages = errors.SelectMany(p => (string[])p.Value).Distinct();
+                var errorMessages = errors.SelectMany(p => (string[]) p.Value).Distinct();
                 message = string.Join(" | ", errorMessages);
             }
+
             return new ApiResult<TData>(false, ApiResultStatusCode.BadRequest, null, message: message);
         }
 
@@ -214,8 +223,9 @@ namespace TTNCO.Result
         /// <returns></returns>
         public static implicit operator ApiResult<TData>(NotFoundObjectResult result)
         {
-            return new ApiResult<TData>(false, ApiResultStatusCode.NotFound, (TData)result.Value);
+            return new ApiResult<TData>(false, ApiResultStatusCode.NotFound, (TData) result.Value);
         }
+
         #endregion
     }
 }

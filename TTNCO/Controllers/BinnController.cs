@@ -13,7 +13,11 @@ using TTNCO.Result;
 namespace TTNCO.Controllers.v1
 {
     [ApiVersion("1.0")]
-    [ApiExplorerSettings(GroupName = "v1")]
+
+    //[ApiExplorerSettings(GroupName = "v1")]
+    [Route("api/[controller]")]
+
+    [Authorize]
     [ApiController]
     public class BinnController : BaseController
     {
@@ -52,10 +56,10 @@ namespace TTNCO.Controllers.v1
             return result;
         }
 
-        [HttpGet("Get")]
-        public async Task<ApiResult<List<BinDTO>>> Get(CancellationToken cancellationToken)
+        [HttpGet("")]
+        public async Task<ApiResult<List<BinDTO>>> Get()
         {
-            var result = await _binService.GetAsync(cancellationToken);
+            var result = await _binService.GetAsync();
             return result;
         }
 
