@@ -40,14 +40,14 @@ namespace TTNCO.Controllers.v1
         }
 
         [HttpDelete("{Id}")]
-        public async Task<ApiResult<string>> DeleteWarehouse(int Id, CancellationToken cancellationToken)
+        public async Task<ApiResult<string>> Delete(int Id, CancellationToken cancellationToken)
         {
             var result = await _warehouseService.DeleteAsync(Id, cancellationToken);
             return result.ToString();
         }
 
         [HttpPut("{Id}")]
-        public async Task<ApiResult<WarehouseDTO>> UpdateWarehouse(int Id, WarehouseDTO modelDto, CancellationToken cancellationToken)
+        public async Task<ApiResult<WarehouseDTO>> Update(int Id, WarehouseDTO modelDto, CancellationToken cancellationToken)
         {
             var result = await _warehouseService.UpdateAsync(Id, modelDto, cancellationToken);
             return result;

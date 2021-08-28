@@ -1,4 +1,5 @@
-﻿using Common.Extensions;
+﻿using System;
+using Common.Extensions;
 using Common.Utilities;
 using DTO;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +12,7 @@ using Domain;
 using Microsoft.AspNetCore.Authorization;
 using TTNCO.Result;
 using System.Data.OleDb;
+using System.IO;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Protocols;
@@ -20,7 +22,7 @@ namespace TTNCO.Controllers.v1
     [ApiVersion("1.0")]
     [ApiExplorerSettings(GroupName = "v1")]
     [ApiController]
-    //[AllowAnonymous]
+    [AllowAnonymous]
     //[Route("api/[controller]")]
     //[Authorize]
     public class CityController : BaseController
@@ -112,6 +114,58 @@ namespace TTNCO.Controllers.v1
         //    return true;
         //}
         #endregion
+        [HttpGet("ImportExcel")]
+        public object GetDataExcelFile()
+        {
+            OleDbConnection conn = new OleDbConnection();
+            string fullPathToExcel = "D:\\city.xlsx"; //ie C:\Temp\YourExcel.xls
+            string fileExtension = Path.GetExtension(fullPathToExcel);
+            if (fileExtension == ".xls")
+                conn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + fullPathToExcel + ";" + "Extended Properties='Excel 8.0;HDR=YES;'";
+            if (fileExtension == ".xlsx")
+                conn.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fullPathToExcel + ";Extended Properties=Excel 12.0;";
+            string connString = string.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fullPathToExcel + ";" + "Extended Properties='Excel 8.0;HDR=YES;'");
+            DataTable dt = GetDataTable("SELECT * from [province$]", connString);
+            IList<ProvinceDTO> dataList = new List<ProvinceDTO>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                ProvinceDTO data = new ProvinceDTO();
+
+                data.ProvinceName = dr[5].ToString() ;
+                data.Id =Convert.ToInt32( dr[6]);
+                data.CreatedBy = 1;
+                data.CreatedDate=DateTime.Now;
+                data.IsActive = true;
+                CancellationToken cancellationToken = new CancellationToken();
+                _provinceService.Create(data,cancellationToken);
+                //Save(data);
+                dataList.Add(data);
+                //Do what you need to do with your data here
+            }
+            return null;
+        }
+        [NonAction]
+        private DataTable GetDataTable(string sql, string connectionString)
+        {
+            DataTable dt = new DataTable();
+            using (OleDbConnection conn = new OleDbConnection(connectionString))
+            {
+                conn.Open();
+                using (OleDbCommand cmd = new OleDbCommand(sql, conn))
+                {
+                    using (OleDbDataReader rdr = cmd.ExecuteReader())
+                    {
+                        dt.Columns.Add("Code");
+                        dt.Columns.Add("Name");
+                        dt.Columns.Add("Family");
+                        dt.Columns.Add("Count");
+                        dt.Load(rdr);
+
+                    }
+                }
+            }
+            return dt;
+        }
     }
 }
 

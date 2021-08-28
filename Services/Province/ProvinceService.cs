@@ -33,17 +33,26 @@ namespace Services
 
         public async Task<ProvinceDTO> Create(ProvinceDTO modelDto, CancellationToken cancellationToken)
         {
-            Domain.Province province = new()
+            try
             {
-                CreatedBy = modelDto.CreatedBy.Value,
-                CreatedDate = DateTime.Now,
-                ProvinceName = modelDto.ProvinceName,
-                CountryId = modelDto.CountryId,
-                IsActive = true
-            };
+                Domain.Province province = new()
+                {
+                    CreatedBy = modelDto.CreatedBy.Value,
+                    CreatedDate = DateTime.Now,
+                    ProvinceName = modelDto.ProvinceName,
+                    CountryId = modelDto.CountryId,
+                    IsActive = true
+                };
 
-            await _repository.AddAsync(province, cancellationToken);
-            return _mapper.Map<ProvinceDTO>(province);
+                await _repository.AddAsync(province, cancellationToken);
+                return _mapper.Map<ProvinceDTO>(province);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+         
 
         }
 

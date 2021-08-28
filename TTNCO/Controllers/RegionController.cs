@@ -32,7 +32,7 @@ namespace TTNCO.Controllers.v1
 
         #region Region Actions
         [HttpPost()]
-        public async Task<ApiResult<RegionDTO>> CreateRegion(RegionDTO modelDto, CancellationToken cancellationToken)
+        public async Task<ApiResult<RegionDTO>> Create(RegionDTO modelDto, CancellationToken cancellationToken)
         {
             modelDto.CreatedBy = HttpContext.User.Identity.GetUserId<int>();
 
@@ -41,14 +41,14 @@ namespace TTNCO.Controllers.v1
         }
 
         [HttpDelete("{Id}")]
-        public async Task<ApiResult<string>> DeleteRegion(int Id, CancellationToken cancellationToken)
+        public async Task<ApiResult<string>> Delete(int Id, CancellationToken cancellationToken)
         {
             var result = await _regionService.DeleteAsync(Id, cancellationToken);
             return result.ToString();
         }
 
         [HttpPut("{Id}")]
-        public async Task<ApiResult<RegionDTO>> UpdateRegion(int Id, RegionDTO modelDto, CancellationToken cancellationToken)
+        public async Task<ApiResult<RegionDTO>> Update(int Id, RegionDTO modelDto, CancellationToken cancellationToken)
         {
             var result = await _regionService.UpdateRegionAsync(Id, modelDto, cancellationToken);
             return result;

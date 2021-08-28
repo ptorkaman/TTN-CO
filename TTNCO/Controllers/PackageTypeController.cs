@@ -32,7 +32,7 @@ namespace TTNCO.Controllers.v1
 
         #region PackageType Actions
         [HttpPost()]
-        public async Task<ApiResult<PackageTypeDTO>> CreatePackageType(PackageTypeDTO modelDto, CancellationToken cancellationToken)
+        public async Task<ApiResult<PackageTypeDTO>> Create(PackageTypeDTO modelDto, CancellationToken cancellationToken)
         {
             modelDto.CreatedBy = HttpContext.User.Identity.GetUserId<int>();
 
@@ -41,14 +41,14 @@ namespace TTNCO.Controllers.v1
         }
 
         [HttpDelete("{Id}")]
-        public async Task<ApiResult<string>> DeletePackageType(int Id, CancellationToken cancellationToken)
+        public async Task<ApiResult<string>> Delete(int Id, CancellationToken cancellationToken)
         {
             var result = await _packageTypeService.DeleteAsync(Id, cancellationToken);
             return result.ToString();
         }
 
         [HttpPut("{Id}")]
-        public async Task<ApiResult<PackageTypeDTO>> UpdatePackageType(int Id, PackageTypeDTO modelDto, CancellationToken cancellationToken)
+        public async Task<ApiResult<PackageTypeDTO>> Update(int Id, PackageTypeDTO modelDto, CancellationToken cancellationToken)
         {
             var result = await _packageTypeService.UpdateAsync(Id, modelDto, cancellationToken);
             return result;

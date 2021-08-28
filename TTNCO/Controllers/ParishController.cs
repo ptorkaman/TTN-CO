@@ -32,7 +32,7 @@ namespace TTNCO.Controllers.v1
 
         #region Parish Actions
         [HttpPost()]
-        public async Task<ApiResult<ParishDTO>> CreateParish(ParishDTO modelDto, CancellationToken cancellationToken)
+        public async Task<ApiResult<ParishDTO>> Create(ParishDTO modelDto, CancellationToken cancellationToken)
         {
             modelDto.CreatedBy = HttpContext.User.Identity.GetUserId<int>();
 
@@ -41,14 +41,14 @@ namespace TTNCO.Controllers.v1
         }
 
         [HttpDelete("{Id}")]
-        public async Task<ApiResult<string>> DeleteParish(int Id, CancellationToken cancellationToken)
+        public async Task<ApiResult<string>> Delete(int Id, CancellationToken cancellationToken)
         {
             var result = await _parishService.DeleteAsync(Id, cancellationToken);
             return result.ToString();
         }
 
         [HttpPut("{Id}")]
-        public async Task<ApiResult<ParishDTO>> UpdateParish(int Id, ParishDTO modelDto, CancellationToken cancellationToken)
+        public async Task<ApiResult<ParishDTO>> Update(int Id, ParishDTO modelDto, CancellationToken cancellationToken)
         {
             var result = await _parishService.UpdateAsync(Id, modelDto, cancellationToken);
             return result;

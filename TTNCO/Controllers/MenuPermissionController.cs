@@ -32,7 +32,7 @@ namespace TTNCO.Controllers.v1
 
         #region MenuPermission Actions
         [HttpPost()]
-        public async Task<ApiResult<MenuPermissionDTO>> CreateMenuPermission(MenuPermissionDTO modelDto, CancellationToken cancellationToken)
+        public async Task<ApiResult<MenuPermissionDTO>> Create(MenuPermissionDTO modelDto, CancellationToken cancellationToken)
         {
             modelDto.CreatedBy = HttpContext.User.Identity.GetUserId<int>();
 
@@ -41,14 +41,14 @@ namespace TTNCO.Controllers.v1
         }
 
         [HttpDelete("{Id}")]
-        public async Task<ApiResult<string>> DeleteMenuPermission(int Id, CancellationToken cancellationToken)
+        public async Task<ApiResult<string>> Delete(int Id, CancellationToken cancellationToken)
         {
             var result = await _menuPermissionService.DeleteAsync(Id, cancellationToken);
             return result.ToString();
         }
 
         [HttpPut("{Id}")]
-        public async Task<ApiResult<MenuPermissionDTO>> UpdateMenuPermission(int Id, MenuPermissionDTO modelDto, CancellationToken cancellationToken)
+        public async Task<ApiResult<MenuPermissionDTO>> Update(int Id, MenuPermissionDTO modelDto, CancellationToken cancellationToken)
         {
             var result = await _menuPermissionService.UpdateAsync(Id, modelDto, cancellationToken);
             return result;
