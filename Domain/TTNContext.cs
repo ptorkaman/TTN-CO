@@ -8,8 +8,17 @@ namespace Domain
         {
         }
 
-        public TTNContext(DbContextOptions<TTNContext> options)
-            : base(options)
+        //public TTNContext(DbContextOptions<TTNContext> options)
+        //    : base(options)
+        //{
+        //}
+        public TTNContext(DbContextOptions<TTNContext> contextOptions)
+            : base(contextOptions)
+        {
+        }
+
+        protected TTNContext(DbContextOptions contextOptions)
+            : base(contextOptions)
         {
         }
         public DbSet<VehicleManager> VehicleManagers { get; set; }

@@ -133,7 +133,9 @@ namespace TTNCO
             #region Connection String
 
             //services.AddDbContext<AlbimDbContext>(item => item.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
-            services.AddDbContext<TTNContext>(item => item.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+           services.AddDbContext<TTNContext>(item => item.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddScoped<TTNContext, TTNContext>();
+           
 
             #endregion
 

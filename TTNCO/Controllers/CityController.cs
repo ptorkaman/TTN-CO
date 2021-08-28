@@ -30,14 +30,18 @@ namespace TTNCO.Controllers.v1
         #region Fields
         private readonly ICityService _cityService;
         private readonly IProvinceService _provinceService;
+        private TTNContext _context;
+
         #endregion
 
         #region CTOR
 
-        public CityController(ICityService cityService, IProvinceService provinceService)
+        public CityController(ICityService cityService, IProvinceService provinceService,TTNContext context)
         {
             _cityService = cityService;
              _provinceService= provinceService;
+             _context = context;
+
         }
         #endregion
 
@@ -125,23 +129,56 @@ namespace TTNCO.Controllers.v1
             if (fileExtension == ".xlsx")
                 conn.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fullPathToExcel + ";Extended Properties=Excel 12.0;";
             string connString = string.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fullPathToExcel + ";" + "Extended Properties='Excel 8.0;HDR=YES;'");
-            DataTable dt = GetDataTable("SELECT * from [province$]", connString);
-            IList<ProvinceDTO> dataList = new List<ProvinceDTO>();
+
+            #region Province
+            //DataTable dt = GetDataTable("SELECT * from [province$]", connString);
+            //IList<Province> dataList = new List<Province>();
+            //foreach (DataRow dr in dt.Rows)
+            //{
+            //    Province data = new Province();
+
+            //    data.ProvinceName = dr[5].ToString() ;
+            //    data.Id =Convert.ToInt32( dr[6]);
+            //    data.CreatedBy = 1;
+            //    data.CreatedDate=DateTime.Now;
+            //    data.IsActive = true;
+            //    CancellationToken cancellationToken = new CancellationToken();
+            //    _context.Provinces.Add(data);
+            //    _context.SaveChanges();
+            //    //_provinceService.Create(data,cancellationToken);
+            //    //Save(data);
+            //    dataList.Add(data);
+            //    //Do what you need to do with your data here
+            //}d
+
+
+            #endregion
+
+            #region City
+            DataTable dt = GetDataTable("SELECT * from [city$]", connString);
+            IList<City> dataList = new List<City>();
             foreach (DataRow dr in dt.Rows)
             {
-                ProvinceDTO data = new ProvinceDTO();
+                City data = new City();
 
-                data.ProvinceName = dr[5].ToString() ;
-                data.Id =Convert.ToInt32( dr[6]);
+                data.Name = dr[6].ToString();
+                data.Id = Convert.ToInt32(dr[4]);
                 data.CreatedBy = 1;
-                data.CreatedDate=DateTime.Now;
+                data.CreatedDate = DateTime.Now;
                 data.IsActive = true;
+                data.Latitude = Convert.ToDecimal(dr[7]);
+                data.Longitude = Convert.ToDecimal(dr[8]);
+                data.ProvinceId =Convert.ToInt32(dr[5]) ;
                 CancellationToken cancellationToken = new CancellationToken();
-                _provinceService.Create(data,cancellationToken);
+                _context.Cities.Add(data);
+                _context.SaveChanges();
+                //_provinceService.Create(data,cancellationToken);
                 //Save(data);
                 dataList.Add(data);
                 //Do what you need to do with your data here
             }
+
+#endregion
             return null;
         }
         [NonAction]
