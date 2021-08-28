@@ -45,41 +45,41 @@ namespace TTNCO.Controllers
         }
 
         #endregion
-        //[HttpPost("login")]
-        //[AllowAnonymous]
-        //public async Task<ApiResult<LoginDataDTO>> Login(LoginDTO modelDto, CancellationToken cancellationToken)
-        //{
-        //    var ip = Request.HttpContext.Connection.RemoteIpAddress.ToString();
-        //    var key = new byte[64];// Encoding.ASCII.GetBytes(_appSettings.Secret);
-        //    var model = await _userService.Login(modelDto, cancellationToken, ip, key);
-
-        //    //model.Menu = _userService.GetMenu(model.Id);
-        //    return model;
-        //}
+        [HttpPost("login")]
         [AllowAnonymous]
-        [HttpPost("Login")]
-        public async Task<ApiResult<DtoBase>> Login(LoginDTO dto)
+        public async Task<ApiResult<LoginDataDTO>> Login(LoginDTO modelDto, CancellationToken cancellationToken)
         {
-
-            var result = new DtoBase();
             var ip = Request.HttpContext.Connection.RemoteIpAddress.ToString();
-            var userAgent = Request.Headers["User-Agent"].ToString();
-            var user = Authenticate1(dto.UserName, dto.Password, "h", ip, userAgent);
+            var key = new byte[64];// Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var model = await _userService.Login(modelDto, cancellationToken, ip, key);
 
-            if (user == null)
-            {
-                result.DtoIsValid = false;
-                result.Status = "500";
-                result.MessageError.Add("Username or password is incorrect");
-            }
-            else
-            {
-                result.DtoIsValid = true;
-                result.Status = "200";
-                result.Results = user;
-            }
-            return result;
+            //model.Menu = _userService.GetMenu(model.Id);
+            return model;
         }
+        //[AllowAnonymous]
+        //[HttpPost("Login")]
+        //public async Task<ApiResult<DtoBase>> Login(LoginDTO dto)
+        //{
+
+        //    var result = new DtoBase();
+        //    var ip = Request.HttpContext.Connection.RemoteIpAddress.ToString();
+        //    var userAgent = Request.Headers["User-Agent"].ToString();
+        //    var user = Authenticate1(dto.UserName, dto.Password, "h", ip, userAgent);
+
+        //    if (user == null)
+        //    {
+        //        result.DtoIsValid = false;
+        //        result.Status = "500";
+        //        result.MessageError.Add("Username or password is incorrect");
+        //    }
+        //    else
+        //    {
+        //        result.DtoIsValid = true;
+        //        result.Status = "200";
+        //        result.Results = user;
+        //    }
+        //    return result;
+        //}
         [NonAction]
         protected NodeDto Authenticate1(string username, string password, string tokenRefresh, string ip, string userAgent)
         {
@@ -88,7 +88,7 @@ namespace TTNCO.Controllers
             var user = _userService.Login1(username, password);
             if (user != null)
             {
-
+                result.UserMenus = user.UserMenus;
 
                 //if (Password.HashPassword(password, user.SecretKey) != user.Password && Password.SaltPass(password, user.SecretKey) != user.Password)
 
@@ -113,94 +113,8 @@ namespace TTNCO.Controllers
                 //claims.AddClaim(new Claim(ClaimTypes.Country, user.Base));
                 claims.AddClaim(new Claim(type: "UserAgent", userAgent));
                 string listmenu = "";
-                //user.UserMenus.ToList().ForEach(x =>
-                //{
-                //    listmenu = listmenu + "," + x.Menu.Name.ToString();
-                //    //claims.AddClaim(new Claim(type: "UserMenues", x.Menu.Name.ToString()));
-
-                //    //claims.AddClaim(new Claim(ClaimTypes., x.Role.Name));
-
-                //});
-                //    claims.AddClaim(new Claim(type: "UserMenues", listmenu));
-
-                //    user.Roles.ToList().ForEach((x) =>
-                //    {
-
-
-                //        claims.AddClaim(new Claim(ClaimTypes.Role, x.Role.Name));
-                //        claims.AddClaim(new Claim("RoleIds", x.Role.Id.ToString()));
-
-                //        var module = new Module
-                //        {
-                //            Id = x.Role.ProjectId,
-                //            Name = x.Role.Project.Name,
-                //            Link = x.Role.Project.Name.Replace(" ", string.Empty).Replace("&", string.Empty),
-                //            DashboarUrl = x.Role.Project.DashboarUrl
-                //        };
-
-                //        var module1 = x.Role.ModuleActionRoles.Select(u => u.ModuleAction);
-                //        foreach (var item1 in x.Role.ModuleActionRoles)
-                //        {
-                //            var action = item1.ModuleAction.Name;
-                //            var controller = item1.ModuleAction.ProjectModule.Name;
-                //            var project = item1.ModuleAction.ProjectModule.Project.Name;
-                //            result.Principles.Add(project + '/' + controller + '/' + action);
-
-                //        }
-                //        userInfo.Roles.Add(x.RoleId.ToString());
-                //        userInfo.RoleNames.Add(x.Role.Name + "-" + x.Role.Project.Name);
-
-
-                //        x.Role.PermissionRoles.ToList().ForEach((per) =>
-                //        {
-                //            bool noMenu = false;
-                //            foreach (var item5 in result.Modules)
-                //            {
-                //                if (item5.Menus.FirstOrDefault(q => q.Id == per.PermissionId) != null)
-                //                    noMenu = true;
-                //            }
-                //            if (noMenu == false)
-                //                module.Menus.Add(new Menue()
-                //                {
-                //                    Id = per.PermissionId,
-                //                    ParentId = per.Permission.ParentId,
-                //                    Name = per.Permission.Title,
-                //                    Link = per.Permission.Title.Replace(" ", string.Empty).Replace("&", string.Empty),
-                //                });
-
-                //        });
-                //        if (result.Modules.FirstOrDefault(y => y.Id == module.Id) == null)
-                //            result.Modules.Add(module);
-                //        else
-                //        {
-                //            var modulenew = result.Modules.FirstOrDefault(yx => yx.Id == module.Id);
-                //            if (modulenew != null)
-                //            {
-                //                module.Menus.ToList().ForEach((item1) =>
-                //                {
-                //                    modulenew.Menus.Add(item1);
-                //                });
-                //            }
-
-                //        }
-                //    });
-                //    user.Stations.ToList().ForEach((x) =>
-                //    {
-                //        Claim c1 = new Claim("Stations", x.StationId.ToString());
-                //        userInfo.Stations.Add(x.StationId);
-
-                //        claims.AddClaim(c1);
-
-                //    });
-
-                //    claims.AddClaims(new[]
-                //    {
-
-                //    new Claim(ClaimTypes.Name,user.UserName),
-                //    new Claim(ClaimTypes.Country,user.Base),
-                //    new Claim(ClaimTypes.UserData,user.Id.ToString())
-                //}
-                //);
+             
+         
                 var key = new byte[64];
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
@@ -228,7 +142,7 @@ namespace TTNCO.Controllers
                 //result.User = userInfo;
                 //result.ExpireDate = 1;
                 //result.AccessTokenExpirationDateTime = tokenDescriptor.Expires.Value;
-
+                //result.UserMenus = user.;
                 return result;
             }
             return null;

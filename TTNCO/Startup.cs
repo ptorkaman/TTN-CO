@@ -287,8 +287,9 @@ namespace TTNCO
             services.AddScoped<IMenuService, MenuService>();
             services.AddScoped<IPermissionService, PermissionService>();
             services.AddScoped<IUnitService, UnitService>();
+            services.AddScoped<IUserMenuService, UserMenuService>();
 
-
+            
             #endregion
 
         }

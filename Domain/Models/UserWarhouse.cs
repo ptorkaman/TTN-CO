@@ -7,10 +7,12 @@ namespace Domain
 
     public class UserWarhouse : BaseClass<int> 
     {
-        public int UserId { get; set; }
-        public int WareouseId { get; set; }
+        public virtual Warehouse Warehouse { get; set; }
+        public int WarehouseId { get; set; }
 
-        
+        public virtual User User { get; set; }
+        public long UserId { get; set; }
+
 
     }
 }

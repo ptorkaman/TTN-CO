@@ -19,16 +19,18 @@ namespace Services
         private readonly IRepository<UserWarhouse> _repository;
         private readonly IMapper _mapper;
         private readonly PagingSettings _pagingSettings;
-        private readonly IUserWarehouseRepository _warehouseRepository;
+        private readonly IWarehouseRepository _warehouseRepository;
+        private readonly IUserRepository _userRepository;
         #endregion 
 
         #region CTOR
-        public UserWarhouseService(IRepository<UserWarhouse> repository, IMapper mapper, IOptionsSnapshot<PagingSettings> pagingSettings, IUserWarehouseRepository warehouseRepository)
+        public UserWarhouseService(IRepository<UserWarhouse> repository, IMapper mapper, IOptionsSnapshot<PagingSettings> pagingSettings, IWarehouseRepository warehouseRepository, IUserRepository userRepository)
         {
             _repository = repository;
             _mapper = mapper;
             _pagingSettings = pagingSettings.Value;
             _warehouseRepository = warehouseRepository;
+            _userRepository = userRepository;
         }
 
         public async Task<UserWarhouseDTO> Create(UserWarhouseDTO modelDto, CancellationToken cancellationToken)
@@ -37,7 +39,7 @@ namespace Services
             {
                 CreatedBy = modelDto.CreatedBy.Value,
                 CreatedDate = DateTime.Now,
-                WareouseId = modelDto.WareouseId,
+                WarehouseId = modelDto.WarehouseId,
                 UserId = modelDto.UserId,
                
                 IsActive = true,
@@ -60,7 +62,7 @@ namespace Services
 
         public async Task<List<UserWarhouseDTO>> GetByWarehouseId(int id,CancellationToken cancellationToken)
         {
-            var model =await _warehouseRepository.GetByWarehouseId(id, cancellationToken);
+            var model = _warehouseRepository.GetById(id, cancellationToken);
             return _mapper.Map<List<UserWarhouseDTO>>(model);
         }
 
@@ -79,7 +81,7 @@ namespace Services
                 Id = warehouseId,
                 CreatedBy = modelDto.CreatedBy.Value,
                 CreatedDate = modelDto.CreatedDate.Value,
-                WareouseId = modelDto.WareouseId,
+                WarehouseId = modelDto.WarehouseId,
                 UserId = modelDto.UserId,
                 IsActive = modelDto.IsActive,
                 ModifiedBy = modelDto.ModifiedBy,
@@ -92,7 +94,7 @@ namespace Services
 
         public async  Task<List<UserWarhouseDTO>> GetByUserId(int id, CancellationToken cancellationToken)
         {
-            var model = await _warehouseRepository.GetByUserId(id, cancellationToken);
+            var model =  _userRepository.GetById(id);
             return _mapper.Map<List<UserWarhouseDTO>>(model);
         }
 
@@ -100,6 +102,11 @@ namespace Services
         public async Task<List<UserWarhouseDTO>> GetAsync(CancellationToken cancellationToken)
         {
             var model = await _repository.GetAllAsync(cancellationToken);
+            foreach (var item in model)
+            {
+                item.Warehouse = _warehouseRepository.GetById(item.WarehouseId);
+                item.User = _userRepository.GetById(item.UserId);
+            }
             return _mapper.Map<List<UserWarhouseDTO>>(model);
         }
 

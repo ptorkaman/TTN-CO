@@ -28,7 +28,7 @@ namespace Repository
                 .ThenInclude(x => x.Role)
                .ThenInclude(x => x.RolePermissions)
                 .Include(x => x.UserMenus)
-                //.ThenInclude(x => x.Menu)
+                .ThenInclude(x => x.Menu)
                 .FirstOrDefault(x => x.Username == username); ;
         }
         public async Task AddAsync(User user, string password, CancellationToken cancellationToken)

@@ -17,6 +17,8 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Common.Extensions;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Services.User
 {
@@ -38,7 +40,7 @@ namespace Services.User
             _userMenuRepository = userMenuRepository;
             _context = new TTNContext();
         }
-        public object Login1(string username, string password)
+        public Domain.User Login1(string username, string password)
         {
             //var user = _context.Users
             //    //.Include(x => x.UserRoles)
@@ -70,10 +72,22 @@ namespace Services.User
             var jwt = await GenerateAsync(user,ip, key);
           
             model.Token = jwt;
-            var Menu =  _userMenuRepository.GetByUserId(user.Id);
-            foreach (var item in Menu.Result)
+            foreach (var item in user.UserMenus)
             {
-                //model.Menu.Add(_mapper.Map<MenuDTO>(item .Menu) ) ;
+                UserMenuDTO modl = new UserMenuDTO()
+                {
+                    CreatedDate = item.CreatedDate,
+                    CreatedBy = item.CreatedBy,
+                    UserId = item.UserId,
+                    MenuTitle = item.Menu.Name,
+                    ParentId=item.Menu.ParentId,
+                    MenuId = item.MenuId,
+                    ModifiedBy = item.ModifiedBy,
+                    ModifiedDate = item.ModifiedDate,
+                    Id=item.Id,
+                    IsActive = item.IsActive
+                };
+                model.UserMenus.Add(modl);
             }
 
             model.Id = user.Id;

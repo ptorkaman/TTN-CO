@@ -1,4 +1,5 @@
-﻿using Domain.Models;
+﻿using System.Collections.Generic;
+using Domain.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain
@@ -19,8 +20,9 @@ namespace Domain
         public decimal Latitude { get; set; }
         [Column(TypeName = "decimal(18,4)")]
         public decimal Longitude { get; set; }
+        public virtual IList<UserWarhouse> UserWarhouses { get; set; }
 
 
-        
+
     }
 }

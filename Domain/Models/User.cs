@@ -40,6 +40,7 @@ namespace Domain
         public virtual Person Person { get; set; }
         public virtual ICollection<UserRole> UserRoles { get; set; }
         public virtual IList<UserMenu> UserMenus { get; set; }
+        public virtual IList<UserWarhouse> UserWarhouses { get; set; }
 
         //public virtual IList<UserStation> Stations { get; set; }
         //public virtual IList<UserMenu> UserMenus { get; set; }

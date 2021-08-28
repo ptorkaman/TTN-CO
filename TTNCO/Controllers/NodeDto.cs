@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using Domain;
 
 namespace TTNCO.Dto
 {
@@ -11,12 +12,14 @@ namespace TTNCO.Dto
         public NodeDto()
         {
             this.Modules = new List<Module>();
+            UserMenus = new List<UserMenu>();
             this.Principles = new List<string>();
             ValidForServices = true;
         }
 
         public UserInfo User { get; set; }
         public IList<Module> Modules { get; set; }
+        public IList<UserMenu> UserMenus { get; set; }
         public string Token { get; set; }
         public string Ip { get; set; }
         public string DashboardUrl { get; set; }

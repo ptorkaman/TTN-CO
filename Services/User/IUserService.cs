@@ -15,6 +15,6 @@ namespace Services.User
         Task<string> CheckVerification(CheckVerificationDTO model, CancellationToken cancellationToken);
         bool ForgetPassword(SendSmsDTO modelDto, CancellationToken cancellationToken);
         IList<MenuDTO> GetMenu(long modelId);
-        object Login1(string username, string password);
+        Domain.User Login1(string username, string password);
     }
 }

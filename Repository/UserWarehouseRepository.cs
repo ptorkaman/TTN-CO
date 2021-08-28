@@ -23,7 +23,7 @@ namespace Repository
 
         public Task<List<UserWarhouse>> GetByWarehouseId(int id, CancellationToken cancellationToken)
         {
-            return Table.Where(x => x.IsActive && x.WareouseId == id).ToListAsync();
+            return Table.Where(x => x.IsActive && x.WarehouseId == id).ToListAsync();
 
         }
     }

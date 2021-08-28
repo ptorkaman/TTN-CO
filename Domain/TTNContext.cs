@@ -77,9 +77,9 @@ namespace Domain
             modelBuilder.Entity<UserMenu>(entity =>
             {
                 entity.ToTable("UserMenus", "TTN");
-                entity.HasOne<User>(x => x.User)
-                    .WithMany(x => x.UserMenus)
-                    .HasForeignKey(x => x.UserId);
+                //entity.HasOne<User>(x => x.User)
+                //    .WithMany(x => x.UserMenus)
+                //    .HasForeignKey(x => x.UserId);
                 //entity.HasOne<Menu>(x => x.Menu)
                 //    .WithMany(x => x.UserMenus)
                 //    .HasForeignKey(x => x.MenuId);
@@ -87,8 +87,17 @@ namespace Domain
 
             modelBuilder.Entity<UserType>(entity => { entity.ToTable("UserTypes", "TTN");});
             modelBuilder.Entity<Role>(entity =>{ entity.ToTable("Roles", "TTN");});
-            modelBuilder.Entity<UserWarhouse>(entity =>{ entity.ToTable("UserWarhouses", "TTN"); });
+            //modelBuilder.Entity<UserWarhouse>(entity =>{ entity.ToTable("UserWarhouses", "TTN"); });
+            modelBuilder.Entity<UserWarhouse>(entity =>
+            {
+                entity.ToTable("UserWarhouses", "TTN");
+                //entity.HasOne<User>(x => x.User)
+                //    .WithMany().HasForeignKey(x => x.UserId);
+                //entity.HasOne<Warehouse>(x => x.Warehouse)
+                //    .WithMany()
+                //    .HasForeignKey(x => x.WarehouseId);
 
+            });
             modelBuilder.Entity<User>(entity =>
             {
                 entity.ToTable("Users", "TTN");

@@ -19,6 +19,7 @@ namespace Services.Mapper
             CreateMap<PackageType, PackageTypeDTO>();
 
             CreateMap<ReceiptStatus, ReceiptStatusDTO>();
+            CreateMap<Domain.User, UserDTO>();
             CreateMap<UserMenu, UserMenuDTO>();
 
             CreateMap<City, CityDTO>();
