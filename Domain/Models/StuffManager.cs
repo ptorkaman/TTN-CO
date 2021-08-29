@@ -10,7 +10,7 @@ namespace Domain
 {
     [Table("StuffManagers", Schema = "TTN")]
 
-    public class StuffManager : BaseClass<int>
+    public class StuffManager : BaseClass<long>
     {
         public string Name { get; set; }
         public decimal Height { get; set; }

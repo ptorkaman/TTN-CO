@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using Domain.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -19,6 +20,8 @@ namespace Domain
 
         public string Address { get; set; }
         public ClassType Type { get; set; }
+        public IList<SenderReciverAddress> SenderReciverAddress { get; set; }
+
     }
 
     public enum ClassType

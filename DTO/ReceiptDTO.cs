@@ -69,7 +69,9 @@ namespace DTO
         public int ForceType { get; set; }
         public IList<ReceiptDetailDTO> ReceiptDetail { get; set; }
 
-        //public string CreateDateStr => CreatedDate.Value.ToShortDateString().Split(' ')[0];
-
+        public virtual BinDTO Bin { get; set; }
+        public int BinId { get; set; }
+        public virtual ReceiptStatusDTO ReceiptStatus { get; set; }
+        public int ReceiptStatusId { get; set; }
     }
 }

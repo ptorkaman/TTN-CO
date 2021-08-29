@@ -44,6 +44,8 @@ namespace Domain
         public DbSet<Parish> Parishes { get; set; }
         public DbSet<Province> Provinces { get; set; }
         public DbSet<SenderReciver> SenderRecivers { get; set; }
+        public DbSet<SenderReciverAddress> SenderReciverAddresses { get; set; }
+
         public DbSet<Region> Regions { get; set; }
         public DbSet<Sender> Senders { get; set; }
         public DbSet<SenderWarehouse> SenderWarehouses { get; set; }

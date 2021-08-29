@@ -72,6 +72,9 @@ namespace Domain
         public decimal Destinationlongtude { get; set; }
         public int ForceType { get; set; }
         public IList<ReceiptDetail> ReceiptDetail { get; set; }
-
+        public virtual Bin Bin { get; set; }
+        public int BinId { get; set; }
+        public virtual ReceiptStatus ReceiptStatus { get; set; }
+        public int ReceiptStatusId { get; set; }
     }
 }

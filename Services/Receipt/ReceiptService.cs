@@ -86,7 +86,7 @@ namespace Services
                             CreatedDate = DateTime.Now,
                             GoodsId = model.CreatedBy,
                             GoodsName = item.GoodsName,
-                            Qty = item.Qty,
+                            Count = item.Qty,
                             ReceiptId = model.Id,
                             UsnitId = item.UsnitId,
                             weight = item.weight
@@ -190,7 +190,7 @@ namespace Services
                             CreatedDate = item.CreatedDate.Value,
                             GoodsId = model.CreatedBy,
                             GoodsName = item.GoodsName,
-                            Qty = item.Qty,
+                            Count = item.Qty,
                             ReceiptId = model.Id,
                             UsnitId = item.UsnitId,
                             weight = item.weight,
