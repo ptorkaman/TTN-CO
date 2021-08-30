@@ -263,6 +263,7 @@ namespace TTNCO
 
             services.AddScoped<IPackageTypeRepository, PackageTypeRepository>();
             services.AddScoped<IReceiptDetailRepository, ReceiptDetailRepository>();
+            services.AddScoped<ISenderReciverAddressRepository, SenderReciverAddressRepository>();
 
 
             #endregion
@@ -290,6 +291,7 @@ namespace TTNCO
             services.AddScoped<IPermissionService, PermissionService>();
             services.AddScoped<IUnitService, UnitService>();
             services.AddScoped<IUserMenuService, UserMenuService>();
+            services.AddScoped<ISenderReciverAddressService, SenderReciverAddressService>();
 
             
             #endregion

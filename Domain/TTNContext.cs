@@ -69,6 +69,7 @@ namespace Domain
             modelBuilder.Entity<SenderWarehouse>(entity => { entity.ToTable("SenderWarehouses", "TTN"); });
             modelBuilder.Entity<Region>(entity =>  {  entity.ToTable("Regions", "TTN"); });
             modelBuilder.Entity<SenderReciver>(entity => { entity.ToTable("SenderRecivers", "TTN"); });
+            modelBuilder.Entity<SenderReciverAddress>(entity => { entity.ToTable("SenderReciverAddresses", "TTN"); });
             modelBuilder.Entity<Province>(entity => {entity.ToTable("Provinces", "TTN"); });
             modelBuilder.Entity<Parish>(entity => {entity.ToTable("Parishes", "TTN");});
             modelBuilder.Entity<Country>(entity =>{ entity.ToTable("Countries", "TTN");});

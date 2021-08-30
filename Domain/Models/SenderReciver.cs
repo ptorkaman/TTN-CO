@@ -9,6 +9,10 @@ namespace Domain
 
     public class SenderReciver : BaseClass<int> 
     {
+        public SenderReciver()
+        {
+            SenderReciverAddress = new List<SenderReciverAddress>();
+        }
         public int CityId { get; set; }
         public string CompanyName { get; set; }
 

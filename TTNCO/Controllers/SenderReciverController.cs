@@ -19,20 +19,20 @@ namespace TTNCO.Controllers.v1
     public class SenderReciverController : BaseController
     {
         #region Fields
-        private readonly ISenderService _senderReciverService;
+        private readonly ISenderReciverService _senderReciverService;
         #endregion
 
         #region CTOR
 
-        public SenderReciverController(ISenderService senderReciverService)
+        public SenderReciverController(ISenderReciverService senderReciverService)
         {
             _senderReciverService = senderReciverService;
         }
         #endregion
 
-        #region SenderReciver Actions
+        #region SenderReciverReciver Actions
         [HttpPost()]
-        public async Task<ApiResult<SenderDTO>> Create(SenderDTO modelDto, CancellationToken cancellationToken)
+        public async Task<ApiResult<SenderReciverDTO>> Create(SenderReciverDTO modelDto, CancellationToken cancellationToken)
         {
             modelDto.CreatedBy = HttpContext.User.Identity.GetUserId<int>();
 
@@ -48,7 +48,7 @@ namespace TTNCO.Controllers.v1
         }
 
         [HttpPut("{Id}")]
-        public async Task<ApiResult<SenderDTO>> Update(int Id, SenderDTO modelDto, CancellationToken cancellationToken)
+        public async Task<ApiResult<SenderReciverDTO>> Update(int Id, SenderReciverDTO modelDto, CancellationToken cancellationToken)
         {
             var result = await _senderReciverService.UpdateAsync(Id, modelDto, cancellationToken);
             return result;
@@ -56,19 +56,20 @@ namespace TTNCO.Controllers.v1
 
      
 
-        [HttpGet("Get")]
-        public async Task<ApiResult<List<SenderDTO>>> Get(CancellationToken cancellationToken)
+        [HttpGet()]
+        public async Task<ApiResult<List<SenderReciverDTO>>> Get(CancellationToken cancellationToken)
         {
             var result = await _senderReciverService.GetAsync(cancellationToken);
+           
             return result;
         }
-
         //[HttpGet("GetAll")]
         //public async Task<ApiResult<PagedResult<SenderReciver>>> GetAll(int? page, [FromQuery] int? pageSize, [FromQuery] string orderBy, CancellationToken cancellationToken)
         //{
         //    var result = await _senderReciverService.GetAllAsync(page, pageSize, orderBy, cancellationToken);
         //    return result;
         //}
+     
         #endregion
     }
 }
