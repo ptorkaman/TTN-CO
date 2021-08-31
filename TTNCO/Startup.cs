@@ -317,6 +317,7 @@ namespace TTNCO
                 var prefix = _siteSetting.PrefixUrl;
                 c.SwaggerEndpoint(prefix + "/swagger/v1/swagger.json", "API v1");
                 c.SwaggerEndpoint(prefix + "/swagger/v2/swagger.json", "API v2");
+                c.DocExpansion(DocExpansion.None);
             });
 
             app.UseHttpsRedirection();
