@@ -17,7 +17,7 @@ namespace TTNCO.Controllers.v1
     //[ApiExplorerSettings(GroupName = "v1")]
     [Route("api/[controller]")]
 
-    [Authorize]
+    [AllowAnonymous]
     [ApiController]
     public class BinnController : BaseController
     {
