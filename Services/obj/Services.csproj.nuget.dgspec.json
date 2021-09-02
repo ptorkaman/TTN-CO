@@ -43,95 +43,45 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
-            "Microsoft.AspNetCore.Routing.Abstractions": {
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.4.4, )"
+            },
+            "Microsoft.AspNet.Mvc": {
+              "target": "Package",
+              "version": "[5.2.7, )"
+            },
+            "Microsoft.AspNetCore.Http.Extensions": {
               "target": "Package",
               "version": "[2.2.0, )"
             },
-            "Microsoft.EntityFrameworkCore": {
+            "Microsoft.AspNetCore.Http.Features": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
-            "Newtonsoft.Json": {
+            "Microsoft.AspNetCore.Routing": {
               "target": "Package",
-              "version": "[13.0.1, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.303\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "D:\\Project\\TTNCO\\Domain\\Domain.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "D:\\Project\\TTNCO\\Domain\\Domain.csproj",
-        "projectName": "Domain",
-        "projectPath": "D:\\Project\\TTNCO\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\P.Torkaman.TTN-TORKAMAN\\.nuget\\packages\\",
-        "outputPath": "D:\\Project\\TTNCO\\Domain\\obj\\",
-        "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
-        "configFilePaths": [
-          "C:\\Users\\P.Torkaman.TTN-TORKAMAN\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "net5.0"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net5.0": {
-            "targetAlias": "net5.0",
-            "projectReferences": {}
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
-          "dependencies": {
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[5.0.8, )"
-            },
-            "Microsoft.EntityFrameworkCore.Design": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[2.2.2, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.5, )"
             },
-            "Microsoft.EntityFrameworkCore.Tools": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
+            "System.Configuration.ConfigurationManager": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.0, )"
+            },
+            "System.Data.OleDb": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
+            "fasterflect": {
+              "target": "Package",
+              "version": "[3.0.0, )"
             }
           },
           "imports": [
@@ -153,77 +103,14 @@
         }
       }
     },
-    "D:\\Project\\TTNCO\\DTO\\DTO.csproj": {
+    "D:\\Project\\TTNCO\\DAL\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Project\\TTNCO\\DTO\\DTO.csproj",
-        "projectName": "DTO",
-        "projectPath": "D:\\Project\\TTNCO\\DTO\\DTO.csproj",
+        "projectUniqueName": "D:\\Project\\TTNCO\\DAL\\Domain.csproj",
+        "projectName": "Domain",
+        "projectPath": "D:\\Project\\TTNCO\\DAL\\Domain.csproj",
         "packagesPath": "C:\\Users\\P.Torkaman.TTN-TORKAMAN\\.nuget\\packages\\",
-        "outputPath": "D:\\Project\\TTNCO\\DTO\\obj\\",
-        "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
-        "configFilePaths": [
-          "C:\\Users\\P.Torkaman.TTN-TORKAMAN\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "net5.0"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net5.0": {
-            "targetAlias": "net5.0",
-            "projectReferences": {}
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
-          "dependencies": {
-            "Newtonsoft.Json": {
-              "target": "Package",
-              "version": "[13.0.1, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.303\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "D:\\Project\\TTNCO\\Repository\\Repository.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "D:\\Project\\TTNCO\\Repository\\Repository.csproj",
-        "projectName": "Repository",
-        "projectPath": "D:\\Project\\TTNCO\\Repository\\Repository.csproj",
-        "packagesPath": "C:\\Users\\P.Torkaman.TTN-TORKAMAN\\.nuget\\packages\\",
-        "outputPath": "D:\\Project\\TTNCO\\Repository\\obj\\",
+        "outputPath": "D:\\Project\\TTNCO\\DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -246,8 +133,8 @@
               "D:\\Project\\TTNCO\\Common\\Common.csproj": {
                 "projectPath": "D:\\Project\\TTNCO\\Common\\Common.csproj"
               },
-              "D:\\Project\\TTNCO\\Domain\\Domain.csproj": {
-                "projectPath": "D:\\Project\\TTNCO\\Domain\\Domain.csproj"
+              "D:\\Project\\TTNCO\\Models\\DTO.csproj": {
+                "projectPath": "D:\\Project\\TTNCO\\Models\\DTO.csproj"
               }
             }
           }
@@ -262,9 +149,82 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
-            "Microsoft.EntityFrameworkCore": {
+            "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.303\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Project\\TTNCO\\Models\\DTO.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Project\\TTNCO\\Models\\DTO.csproj",
+        "projectName": "DTO",
+        "projectPath": "D:\\Project\\TTNCO\\Models\\DTO.csproj",
+        "packagesPath": "C:\\Users\\P.Torkaman.TTN-TORKAMAN\\.nuget\\packages\\",
+        "outputPath": "D:\\Project\\TTNCO\\Models\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\P.Torkaman.TTN-TORKAMAN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Mvc.Core": {
+              "target": "Package",
+              "version": "[2.2.5, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
             }
           },
           "imports": [
@@ -313,14 +273,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\Project\\TTNCO\\Domain\\Domain.csproj": {
-                "projectPath": "D:\\Project\\TTNCO\\Domain\\Domain.csproj"
+              "D:\\Project\\TTNCO\\DAL\\Domain.csproj": {
+                "projectPath": "D:\\Project\\TTNCO\\DAL\\Domain.csproj"
               },
-              "D:\\Project\\TTNCO\\DTO\\DTO.csproj": {
-                "projectPath": "D:\\Project\\TTNCO\\DTO\\DTO.csproj"
-              },
-              "D:\\Project\\TTNCO\\Repository\\Repository.csproj": {
-                "projectPath": "D:\\Project\\TTNCO\\Repository\\Repository.csproj"
+              "D:\\Project\\TTNCO\\Models\\DTO.csproj": {
+                "projectPath": "D:\\Project\\TTNCO\\Models\\DTO.csproj"
               }
             }
           }
@@ -339,9 +296,17 @@
               "target": "Package",
               "version": "[8.1.1, )"
             },
+            "Microsoft.AspNetCore.Hosting": {
+              "target": "Package",
+              "version": "[2.2.7, )"
+            },
             "Microsoft.Extensions.Identity.Core": {
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.6, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
             },
             "SmsIrRestfulNetCore": {
               "target": "Package",
@@ -349,11 +314,7 @@
             },
             "StackExchange.Redis": {
               "target": "Package",
-              "version": "[2.2.50, )"
-            },
-            "System.Security.Claims": {
-              "target": "Package",
-              "version": "[4.3.0, )"
+              "version": "[2.2.62, )"
             }
           },
           "imports": [

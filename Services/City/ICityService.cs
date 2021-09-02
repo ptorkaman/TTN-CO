@@ -4,6 +4,7 @@ using DTO;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using TTN;
 
 namespace Services
 {
@@ -14,5 +15,6 @@ namespace Services
         Task<CityDTO> UpdateAsync(int Id, CityDTO modelDto, CancellationToken cancellationToken);
         Task<PagedResult<City>> GetAllAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken);
         Task<List<CityDTO>> GetAsync(CancellationToken cancellationToken);
+        Task<PagedResult<City>> FindAll(int pageSize, int pageIndex, Criteria criteria);
     }
 }

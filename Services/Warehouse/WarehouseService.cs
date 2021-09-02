@@ -3,13 +3,13 @@ using Common.Exceptions;
 using Common.Utilities;
 using Domain;
 using DTO;
-using DTO.Settings;
 using Microsoft.Extensions.Options;
 using Repository;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Models.Settings;
 
 namespace Services
 {

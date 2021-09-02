@@ -3,13 +3,14 @@ using Common.Exceptions;
 using Common.Utilities;
 using Domain;
 using DTO;
-using DTO.Settings;
 using Microsoft.Extensions.Options;
+using Models.Settings;
 using Repository;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using TTN;
 
 namespace Services
 {
@@ -91,7 +92,14 @@ namespace Services
             return _mapper.Map<CityDTO>(city);
         }
 
-        
+        public Task<PagedResult<City>> FindAll(int pageSize, int pageIndex, Criteria criteria)
+        {
+            CancellationToken cancellationToken = new CancellationToken();
+            var model= _repository.GetPagedAsync(pageIndex,pageSize, cancellationToken);
+            return model;
+        }
+
+
         #endregion
 
     }

@@ -1,0 +1,180 @@
+﻿ 
+
+CREATE TABLE [MasterMenu](
+	[id] [int] NOT NULL,
+	[url] [nvarchar](200) NULL,
+	[title] [nvarchar](200) NULL,
+	[parentId] [int] NULL,
+	[sortBy] [int] NULL,
+	[isActive] [bit] NULL CONSTRAINT [DF_tblMasterMenu_isActive]  DEFAULT ((1)),
+	[icon] [varchar](50) NULL,
+	[help] [nvarchar](250) NULL,
+	[movie] [nvarchar](250) NULL,
+ CONSTRAINT [PK__tblMaste__3213E83F68487DD7] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+-----------------------------------------هر فرمی چه دسترسی هایی دارد 
+CREATE TABLE [dbo].[MenuPermission](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[menuId] [int] NULL,
+	[permissionName] [varchar](100) NULL,
+	[permissionTitle] [nvarchar](200) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+----------------------------------
+CREATE TABLE [dbo].[ObjectInMenu](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[objectId] [int] NULL,
+	[objectTypeId] [int] NULL,
+	[menuId] [int] NULL,
+	[permissionId] [int] NULL,
+	[permissionValue] [bit] NULL,
+	[isActive] [bit] NULL,
+	[createdDate] [datetime] NULL,
+	[createdBy] [int] NULL,
+	[modifiedDate] [datetime] NULL,
+	[modifiedBy] [int] NULL,
+ CONSTRAINT [uqObjIdTypeIDMenuId] UNIQUE NONCLUSTERED 
+(
+	[objectId] ASC,
+	[objectTypeId] ASC,
+	[menuId] ASC,
+	[permissionId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+------------------------------
+CREATE TABLE [GroupUser](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[GroupName] [nvarchar](50) NULL,
+	[createdDate] [datetime] NULL,
+	[createdBy] [int] NULL,
+	[modifiedDate] [datetime] NULL,
+	[modifiedBy] [int] NULL,
+	[isActive] [bit] NULL,
+ CONSTRAINT [PK_GCS_tblGroupUser] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+------------------------------
+CREATE TABLE [dbo].[GCS_tblGroupUserMembers](
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+	[userGroupId] [int] NULL,
+	[userId] [int] NULL,
+	[isActive] [bit] NULL,
+	[createdDate] [datetime] NULL,
+	[createdBy] [int] NULL,
+	[modifiedDate] [datetime] NULL,
+	[modifiedBy] [int] NULL,
+ CONSTRAINT [PK_GCS_tblGroupUserMembers] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+----------------------------------فیلتر کردن منوها 
+
+CREATE PROC [spGetMenuAC]
+@term NVARCHAR(50)
+AS
+SELECT TOP 10	id,title,id AS parentId
+FROM			tblMasterMenu
+WHERE			title LIKE N'%'+@term+'%' AND
+				parentId <>0 AND url <> '#'
+GO
+------------------------------------
+
+create PROC [dbo].[spGgetAllMenu]
+@userName VARCHAR(50)
+AS
+DECLARE @userType INT,@userId INT 
+SELECT @userType=userType,@userId=id FROM tblUsers WHERE userName=@userName
+
+ 
+			
+
+DECLARE @tbl AS TABLE (menuId INT,include BIT)
+DECLARE @tblBuf AS TABLE (menuId INT)
+
+IF @userType <> 1
+BEGIN
+INSERT	@tbl 
+
+SELECT menuId,1 FROM dbo.GCS_fnGetUserPermissionsInPages(@userId)
+						
+INSERT @tblBuf 
+SELECT  parentId FROM tblMasterMenu
+		WHERE id IN (
+					SELECT menuid FROM  @tbl
+					)
+		 AND parentId<>0
+
+INSERT @tbl
+SELECT  parentId,0 FROM tblMasterMenu
+		WHERE id IN (
+					SELECT menuid FROM  @tbl
+					)
+		 AND parentId<>0
+
+		 
+UPDATE @tbl SET include=1	 
+			 
+DECLARE @flag BIT =1
+WHILE @flag=1
+BEGIN
+	IF (SELECT COUNT(*) FROM @tblBuf)>0
+	BEGIN
+		INSERT @tbl
+		SELECT parentId,0 FROM tblMasterMenu
+		WHERE  id IN (
+						SELECT * FROM @tblBuf
+					 )
+			  AND parentId<>0	
+			 
+		DELETE @tblBuf
+		INSERT @tblBuf SELECT menuId FROM @tbl WHERE include=0
+		UPDATE @tbl SET include=1 
+	END
+	ELSE
+		SET @flag=0
+END
+
+
+
+
+SELECT M.*
+FROM		tblMasterMenu M
+
+WHERE id IN 
+(
+	SELECT distinct menuId FROM @tbl			
+)
+AND isActive=1
+ORDER BY sortBy
+END
+ELSE IF (@userType=1)
+ 
+SELECT *,'admin' AS userPermissions FROM tblMasterMenu
+WHERE isActive=1
+ORDER BY sortBy

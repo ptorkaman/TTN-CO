@@ -3,13 +3,13 @@ using Common.Exceptions;
 using Common.Utilities;
 using Domain;
 using DTO;
-using DTO.Settings;
 using Microsoft.Extensions.Options;
 using Repository;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Models.Settings;
 
 namespace Services
 {
@@ -35,19 +35,28 @@ namespace Services
 
         public async Task<UserWarhouseDTO> Create(UserWarhouseDTO modelDto, CancellationToken cancellationToken)
         {
-            UserWarhouse warehouse = new()
+            try
             {
-                CreatedBy = modelDto.CreatedBy.Value,
-                CreatedDate = DateTime.Now,
-                WarehouseId = modelDto.WarehouseId,
-                UserId = modelDto.UserId,
-               
-                IsActive = true,
-                ModifiedBy = modelDto.ModifiedBy,
-                ModifiedDate = modelDto.ModifiedDate,
-            };
-            await _repository.AddAsync(warehouse, cancellationToken);
-            return _mapper.Map<UserWarhouseDTO>(warehouse);
+                UserWarhouse warehouse = new()
+                {
+                    CreatedBy = modelDto.CreatedBy.Value,
+                    CreatedDate = DateTime.Now,
+                    WarehouseId = modelDto.WarehouseId,
+                    UserId = modelDto.UserId,
+
+                    IsActive = true,
+                    ModifiedBy = modelDto.ModifiedBy,
+                    ModifiedDate = modelDto.ModifiedDate,
+                };
+                await _repository.AddAsync(warehouse, cancellationToken);
+                return _mapper.Map<UserWarhouseDTO>(warehouse);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+            
         }
 
         public async Task<bool> DeleteAsync(int warehouseId, CancellationToken cancellationToken)

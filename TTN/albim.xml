@@ -1,0 +1,262 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TTN</name>
+    </assembly>
+    <members>
+        <member name="M:Albim.ActionFilters.PermissionAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>
+            Get User roles 
+            then get user roles permissins 
+            distinct roles permissions
+            if permissions contain action required permissions Ok otherwise 401
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:TTN.Controllers.v1.BaseController">
+            <summary>
+            Base Controller 
+            </summary>
+        </member>
+        <member name="M:TTN.Controllers.v1.BaseController.GetInnerException(System.Exception)">
+            <summary>
+            Get Inner Exception
+            </summary>
+            <param name="ex"></param>
+            <returns></returns>
+        </member>
+        <member name="T:albim.CustomExceptionHandlerMiddlewareExtensions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:albim.CustomExceptionHandlerMiddlewareExtensions.UseCustomExceptionHandler(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="builder"></param>
+            <returns></returns>
+        </member>
+        <member name="T:albim.CustomExceptionHandlerMiddleware">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:albim.CustomExceptionHandlerMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.AspNetCore.Hosting.IWebHostEnvironment,Microsoft.Extensions.Logging.ILogger{albim.CustomExceptionHandlerMiddleware},Microsoft.Extensions.Localization.IStringLocalizer{Albim.Resources.Resource})">
+            <summary>
+            
+            </summary>
+            <param name="next"></param>
+            <param name="env"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:albim.CustomExceptionHandlerMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="T:albim.Program">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:albim.Program.Main(System.String[])">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:albim.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:albim.Result.ApiResult">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:albim.Result.ApiResult.IsSuccess">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:albim.Result.ApiResult.StatusCode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:albim.Result.ApiResult.Message">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:albim.Result.ApiResult.#ctor(System.Boolean,Common.ApiResultStatusCode,System.Boolean,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="isSuccess"></param>
+            <param name="statusCode"></param>
+            <param name="message"></param>
+            <param name="isCached"></param>
+        </member>
+        <member name="M:albim.Result.ApiResult.op_Implicit(Microsoft.AspNetCore.Mvc.OkResult)~albim.Result.ApiResult">
+            <summary>
+            
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:albim.Result.ApiResult.op_Implicit(Microsoft.AspNetCore.Mvc.BadRequestResult)~albim.Result.ApiResult">
+            <summary>
+            
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:albim.Result.ApiResult.op_Implicit(Microsoft.AspNetCore.Mvc.BadRequestObjectResult)~albim.Result.ApiResult">
+            <summary>
+            
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:albim.Result.ApiResult.op_Implicit(Microsoft.AspNetCore.Mvc.ContentResult)~albim.Result.ApiResult">
+            <summary>
+            
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:albim.Result.ApiResult.op_Implicit(Microsoft.AspNetCore.Mvc.NotFoundResult)~albim.Result.ApiResult">
+            <summary>
+            
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="T:albim.Result.ApiResult`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="TData"></typeparam>
+        </member>
+        <member name="P:albim.Result.ApiResult`1.Data">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:albim.Result.ApiResult`1.#ctor(System.Boolean,Common.ApiResultStatusCode,`0,System.Boolean,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="isSuccess"></param>
+            <param name="statusCode"></param>
+            <param name="data"></param>
+            <param name="message"></param>
+            <param name="isCached"></param>
+        </member>
+        <member name="M:albim.Result.ApiResult`1.op_Implicit(`0)~albim.Result.ApiResult{`0}">
+            <summary>
+            
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:albim.Result.ApiResult`1.op_Implicit(Microsoft.AspNetCore.Mvc.OkResult)~albim.Result.ApiResult{`0}">
+            <summary>
+            
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:albim.Result.ApiResult`1.op_Implicit(Microsoft.AspNetCore.Mvc.OkObjectResult)~albim.Result.ApiResult{`0}">
+            <summary>
+            
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:albim.Result.ApiResult`1.op_Implicit(Microsoft.AspNetCore.Mvc.BadRequestResult)~albim.Result.ApiResult{`0}">
+            <summary>
+            
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:albim.Result.ApiResult`1.op_Implicit(Microsoft.AspNetCore.Mvc.BadRequestObjectResult)~albim.Result.ApiResult{`0}">
+            <summary>
+            
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:albim.Result.ApiResult`1.op_Implicit(Microsoft.AspNetCore.Mvc.ContentResult)~albim.Result.ApiResult{`0}">
+            <summary>
+            
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:albim.Result.ApiResult`1.op_Implicit(Microsoft.AspNetCore.Mvc.NotFoundResult)~albim.Result.ApiResult{`0}">
+            <summary>
+            
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:albim.Result.ApiResult`1.op_Implicit(Microsoft.AspNetCore.Mvc.NotFoundObjectResult)~albim.Result.ApiResult{`0}">
+            <summary>
+            
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="T:albim.Startup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:albim.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:albim.Startup.Configuration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:albim.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:albim.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:albim.Versioning.RemoveVersionFromParameterv">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:albim.Versioning.RemoveVersionFromParameterv.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:albim.Versioning.ReplaceVersionWithExactValueInPath">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:albim.Versioning.ReplaceVersionWithExactValueInPath.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
+            <summary>
+            
+            </summary>
+        </member>
+    </members>
+</doc>

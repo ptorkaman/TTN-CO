@@ -1,0 +1,274 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TTN</name>
+    </assembly>
+    <members>
+        <member name="M:TTN.ActionFilters.PermissionAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>
+            Get User roles 
+            then get user roles permissins 
+            distinct roles permissions
+            if permissions contain action required permissions Ok otherwise 401
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:TTN.Controllers.BaseController">
+            <summary>
+            Base Controller 
+            </summary>
+        </member>
+        <member name="M:TTN.Controllers.BaseController.GetInnerException(System.Exception)">
+            <summary>
+            Get Inner Exception
+            </summary>
+            <param name="ex"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TTN.CustomExceptionHandlerMiddlewareExtensions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TTN.CustomExceptionHandlerMiddlewareExtensions.UseCustomExceptionHandler(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="builder"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TTN.CustomExceptionHandlerMiddleware">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TTN.CustomExceptionHandlerMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.AspNetCore.Hosting.IWebHostEnvironment,Microsoft.Extensions.Logging.ILogger{TTN.CustomExceptionHandlerMiddleware},Microsoft.Extensions.Localization.IStringLocalizer{TTN.Resources.Resource})">
+            <summary>
+            
+            </summary>
+            <param name="next"></param>
+            <param name="env"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:TTN.CustomExceptionHandlerMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="T:TTN.Program">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TTN.Program.Main(System.String[])">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TTN.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:TTN.Result.ApiResult">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TTN.Result.ApiResult.IsSuccess">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TTN.Result.ApiResult.StatusCode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TTN.Result.ApiResult.Message">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TTN.Result.ApiResult.#ctor(System.Boolean,Common.ApiResultStatusCode,System.Boolean,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="isSuccess"></param>
+            <param name="statusCode"></param>
+            <param name="message"></param>
+            <param name="isCached"></param>
+        </member>
+        <member name="M:TTN.Result.ApiResult.op_Implicit(Microsoft.AspNetCore.Mvc.OkResult)~TTN.Result.ApiResult">
+            <summary>
+            
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TTN.Result.ApiResult.op_Implicit(Microsoft.AspNetCore.Mvc.BadRequestResult)~TTN.Result.ApiResult">
+            <summary>
+            
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TTN.Result.ApiResult.op_Implicit(Microsoft.AspNetCore.Mvc.BadRequestObjectResult)~TTN.Result.ApiResult">
+            <summary>
+            
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TTN.Result.ApiResult.op_Implicit(Microsoft.AspNetCore.Mvc.ContentResult)~TTN.Result.ApiResult">
+            <summary>
+            
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TTN.Result.ApiResult.op_Implicit(Microsoft.AspNetCore.Mvc.NotFoundResult)~TTN.Result.ApiResult">
+            <summary>
+            
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TTN.Result.ApiResult`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="TData"></typeparam>
+        </member>
+        <member name="P:TTN.Result.ApiResult`1.Data">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TTN.Result.ApiResult`1.#ctor(System.Boolean,Common.ApiResultStatusCode,`0,System.Boolean,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="isSuccess"></param>
+            <param name="statusCode"></param>
+            <param name="data"></param>
+            <param name="message"></param>
+            <param name="isCached"></param>
+        </member>
+        <member name="M:TTN.Result.ApiResult`1.op_Implicit(`0)~TTN.Result.ApiResult{`0}">
+            <summary>
+            
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TTN.Result.ApiResult`1.op_Implicit(Microsoft.AspNetCore.Mvc.OkResult)~TTN.Result.ApiResult{`0}">
+            <summary>
+            
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TTN.Result.ApiResult`1.op_Implicit(Microsoft.AspNetCore.Mvc.OkObjectResult)~TTN.Result.ApiResult{`0}">
+            <summary>
+            
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TTN.Result.ApiResult`1.op_Implicit(Microsoft.AspNetCore.Mvc.BadRequestResult)~TTN.Result.ApiResult{`0}">
+            <summary>
+            
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TTN.Result.ApiResult`1.op_Implicit(Microsoft.AspNetCore.Mvc.BadRequestObjectResult)~TTN.Result.ApiResult{`0}">
+            <summary>
+            
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TTN.Result.ApiResult`1.op_Implicit(Microsoft.AspNetCore.Mvc.ContentResult)~TTN.Result.ApiResult{`0}">
+            <summary>
+            
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TTN.Result.ApiResult`1.op_Implicit(Microsoft.AspNetCore.Mvc.NotFoundResult)~TTN.Result.ApiResult{`0}">
+            <summary>
+            
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TTN.Result.ApiResult`1.op_Implicit(Microsoft.AspNetCore.Mvc.NotFoundObjectResult)~TTN.Result.ApiResult{`0}">
+            <summary>
+            
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TTN.Startup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TTN.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:TTN.Startup.Configuration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TTN.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TTN.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:TTN.Versioning.RemoveVersionFromParameterv">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TTN.Versioning.RemoveVersionFromParameterv.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:TTN.Versioning.ReplaceVersionWithExactValueInPath">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TTN.Versioning.ReplaceVersionWithExactValueInPath.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:TTNCO.Controllers.BaseController">
+            <summary>
+            Base Controller 
+            </summary>
+        </member>
+        <member name="M:TTNCO.Controllers.BaseController.GetInnerException(System.Exception)">
+            <summary>
+            Get Inner Exception
+            </summary>
+            <param name="ex"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

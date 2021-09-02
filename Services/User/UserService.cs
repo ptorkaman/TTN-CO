@@ -2,9 +2,7 @@
 using Common.Exceptions;
 using Domain;
 using DTO;
-using DTO.Settings;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Repository;
@@ -17,8 +15,12 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Common.Extensions;
+using Common.Utilities;
+using DAL.Contracts;
+using DAL.Models;
 using Microsoft.Extensions.DependencyInjection;
+using Models.Settings;
+using Models.User;
 
 namespace Services.User
 {
@@ -62,15 +64,15 @@ namespace Services.User
 
             return user;
         }
-        public async Task<LoginDataDTO> Login(LoginDTO modelDto, CancellationToken cancellationToken,string ip, byte[] key)
+        public async Task<LoginDataDTO> Login(LoginDTO modelDto, CancellationToken cancellationToken, string ip, byte[] key)
         {
             LoginDataDTO model = new LoginDataDTO();
-            var user =  _userRepository.GetByUserAndPass(modelDto.UserName, modelDto.Password, cancellationToken);
+            var user = _userRepository.GetByUserAndPass(modelDto.UserName, modelDto.Password, cancellationToken);
             if (user == null)
                 throw new BadRequestException("نام کاربری یا رمز عبور اشتباه است");
 
-            var jwt = await GenerateAsync(user,ip, key);
-          
+            var jwt = await GenerateAsync(user, ip, key);
+
             model.Token = jwt;
             foreach (var item in user.UserMenus)
             {
@@ -80,25 +82,47 @@ namespace Services.User
                     CreatedBy = item.CreatedBy,
                     UserId = item.UserId,
                     MenuTitle = item.Menu.Name,
-                    ParentId=item.Menu.ParentId,
+                    ParentId = item.Menu.ParentId,
                     MenuId = item.MenuId,
                     ModifiedBy = item.ModifiedBy,
                     ModifiedDate = item.ModifiedDate,
-                    Id=item.Id,
-                    IsActive = item.IsActive
+                    Id = item.Id,
+                    IsActive = item.IsActive,
+                    //Menu =_mapper.Map<MenuDTO>(item.Menu) 
                 };
                 model.UserMenus.Add(modl);
             }
-
+            foreach (var item in user.UserWarhouses)
+            {
+                WarehouseDTO modl = new WarehouseDTO()
+                {
+                    CreatedDate = item.CreatedDate,
+                    CreatedBy = item.CreatedBy,
+                    Id = item.WarehouseId,
+                    WarhouseName = item.Warehouse.WarhouseName,
+                    WarehouseCode = item.Warehouse.WarehouseCode,
+                    Address = item.Warehouse.Address,
+                    ModifiedBy = item.ModifiedBy,
+                    ModifiedDate = item.ModifiedDate,
+                    Latitude = item.Warehouse.Latitude,
+                    Longitude = item.Warehouse.Longitude,
+                    ContactMobile1 = item.Warehouse.ContactMobile1,
+                    ContactMobile2 = item.Warehouse.ContactMobile2,
+                    Phone = item.Warehouse.Phone,
+                    IsActive = item.IsActive,
+                    //Menu =_mapper.Map<MenuDTO>(item.Menu) 
+                };
+                model.WareHauses.Add(modl);
+            }
             model.Id = user.Id;
             //model.Menu = _mapper.Map<List<UserMenuDTO>>(Menu);
             user.LastLogOnDate = DateTime.Now;
             await _userRepository.UpdateAsync(user, cancellationToken);
             return model;
         }
-        public async Task<string> GenerateAsync(Domain.User user,string ip,byte[] key)
+        public async Task<string> GenerateAsync(Domain.User user, string ip, byte[] key)
         {
-            var secretKey =  Encoding.UTF8.GetBytes(_siteSetting.Jwt.Key);
+            var secretKey = Encoding.UTF8.GetBytes(_siteSetting.Jwt.Key);
             var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(secretKey), SecurityAlgorithms.HmacSha256Signature);
 
             var claims = new ClaimsIdentity();
@@ -108,7 +132,7 @@ namespace Services.User
             //claims.AddClaim(new Claim(ClaimTypes.Country, user.Base));
             //claims.AddClaim(new Claim(type: "UserAgent", userAgent));
             //claims.AddClaim(new Claim(type: "UserMenues", user.UserMenus.ToString()));
-   
+
             claims.AddClaims(new[]
             {
                 new Claim(ClaimTypes.Name,user.Username),
@@ -123,10 +147,10 @@ namespace Services.User
             //};
             var tokenHandler = new JwtSecurityTokenHandler();
             var claim = await _getClaimsAsync(user);
-            
+
             var descriptor = new SecurityTokenDescriptor
             {
-               Issuer = _siteSetting.Jwt.Issuer,
+                Issuer = _siteSetting.Jwt.Issuer,
                 Audience = _siteSetting.Jwt.Issuer,
                 IssuedAt = DateTime.Now,
                 NotBefore = DateTime.Now.AddMinutes(_siteSetting.Jwt.NotBeforeMinutes),
@@ -169,7 +193,7 @@ namespace Services.User
                     GenderId = modelDto.GenderId,
                     MarriageId = modelDto.MarriageId,
                     MillitaryId = modelDto.MillitaryId,
-                    Code=Guid.NewGuid()
+                    Code = Guid.NewGuid()
                 };
                 await _personRepository.AddAsync(person, cancellationToken);
                 var user = new Domain.User
@@ -178,8 +202,8 @@ namespace Services.User
                     Password = modelDto.Password,
                     Email = modelDto.Email,
                     PersonId = person.Id,
-                    Code=Guid.NewGuid(),
-                    
+                    Code = Guid.NewGuid(),
+
                 };
                 await _userRepository.AddAsync(user, modelDto.Password, cancellationToken);
                 return "Success";
@@ -188,7 +212,7 @@ namespace Services.User
             {
                 return ex.Message.ToString();
             }
-            
+
         }
 
         public async Task<string> CheckVerification(CheckVerificationDTO model, CancellationToken cancellationToken)
@@ -203,7 +227,7 @@ namespace Services.User
 
                 user.ChangePasswordCode = guid.ToString().Substring(0, 8);
 
-                await _userRepository.ChangePassword(user,model.NewPassword, cancellationToken);
+                await _userRepository.ChangePassword(user, model.NewPassword, cancellationToken);
                 return "موفقیت آمیز بود";
 
             }
@@ -252,13 +276,13 @@ namespace Services.User
         {
             var model = _userMenuRepository.GetMenu(modelId);
             IList<MenuDTO> list = new List<MenuDTO>();
-            foreach(var itm in model.Result)
+            foreach (var itm in model.Result)
             {
                 list.Add(_mapper.Map<MenuDTO>(itm));
             }
             return list;
         }
 
-        
+
     }
 }

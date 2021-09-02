@@ -1,11 +1,28 @@
-D:\Project\TTNCO\Common\bin\Debug\net5.0\Common.deps.json
-D:\Project\TTNCO\Common\bin\Debug\net5.0\Common.dll
-D:\Project\TTNCO\Common\bin\Debug\net5.0\ref\Common.dll
-D:\Project\TTNCO\Common\bin\Debug\net5.0\Common.pdb
-D:\Project\TTNCO\Common\obj\Debug\net5.0\Common.GeneratedMSBuildEditorConfig.editorconfig
-D:\Project\TTNCO\Common\obj\Debug\net5.0\Common.AssemblyInfoInputs.cache
-D:\Project\TTNCO\Common\obj\Debug\net5.0\Common.AssemblyInfo.cs
-D:\Project\TTNCO\Common\obj\Debug\net5.0\Common.csproj.CoreCompileInputs.cache
-D:\Project\TTNCO\Common\obj\Debug\net5.0\Common.dll
-D:\Project\TTNCO\Common\obj\Debug\net5.0\ref\Common.dll
-D:\Project\TTNCO\Common\obj\Debug\net5.0\Common.pdb
+D:\Project\backend\Common\bin\Debug\net5.0\Common.deps.json
+D:\Project\backend\Common\bin\Debug\net5.0\Common.dll
+D:\Project\backend\Common\bin\Debug\net5.0\ref\Common.dll
+D:\Project\backend\Common\bin\Debug\net5.0\Common.pdb
+D:\Project\backend\Common\obj\Debug\net5.0\Common.GeneratedMSBuildEditorConfig.editorconfig
+D:\Project\backend\Common\obj\Debug\net5.0\Common.AssemblyInfoInputs.cache
+D:\Project\backend\Common\obj\Debug\net5.0\Common.AssemblyInfo.cs
+D:\Project\backend\Common\obj\Debug\net5.0\Common.csproj.CoreCompileInputs.cache
+D:\Project\backend\Common\obj\Debug\net5.0\Common.dll
+D:\Project\backend\Common\obj\Debug\net5.0\ref\Common.dll
+D:\Project\backend\Common\obj\Debug\net5.0\Common.pdb
+D:\Project\backend\Common\obj\Debug\net5.0\Common.csproj.AssemblyReference.cache
+D:\Project\backend - Copy\Common\bin\Debug\net5.0\Common.deps.json
+D:\Project\backend - Copy\Common\bin\Debug\net5.0\Common.dll
+D:\Project\backend - Copy\Common\bin\Debug\net5.0\ref\Common.dll
+D:\Project\backend - Copy\Common\bin\Debug\net5.0\Common.pdb
+D:\Project\backend - Copy\Common\obj\Debug\net5.0\Common.csproj.ResolveComReference.cache
+D:\Project\backend - Copy\Common\obj\Debug\net5.0\Common.GeneratedMSBuildEditorConfig.editorconfig
+D:\Project\backend - Copy\Common\obj\Debug\net5.0\Common.AssemblyInfoInputs.cache
+D:\Project\backend - Copy\Common\obj\Debug\net5.0\Common.AssemblyInfo.cs
+D:\Project\backend - Copy\Common\obj\Debug\net5.0\Common.csproj.CoreCompileInputs.cache
+D:\Project\backend - Copy\Common\obj\Debug\net5.0\Common.dll
+D:\Project\backend - Copy\Common\obj\Debug\net5.0\ref\Common.dll
+D:\Project\backend - Copy\Common\obj\Debug\net5.0\Common.pdb
+D:\Project\backend - Copy\Common\bin\Debug\net5.0\Common.runtimeconfig.json
+D:\Project\backend - Copy\Common\bin\Debug\net5.0\Common.runtimeconfig.dev.json
+D:\Project\backend - Copy\Common\obj\Debug\net5.0\Common.genruntimeconfig.cache
+D:\Project\backend - Copy\Common\obj\Debug\net5.0\Common.csproj.AssemblyReference.cache

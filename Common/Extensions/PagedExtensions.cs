@@ -94,7 +94,7 @@ namespace Common.Extensions
         private static void GetOrderByDetails<T>(string orderby, out string orderMode, out Expression<Func<T, object>> orderByFunc) where T : class
         {
             var orderInfo = orderby.Split(",");
-            var orderByPropName = orderInfo.FirstOrDefault().ToPascalCase();
+            var orderByPropName = orderInfo.FirstOrDefault();//.ToPascalCase();
             orderMode = orderInfo.LastOrDefault();
             var parameter = Expression.Parameter(typeof(T));
             var property = Expression.Property(parameter, orderByPropName);

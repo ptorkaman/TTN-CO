@@ -3,19 +3,12 @@ using Common.Exceptions;
 using Common.Utilities;
 using Domain;
 using DTO;
-using DTO.Settings;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 using Repository;
-using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Models.Settings;
 
 namespace Services
 {

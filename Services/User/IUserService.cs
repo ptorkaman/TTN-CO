@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Common.Utilities;
+using Models.User;
 
 namespace Services.User
 {
@@ -16,5 +18,7 @@ namespace Services.User
         bool ForgetPassword(SendSmsDTO modelDto, CancellationToken cancellationToken);
         IList<MenuDTO> GetMenu(long modelId);
         Domain.User Login1(string username, string password);
+
+
     }
 }
