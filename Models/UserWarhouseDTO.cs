@@ -1,7 +1,7 @@
 ﻿
 namespace DTO
 {
-    public  class UserWarhouseDTO : BaseClassDTO<int> 
+    public  class UserWarhouseDTO : BaseClassDTO<long> 
     {
         public UserWarhouseDTO()
         {

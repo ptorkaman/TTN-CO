@@ -38,7 +38,7 @@ namespace Services
                 {
                     CreatedBy = modelDto.CreatedBy.Value,
                     CreatedDate = DateTime.Now,
-                    Name = modelDto.Name,
+                    Title = modelDto.Title,
                     ParentId = modelDto.ParentId,
                     IsActive = true
                 };
@@ -86,7 +86,7 @@ namespace Services
                 Id = menuId,
                 CreatedBy = modelDto.CreatedBy.Value,
                 CreatedDate = modelDto.CreatedDate.Value,
-                Name = modelDto.Name,
+                Title = modelDto.Title,
                 ParentId = modelDto.ParentId,
 
                 ModifiedDate = DateTime.Now

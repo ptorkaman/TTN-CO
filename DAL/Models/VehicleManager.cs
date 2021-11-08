@@ -8,7 +8,7 @@ using Domain.Models;
 
 namespace Domain
 {
-    [Table("VehicleManagers", Schema = "TTN")]
+    [Table("VehicleManagers")]
     public class VehicleManager : BaseClass<int>
     {
         public string Name { get; set; }

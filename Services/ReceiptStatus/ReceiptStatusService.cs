@@ -17,14 +17,16 @@ namespace Services
     {
         #region Fields
         private readonly IRepository<ReceiptStatus> _repository;
+        private readonly IReceiptStatusRepository _receiptStatusRepository;
         private readonly IMapper _mapper;
         private readonly PagingSettings _pagingSettings;
 
         #endregion
 
         #region CTOR
-        public ReceiptStatusService(IRepository<ReceiptStatus> repository, IMapper mapper, IOptionsSnapshot<PagingSettings> pagingSettings)
+        public ReceiptStatusService(IRepository<ReceiptStatus> repository, IMapper mapper, IOptionsSnapshot<PagingSettings> pagingSettings, IReceiptStatusRepository receiptStatusRepository)
         {
+            _receiptStatusRepository = receiptStatusRepository;
             _repository = repository;
             _mapper = mapper;
             _pagingSettings = pagingSettings.Value;
@@ -84,6 +86,12 @@ namespace Services
 
             await _repository.UpdateAsync(city, cancellationToken);
             return _mapper.Map<ReceiptStatusDTO>(city);
+        }
+
+        public async Task<ReceiptStatusDTO> GetByCode(int code, CancellationToken cancellationToken)
+        {
+            var model =  _receiptStatusRepository.GetByCode(code,cancellationToken);
+            return _mapper.Map<ReceiptStatusDTO>(model);
         }
         #endregion
 

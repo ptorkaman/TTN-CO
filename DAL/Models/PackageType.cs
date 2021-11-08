@@ -8,7 +8,7 @@ using Domain.Models;
 
 namespace Domain
 {
-    [Table("PackageTypes", Schema = "TTN")]
+    [Table("PackageTypes")]
     public class PackageType : BaseClass<int>
     {
         public string Title { get; set; }

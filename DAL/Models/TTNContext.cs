@@ -61,33 +61,33 @@ namespace DAL.Models
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Arabic_CI_AS");
 
-            modelBuilder.Entity<WehicleType>(entity => { entity.ToTable("WehicleTypes", "TTN"); });
-            modelBuilder.Entity<Warehouse>(entity => { entity.ToTable("Warehouses", "TTN"); });
-            modelBuilder.Entity<Unit>(entity => { entity.ToTable("Units", "TTN"); });
-            modelBuilder.Entity<TransportationDetail>(entity => { entity.ToTable("TransportationDetails", "TTN"); });
-            modelBuilder.Entity<SenderWarehouse>(entity => { entity.ToTable("SenderWarehouses", "TTN"); });
-            modelBuilder.Entity<Region>(entity => { entity.ToTable("Regions", "TTN"); });
-            modelBuilder.Entity<SenderReciver>(entity => { entity.ToTable("SenderRecivers", "TTN"); });
-            modelBuilder.Entity<SenderReciverAddress>(entity => { entity.ToTable("SenderReciverAddresses", "TTN"); });
-            modelBuilder.Entity<Province>(entity => { entity.ToTable("Provinces", "TTN"); });
-            modelBuilder.Entity<Parish>(entity => { entity.ToTable("Parishes", "TTN"); });
-            modelBuilder.Entity<Country>(entity => { entity.ToTable("Countries", "TTN"); });
-            modelBuilder.Entity<City>(entity => { entity.ToTable("Cities", "TTN"); });
-            modelBuilder.Entity<ReceiptStatus>(entity => { entity.ToTable("ReceiptStatuses", "TTN"); });
-            modelBuilder.Entity<Receipt>(entity => { entity.ToTable("Receipts", "TTN"); });
-            modelBuilder.Entity<ReceiptDetail>(entity => { entity.ToTable("ReceiptDetails", "TTN"); });
-            modelBuilder.Entity<ReceiptBin>(entity => { entity.ToTable("ReceiptBins", "TTN"); });
-            modelBuilder.Entity<Bin>(entity => { entity.ToTable("Bins", "TTN"); });
-            modelBuilder.Entity<MenuPermission>(entity => { entity.ToTable("MenuPermissions", "TTN"); });
-            modelBuilder.Entity<RolePermission>(entity => { entity.ToTable("RolePermissions", "TTN"); });
-            modelBuilder.Entity<Menu>(entity => { entity.ToTable("Menus", "TTN"); });
-            modelBuilder.Entity<Permission>(entity => { entity.ToTable("Permissions", "TTN"); });
-            modelBuilder.Entity<Person>(entity => { entity.ToTable("Persons", "TTN"); });
-            modelBuilder.Entity<UserRole>(entity => { entity.ToTable("UserRoles", "TTN"); });
+            modelBuilder.Entity<WehicleType>(entity => { entity.ToTable("WehicleTypes", "dbo"); });
+            modelBuilder.Entity<Warehouse>(entity => { entity.ToTable("Warehouses", "dbo"); });
+            modelBuilder.Entity<Unit>(entity => { entity.ToTable("Units", "dbo"); });
+            modelBuilder.Entity<TransportationDetail>(entity => { entity.ToTable("TransportationDetails", "dbo"); });
+            modelBuilder.Entity<SenderWarehouse>(entity => { entity.ToTable("SenderWarehouses", "dbo"); });
+            modelBuilder.Entity<Region>(entity => { entity.ToTable("Regions", "dbo"); });
+            modelBuilder.Entity<SenderReciver>(entity => { entity.ToTable("SenderRecivers", "dbo"); });
+            modelBuilder.Entity<SenderReciverAddress>(entity => { entity.ToTable("SenderReciverAddresses", "dbo"); });
+            modelBuilder.Entity<Province>(entity => { entity.ToTable("Provinces", "dbo"); });
+            modelBuilder.Entity<Parish>(entity => { entity.ToTable("Parishes", "dbo"); });
+            modelBuilder.Entity<Country>(entity => { entity.ToTable("Countries", "dbo"); });
+            modelBuilder.Entity<City>(entity => { entity.ToTable("Cities", "dbo"); });
+            modelBuilder.Entity<ReceiptStatus>(entity => { entity.ToTable("ReceiptStatuses", "dbo"); });
+            modelBuilder.Entity<Receipt>(entity => { entity.ToTable("Receipts", "dbo"); });
+            modelBuilder.Entity<ReceiptDetail>(entity => { entity.ToTable("ReceiptDetails", "dbo"); });
+            modelBuilder.Entity<ReceiptBin>(entity => { entity.ToTable("ReceiptBins", "dbo"); });
+            modelBuilder.Entity<Bin>(entity => { entity.ToTable("Bins", "dbo"); });
+            modelBuilder.Entity<MenuPermission>(entity => { entity.ToTable("MenuPermissions", "dbo"); });
+            modelBuilder.Entity<RolePermission>(entity => { entity.ToTable("RolePermissions", "dbo"); });
+            modelBuilder.Entity<Menu>(entity => { entity.ToTable("Menus", "dbo"); });
+            modelBuilder.Entity<Permission>(entity => { entity.ToTable("Permissions", "dbo"); });
+            modelBuilder.Entity<Person>(entity => { entity.ToTable("Persons", "dbo"); });
+            modelBuilder.Entity<UserRole>(entity => { entity.ToTable("UserRoles", "dbo"); });
 
             modelBuilder.Entity<UserMenu>(entity =>
             {
-                entity.ToTable("UserMenus", "TTN");
+                entity.ToTable("UserMenus", "dbo");
                 //entity.HasOne<User>(x => x.User)
                 //    .WithMany(x => x.UserMenus)
                 //    .HasForeignKey(x => x.UserId);
@@ -96,12 +96,12 @@ namespace DAL.Models
                 //    .HasForeignKey(x => x.MenuId);
             });
 
-            modelBuilder.Entity<UserType>(entity => { entity.ToTable("UserTypes", "TTN"); });
-            modelBuilder.Entity<Role>(entity => { entity.ToTable("Roles", "TTN"); });
-            //modelBuilder.Entity<UserWarhouse>(entity =>{ entity.ToTable("UserWarhouses", "TTN"); });
+            modelBuilder.Entity<UserType>(entity => { entity.ToTable("UserTypes", "dbo"); });
+            modelBuilder.Entity<Role>(entity => { entity.ToTable("Roles", "dbo"); });
+            //modelBuilder.Entity<UserWarhouse>(entity =>{ entity.ToTable("UserWarhouses", "dbo"); });
             modelBuilder.Entity<UserWarhouse>(entity =>
             {
-                entity.ToTable("UserWarhouses", "TTN");
+                entity.ToTable("UserWarhouses", "dbo");
                 //entity.HasOne<User>(x => x.User)
                 //    .WithMany().HasForeignKey(x => x.UserId);
                 //entity.HasOne<Warehouse>(x => x.Warehouse)
@@ -111,7 +111,7 @@ namespace DAL.Models
             });
             modelBuilder.Entity<User>(entity =>
             {
-                entity.ToTable("Users", "TTN");
+                entity.ToTable("Users", "dbo");
                 entity.Property(e => e.ChangePasswordCode)
                     .HasMaxLength(10)
                     .IsUnicode(false);

@@ -43,6 +43,7 @@ namespace TTNCO.Controllers.v1
             var result = await _binService.Create(modelDto, cancellationToken);
             return result;
         }
+        
 
         [HttpDelete("{Id}")]
         public async Task<ApiResult<string>> Delete(int Id, CancellationToken cancellationToken)

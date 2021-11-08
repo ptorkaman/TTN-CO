@@ -73,5 +73,6 @@ namespace DTO
         public int BinId { get; set; }
         public virtual ReceiptStatusDTO ReceiptStatus { get; set; }
         public int ReceiptStatusId { get; set; }
+        public bool IsPeyment { get; set; }
     }
 }

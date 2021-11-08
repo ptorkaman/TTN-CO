@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    [Table("Roles", Schema = "TTN")]
+    [Table("Roles")]
 
     public  class Role
     {
@@ -18,7 +18,7 @@ namespace Domain
         }
 
         public long Id { get; set; }
-        public string Name { get; set; }
+        public string Title { get; set; }
 
         public virtual IList<RolePermission> RolePermissions { get; set; }
         //public virtual ICollection<UserRole> UserRoles { get; set; }

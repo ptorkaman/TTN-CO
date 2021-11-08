@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain
 {
-    [Table("SenderRecivers", Schema = "TTN")]
+    [Table("SenderRecivers")]
 
     public class SenderReciver : BaseClass<int> 
     {

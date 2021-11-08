@@ -1,9 +1,10 @@
 ﻿using Domain.Models;
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain
 {
-    [Table("ReceiptDetails", Schema = "TTN")]
+    [Table("ReceiptDetails")]
 
     public class ReceiptDetail : BaseClass<int> 
     { 
@@ -15,10 +16,15 @@ namespace Domain
         [Column(TypeName = "decimal(18,4)")]
         public decimal weight { get; set; }
         
-        public virtual PackageType PackageTypes { get; set; }
-        public int PackageTypesId { get; set; }
+        public virtual PackageType PackageType { get; set; }
+        public int PackageTypeId { get; set; }
         public virtual StuffManager StuffManager { get; set; }
-        public int StuffManagerId { get; set; }
-        
+        public long StuffManagerId { get; set; }
+
+        public ReceiptStatus Status { get; set; }
+        public int? StatusId { get; set; }
+        public DateTime? DownloadDate { get; set; }
+        public int? DownloadBy { get; set; }
+
     }
 }

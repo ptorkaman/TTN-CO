@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    [Table("Menus", Schema = "TTN")]
+    [Table("Menus")]
 
     public  class Menu:BaseClass<long>
     {
@@ -16,7 +16,7 @@ namespace Domain
         {
             //UserMenus = new List<UserMenu>();
         }
-        public string Name { get; set; }
+        public string Title { get; set; }
         public long? ParentId { get; set; }
 
         public virtual IList<UserMenu> UserMenus { get; set; }

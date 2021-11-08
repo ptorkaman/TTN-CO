@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    [Table("StuffManagers", Schema = "TTN")]
+    [Table("StuffManagers")]
 
     public class StuffManager : BaseClass<long>
     {

@@ -3,12 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain
 {
-    [Table("BijakStatuses", Schema = "TTN")]
+    [Table("ReceiptStatuses")]
 
     public class ReceiptStatus : BaseClass<int> 
     { 
         public string Title { get; set; }
-       
+        public int Code { get; set; }
 
     }
 }

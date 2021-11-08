@@ -286,11 +286,16 @@ namespace albim
             services.AddScoped<IPackageTypeRepository, PackageTypeRepository>();
             services.AddScoped<IReceiptDetailRepository, ReceiptDetailRepository>();
             services.AddScoped<ISenderReciverAddressRepository, SenderReciverAddressRepository>();
+            services.AddScoped<IReceiptBinRepository, ReceiptBinRepository>();
+            services.AddScoped<IReceiptStatusRepository, ReceiptStatusRepository>();
 
 
             #endregion
 
             #region Services
+            services.AddScoped<IReceiptDetailService, ReceiptDetailService>();
+            services.AddScoped<IReceiptStatusService, ReceiptStatusService>();
+            services.AddScoped<IReceiptBinService, ReceiptBinService>();
             services.AddScoped<IStuffManagerService, StuffManagerService>();
             services.AddScoped<IUserWarhouseService, UserWarhouseService>();
             services.AddScoped<IReceiptStatusService, ReceiptStatusService>();

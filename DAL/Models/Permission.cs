@@ -8,7 +8,7 @@ using Domain.Models;
 
 namespace Domain
 {
-    [Table("Permissions", Schema = "TTN")]
+    [Table("Permissions")]
 
     public  class Permission : BaseClass<long>
     {

@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain
 {
-    [Table("UserWarhouses", Schema = "TTN")]
+    [Table("UserWarhouses")]
 
-    public class UserWarhouse : BaseClass<int> 
+    public class UserWarhouse : BaseClass<long> 
     {
         public virtual Warehouse Warehouse { get; set; }
         public int WarehouseId { get; set; }

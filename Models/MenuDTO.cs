@@ -8,7 +8,7 @@ namespace DTO
         {
             UserMenus = new List<UserMenuDTO>();
         }
-        public string Name { get; set; }
+        public string Title { get; set; }
        // public long PermissionId { get; set; }
         //public virtual PermissionDTO Permission { get; set; }
         public long? ParentId { get; set; }

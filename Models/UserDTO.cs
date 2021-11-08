@@ -13,7 +13,7 @@ namespace DTO
         }
 
         public long Id { get; set; }
-        public long PersonId { get; set; }
+        public long? PersonId { get; set; }
         public Guid Code { get; set; }
         public string Username { get; set; }
         public string DisplayName { get; set; }

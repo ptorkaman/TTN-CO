@@ -14,5 +14,7 @@ namespace Services
         Task<ReceiptStatusDTO> UpdateAsync(int cityId, ReceiptStatusDTO modelDto, CancellationToken cancellationToken);
         Task<PagedResult<ReceiptStatus>> GetAllAsync(int? page, int? pageSize, string orderBy, CancellationToken cancellationToken);
         Task<List<ReceiptStatusDTO>> GetAsync(CancellationToken cancellationToken);
+        Task<ReceiptStatusDTO> GetByCode(int code, CancellationToken cancellationToken);
+
     }
 }

@@ -21,6 +21,7 @@ namespace Common.Extensions
 
         public static string GetUserId(this IIdentity identity)
         {
+            var a = identity?.FindFirstValue(ClaimTypes.NameIdentifier);
             return identity?.FindFirstValue(ClaimTypes.NameIdentifier);
         }
 

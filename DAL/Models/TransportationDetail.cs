@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain
 {
-    [Table("TransportationDetails", Schema = "TTN")]
+    [Table("TransportationDetails")]
 
     public class TransportationDetail : BaseClass<int> 
     {

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    [Table("Receipts", Schema = "TTN")]
+    [Table("Receipts")]
     public class Receipt : BaseClass<long> 
     {
         public Receipt()
@@ -76,5 +76,6 @@ namespace Domain
         public int BinId { get; set; }
         public virtual ReceiptStatus ReceiptStatus { get; set; }
         public int ReceiptStatusId { get; set; }
+        public bool IsPeyment { get; set; }
     }
 }

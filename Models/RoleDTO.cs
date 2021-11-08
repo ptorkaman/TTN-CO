@@ -15,7 +15,7 @@ namespace DTO
         }
 
         public long Id { get; set; }
-        public string Name { get; set; }
+        public string Title { get; set; }
 
         public virtual ICollection<RolePermissionDTO> RolePermissions { get; set; }
         public virtual ICollection<UserRoleDTO> UserRoles { get; set; }

@@ -4,13 +4,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain
 {
-    [Table("Warehouses", Schema = "TTN")]
+    [Table("Warehouses")]
 
     public class Warehouse : BaseClass<int>
     {
         public string WarehouseCode { get; set; }
         public int CityId { get; set; }
-        public string WarhouseName { get; set; }
+        public string Title { get; set; }
         public string ContactPerson { get; set; }
         public string ContactMobile1 { get; set; }
         public string ContactMobile2 { get; set; }

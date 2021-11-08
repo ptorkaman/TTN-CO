@@ -81,7 +81,7 @@ namespace Services.User
                     CreatedDate = item.CreatedDate,
                     CreatedBy = item.CreatedBy,
                     UserId = item.UserId,
-                    MenuTitle = item.Menu.Name,
+                    MenuTitle = item.Menu.Title,
                     ParentId = item.Menu.ParentId,
                     MenuId = item.MenuId,
                     ModifiedBy = item.ModifiedBy,
@@ -99,7 +99,7 @@ namespace Services.User
                     CreatedDate = item.CreatedDate,
                     CreatedBy = item.CreatedBy,
                     Id = item.WarehouseId,
-                    WarhouseName = item.Warehouse.WarhouseName,
+                    Title = item.Warehouse.Title,
                     WarehouseCode = item.Warehouse.WarehouseCode,
                     Address = item.Warehouse.Address,
                     ModifiedBy = item.ModifiedBy,
@@ -126,8 +126,8 @@ namespace Services.User
             var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(secretKey), SecurityAlgorithms.HmacSha256Signature);
 
             var claims = new ClaimsIdentity();
-            claims.AddClaim(new Claim(type: ClaimTypes.Name, user.Username));
             claims.AddClaim(new Claim(type: "UserId", user.Id.ToString()));
+            claims.AddClaim(new Claim(type: ClaimTypes.Name, user.Username));
             claims.AddClaim(new Claim(type: "Ip", ip));
             //claims.AddClaim(new Claim(ClaimTypes.Country, user.Base));
             //claims.AddClaim(new Claim(type: "UserAgent", userAgent));
@@ -174,7 +174,7 @@ namespace Services.User
             };
             var usermodel = _userRepository.GetById(user.Id);
             var userRoles = await _userRepository.GetUserRolesAsync(user.Id);
-            userClaims.AddRange(userRoles.Select(z => new Claim(ClaimTypes.Role, z.Name)));
+            userClaims.AddRange(userRoles.Select(z => new Claim(ClaimTypes.Role, z.Title)));
 
             return userClaims;
         }

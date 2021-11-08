@@ -40,6 +40,5 @@ namespace Repository
         Task<PagedResult<TEntity>> GetPagedAsync(int page, int pageSize, CancellationToken cancellationToken);
         Task<PagedResult<TEntity>> GetOrderedPagedAsync(int page, int pageSize, string orderby, CancellationToken cancellationToken);
         Task<List<TEntity>> GetAllAsync(CancellationToken cancellationToken);
-    
     }
 }
